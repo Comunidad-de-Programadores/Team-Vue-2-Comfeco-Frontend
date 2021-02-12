@@ -1,22 +1,16 @@
 <template lang="pug">
-    section
-        .uk-container
-            nav.uk-navbar.uk-navbar-transparent.uk-navbar-container(uk-navbar)
-                .uk-navbar-left
-                    .uk-navbar-item.uk-padding-remove
-                    h5.uk-margin-remove() 👋 Hola !
-                .uk-navbar-right
-                    .uk-navbar-item.uk-padding-remove
-                        button.uk-button.uk-button-default(title="hola mundo" uk-tooltip) boton 1
-                    .uk-navbar-item.uk-padding-remove(z-index="40")
-                        button.uk-button.uk-button-default(title="hola mundo" uk-tooltip) boton 2
-
+    nav.container.mx-auto.bg-transparent.px-4.py-4
+        .flex
+            a.flex-initial
+                figure.logo-container.w-32(class='sm:w-40')
+                    img(alt="Confeco logo" src="@/assets/images/logo.png")
+            .buttons-container.ml-auto
+                button.bg-purple-500.text-white.font-bold.uppercase.text-xs.px-4.py-2.rounded.shadow.outline-none.mr-1.mb-1.transition-all(class='active:bg-purple-600 hover:shadow-md focus:outline-none' type='button')
+                    | Iniciar Sesión
 </template>
 <script>
 export default {
-    name: 'Header',
-}
+	name: "Header",
+};
 </script>
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>
