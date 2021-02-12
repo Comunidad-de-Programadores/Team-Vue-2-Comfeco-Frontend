@@ -1,7 +1,7 @@
 <template lang="pug">
-    section.uk-section
-        .uk-container.uk-text-center
-            h3 El inicio del proyecto
+    section.bg-black
+        .text-center
+            h3.text-white El inicio del proyecto
             img(alt="Vue logo" src="@/assets/logo.png")    
 </template>
 <script>
