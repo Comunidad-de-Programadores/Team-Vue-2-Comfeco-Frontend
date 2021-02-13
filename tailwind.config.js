@@ -4,7 +4,8 @@ module.exports = {
 	theme: {
 		extend: {},
 		textColor:{
-			'error':'#f57f6c'
+			'error':'#f57f6c',
+			'white' : '#FFFFFF'
 		}
 	},
 	variants: {
