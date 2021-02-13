@@ -4,15 +4,16 @@
             div(class="flex-none pl-4 sm:pl-6 xl:pl-8 flex items-center border-b border-gray-200 lg:border-b-0 lg:w-60 xl:w-72")
                .container.mx-auto.bg-transparent.px-4.py-4
                     .flex
-                        a.flex-initial
+                        router-link.flex-initial( to="/" )                          
                             figure.logo-container.w-32(class='sm:w-40')
                                 img(alt="Confeco logo" src="@/assets/images/comfeco.png")
             div.flex-auto.border-b.border-gray-200.h-18.flex.items-center.justify-between(class="md:px-4 lg:mx-6 lg:px-0 xl:mx-8")
-                button.group.leading-6.font-medium.flex.items-center.space-x-3(class="sm:space-x-4 hover:text-gray-600 transition-colors duration-200 w-full py-2") central
+                button.group.leading-6.font-medium.flex.items-center.space-x-3(class="sm:space-x-4 hover:text-gray-600 transition-colors duration-200 w-full py-2")
                 div(class="lg:w-64 pl-8 flex-shrink-0 flex items-center justify-end md:space-x-6")
                     div(class='hidden md:block')
-                        button.bg-purple-500.text-white.font-bold.uppercase.text-xs.px-4.py-2.rounded.shadow.outline-none.mr-1.mb-1.transition-all(class='active:bg-purple-600 hover:shadow-md focus:outline-none' type='button')
-                            | Iniciar Sesión
+                        router-link( to="/" )  
+                            button.bg-purple-500.text-white.font-bold.uppercase.text-xs.px-4.py-2.rounded.shadow.outline-none.mr-1.mb-1.transition-all(class='active:bg-purple-600 hover:shadow-md focus:outline-none' type='button')
+                                | Iniciar Sesión
                     a(href="https://github.com/Comunidad-de-Programadores/team-vue-2" class="text-gray-400 hover:text-gray-500 transition-colors duration-200")
                         span(class="sr-only") Tailwind CSS on GitHub 
                         svg(width="20" height="20" viewBox="0 0 16 16" fill="currentColor")
