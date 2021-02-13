@@ -10,7 +10,7 @@
 </template>
 <script>
 
-import Login from "@/components/principal/Login.vue";
+import Login from "@/components/paginas/Login.vue";
 
 export default {
     name: 'Body',
