@@ -12,11 +12,11 @@
 import Login from "@/components/views/Login.vue";
 
 export default {
-    name: 'Body',
-    components:{
-        Login
-    }
-}
+	name: "Body",
+	components: {
+		Login,
+	},
+};
 </script>
 <style lang="scss" scoped>
     
