@@ -1,6 +1,6 @@
 <template lang="pug">
     section.uk-section-small
-        .uk-container
+        .uk-container.text-center
             p Footer
 </template>
 <script>

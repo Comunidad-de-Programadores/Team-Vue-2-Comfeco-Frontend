@@ -3,6 +3,10 @@ module.exports = {
 	darkMode: false, // or 'media' or 'class'
 	theme: {
 		extend: {},
+		textColor:{
+			'error':'#f57f6c',
+			'white' : '#FFFFFF'
+		}
 	},
 	variants: {
 		extend: {
