@@ -1,3 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.is-active{
+    color: rgba(139, 92, 246, var(--tw-bg-opacity));
+}
