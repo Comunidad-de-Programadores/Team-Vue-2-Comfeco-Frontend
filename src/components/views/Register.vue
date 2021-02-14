@@ -9,17 +9,17 @@
                         router-link( :to=" $route.path !== 'register' ? 'register' : ''" class="text-gray-300 dark:text-white text-words font-extrabold tracking-tight w-full rounded-sm" ) Registrate
                 form(@submit.prevent="registrando()" class="mt-9")
                     .my-5.text-sm( :class="{ 'form-group--error': $v.email.$error }")
-                        input( type="text" autofocus class="rounded px-4 py-3 mt-3 focus:outline-none bg-gray-100 w-full" placeholder="Correo" v-model.trim="$v.email.$model")
-                        .error.text-error.text-xs.text-center(v-if="!$v.email.required") Email es necesario
+                        input( type="text" autofocus class="rounded px-4 py-3 mt-3 focus:outline-none bg-gray-100 w-full" placeholder="Correo electrónico" v-model.trim="$v.email.$model")
+                        .error.text-error.text-xs.text-center(v-if="!$v.email.required") Correo electrónico es necesario
                         .error.text-error.text-xs.text-center(v-if="!$v.email.email")
-                            | Debe ser un email.        
+                            | Debe ser un correo electrónico.        
                     .my-5.text-sm( :class="{ 'form-group--error': $v.password.$error }")
-                        input( type="password" class="rounded px-4 py-3 mt-3 focus:outline-none bg-gray-100 w-full" placeholder="Clave" v-model.trim="$v.password.$model")
-                        .error.text-error.text-xs.text-center(v-if="!$v.password.required") Contrasena necesaria
+                        input( type="password" class="rounded px-4 py-3 mt-3 focus:outline-none bg-gray-100 w-full" placeholder="Crear contraseña" v-model.trim="$v.password.$model")
+                        .error.text-error.text-xs.text-center(v-if="!$v.password.required") Contraseña necesaria
                     .my-5.text-sm( :class="{ 'form-group--error': $v.repeatPassword.$error }")
-                        input( type="password" class="rounded px-4 py-3 mt-3 focus:outline-none bg-gray-100 w-full" placeholder="Clave" v-model.trim="$v.repeatPassword.$model")
-                        .error.text-error.text-xs.text-center(v-if="!$v.repeatPassword.required") Contrasena necesaria                        
-                        .error(v-if="!$v.repeatPassword.sameAsPassword") Passwords must be identical.
+                        input( type="password" class="rounded px-4 py-3 mt-3 focus:outline-none bg-gray-100 w-full" placeholder="Repetir contraseña" v-model.trim="$v.repeatPassword.$model")
+                        .error.text-error.text-xs.text-center(v-if="!$v.repeatPassword.required") Contraseña necesaria                        
+                        .error(v-if="!$v.repeatPassword.sameAsPassword") Las contraseñas deben ser identicas.
 
                     button( class="block text-center p-3 duration-300 rounded hover:bg-purple-500 w-full mt-10 bg-purple-600 text-white font-bold uppercase text-xs px-4 py-2 focus:outline-none") Crear una cuenta
 </template>
