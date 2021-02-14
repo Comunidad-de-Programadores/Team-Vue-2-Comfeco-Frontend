@@ -5,9 +5,7 @@ module.exports = {
 		extend: {},
 		textColor:{
 			'error':'#f57f6c',
-			'white' : '#FFFFFF',
-			'success': '#41B883',
-			'words': '#737373',
+			'white' : '#FFFFFF'
 		}
 	},
 	variants: {

@@ -1,23 +1,17 @@
-import Vue from "vue";
-import Vuelidate from 'vuelidate'
-import VueRouter from 'vue-router'
-import App from "./App.vue";
-import "@/assets/tailwind/tailwind.css";
-import { routes } from './routes'
+import Vue from 'vue'
+import App from './App.vue'
+import '@/assets/tailwind/tailwind.css'
 
-Vue.use(VueRouter)
-  
-const router = new VueRouter({
-	routes,
-	linkExactActiveClass: 'is-active',
-	mode: 'history'
-})
+import Router from 'vue-router'
+
+
+import Vuelidate from 'vuelidate'
 
 Vue.use(Vuelidate)
 
 Vue.config.productionTip = false;
 
 new Vue({
-	router,
+	Router,
 	render: (h) => h(App),
-}).$mount("#app");
+}).$mount('#app');
