@@ -2,8 +2,7 @@
   div(id="app" class="relative z-10 max-w-screen-lg xl:max-w-screen-xl mx-auto") 
     Header
     Body.w-full.max-w-8xl.mx-auto(class="min-h-screen-good")
-    Footer  
-  </div>  
+    Footer
 </template>
 
 <script>
