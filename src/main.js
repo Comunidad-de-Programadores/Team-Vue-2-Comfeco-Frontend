@@ -1,9 +1,12 @@
 import Vue from "vue";
 import Vuelidate from 'vuelidate'
 import VueRouter from 'vue-router'
+import Axios from 'axios'
 import App from "./App.vue";
 import "@/assets/tailwind/tailwind.css";
 import { routes } from './routes'
+
+Vue.prototype.$http = Axios;
 
 Vue.use(VueRouter)
   

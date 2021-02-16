@@ -18,6 +18,17 @@ export default {
     Body,
     Header,
     Footer
+  },
+  beforeCreate() {
+    this.$http.post(`http://localhost/Team-Vue-2-Comfeco-Backend/public/oauth/token`, {
+      grant_type:  "client_credentials",
+      client_id: 3,
+      client_secret: "ZWPPLoZe0STTgSJuUg5ijeOlb2TRajRlEQD22rDf",
+      scope: "app-client-guest"
+    }).then(response => {
+      localStorage.setItem('oauth-bearer',response.data.access_token)
+    }).catch(er => console.log(er))
+    // if(localStorage.getItem('user'))
   }
 }
 </script>

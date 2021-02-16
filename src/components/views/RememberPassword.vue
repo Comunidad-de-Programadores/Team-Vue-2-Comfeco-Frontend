@@ -20,6 +20,7 @@
 <script>
 
 import { required, email  } from 'vuelidate/lib/validators';
+import { settings } from '../../settings';
 
 export default {
     name: 'RememberPassword',
@@ -36,7 +37,7 @@ export default {
         },
     },
     methods:{
-        remeberPassword(){
+        async remeberPassword(){
             console.log('enviando!')
             
             this.$v.$touch()
@@ -44,11 +45,15 @@ export default {
             if (this.$v.$invalid) {
                 this.submitStatus = 'ERROR'
             } else {
-                // do your submit logic here
-                this.submitStatus = 'PENDIENTE'
-                setTimeout(() => {
-                    this.submitStatus = 'ENVIADO'
-                }, 500)
+                let response = await this.$http.post(`${settings.api}/recoverPassword`, {
+                    email: this.email
+                }, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': localStorage.getItem('oauth-bearer')
+                    }
+                })
+                console.log(response)
             }
         }
     }
