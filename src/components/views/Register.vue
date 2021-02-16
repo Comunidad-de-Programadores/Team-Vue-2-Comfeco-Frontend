@@ -80,8 +80,12 @@ export default {
                 if(!response.data.error){
                     localStorage.setItem('token',response.data.user.access_token)
                     this.submitStatus = 'SUCCESS';
+                    this.email = ''
+                    this.password = ''
+                    this.password_confirmation = ''
+                    this.name = ''
                     this.validationTexts.push('USUARIO CREADO')
-                    // return this.$router.push('/inside')
+                    return this.$router.push('/inside')
                 } else {
                     this.submitStatus = 'ERROR';
                     (response.data.errors.password_confirmation.length > 0) && (this.validationTexts.push(response.data.errors.password_confirmation));

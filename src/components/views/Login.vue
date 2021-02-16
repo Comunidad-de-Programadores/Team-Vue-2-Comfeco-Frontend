@@ -26,7 +26,7 @@
                             
                     button( class="block text-center p-3 duration-300 rounded hover:bg-purple-500 w-full mt-10 bg-purple-600 text-white font-bold uppercase text-xs px-4 py-2 focus:outline-none") Ingresar
                     
-                    .error.text-xs.text-center.mt-3(:class="{'text-error': submitStatus == 'ERROR', 'text-success': submitStatus !== 'ERROR',}" v-if="submitStatus") {{submitStatus}}     
+                    .error.text-xs.text-center.mt-3(:class="{'text-error': submitStatus == 'ERROR', 'text-success': submitStatus == 'SUCCESS',}" v-if="submitStatus") {{submitStatus}}     
                     
                 //- div(class="flex md:justify-between justify-center items-center mt-10")
                 //-     div(style="height: 1px;" class="bg-gray-300 md:block hidden w-4/12")
@@ -80,8 +80,11 @@ export default {
                 if(!response.data.error){
                     this.email = ''
                     this.password = ''
+                    this.submitStatus = 'SUCCESS'
                     localStorage.setItem('user', JSON.stringify(response.data.user))
                     this.$router.push('/inside')
+                } else {
+                    this.submitStatus = 'ERROR'
                 }
             }            
         }

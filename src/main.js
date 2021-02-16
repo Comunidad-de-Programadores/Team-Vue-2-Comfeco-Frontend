@@ -1,20 +1,22 @@
 import Vue from "vue";
 import Vuelidate from 'vuelidate'
-import VueRouter from 'vue-router'
 import Axios from 'axios'
 import App from "./App.vue";
 import "@/assets/tailwind/tailwind.css";
-import { routes } from './routes'
+import router  from './routes'
 
 Vue.prototype.$http = Axios;
 
-Vue.use(VueRouter)
+Axios.interceptors.request.use((config) => {
+  const oauth_bearer = localStorage.getItem('oauth-bearer');
+  const user = localStorage.getItem('user');
+
+  user ? config.headers.Authorization = user.access_token : oauth_bearer ? config.headers.Authorization = oauth_bearer : ''
   
-const router = new VueRouter({
-	routes,
-	linkExactActiveClass: 'is-active',
-	mode: 'history'
-})
+  return config;
+}, function(err) {
+  return Promise.reject(err);
+});
 
 Vue.use(Vuelidate)
 

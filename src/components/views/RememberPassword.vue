@@ -14,7 +14,7 @@
 
                     button( class="block text-center p-3 duration-300 rounded hover:bg-purple-500 w-full mt-10 bg-purple-600 text-white font-bold uppercase text-xs px-4 py-2 focus:outline-none") Enviar enlace                      
                     
-                    .error.text-xs.text-center.mt-3(:class="{'text-error': submitStatus == 'ERROR', 'text-success': submitStatus !== 'ERROR',}" v-if="submitStatus") {{submitStatus}}     
+                    .error.text-xs.text-center.mt-3(:class="{'text-error': submitStatus == 'ERROR', 'text-success': submitStatus == 'SUCCESS',}" v-if="submitStatus") {{validationTexts}}     
                     
 </template>
 <script>
@@ -28,7 +28,8 @@ export default {
         return {            
             email: '',
             submitStatus: null,
-            service: new FirstPartService()
+            service: new FirstPartService(),
+            validationTexts: ''
         }
     },
     validations: {
@@ -47,7 +48,17 @@ export default {
                 this.submitStatus = 'ERROR'
             } else {
                 let response = await this.service.RememberPassword(this.email) 
-                console.log(response)
+                if(!response.data.error){
+                    this.submitStatus = 'SUCCESS';
+                    this.email = ''
+                    this.validationTexts = 'El correo ha sido enviado con exito'
+                    return this.$router.push('/')
+                } else {
+                    this.submitStatus = 'ERROR';
+                    this.validationTexts = response.data.message
+                    return this.$router.push('/')
+                }
+                
             }
         }
     }

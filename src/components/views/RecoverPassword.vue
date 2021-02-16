@@ -58,6 +58,7 @@ export default {
                     this.$router.push('/')       
                 } else {
                     this.submitStatus = 'ERROR'
+                    this.$router.push('/')       
                 }
             }
         }

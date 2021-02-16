@@ -16,23 +16,11 @@ export default class FirstPartService {
       email,
       password,
       rememberMe
-    }, {
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': localStorage.getItem('oauth-bearer')
-        }
     })
   }
 
   async CancelPassword(email){
-    return await Axios.post(`${settings.api}/cancelRecoverPassword`, {
-      email
-    }, {
-      headers: {
-          'Content-Type': 'application/json',
-          'Authorization': localStorage.getItem('oauth-bearer')
-      }
-    })
+    return await Axios.post(`${settings.api}/cancelRecoverPassword`, { email })
   }
 
   async RecoverPassword(email, password, password_confirmation){
@@ -40,11 +28,6 @@ export default class FirstPartService {
       email,
       password,
       password_confirmation
-    }, {
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': localStorage.getItem('oauth-bearer')
-        }
     })
   }
 
@@ -54,23 +37,10 @@ export default class FirstPartService {
       email,
       password,
       password_confirmation
-    }, {
-      headers: {
-        'Content-Type': 'application/json',
-        accept: 'application/json',
-        Authorization: `${localStorage.getItem('oauth-bearer')}`
-      }
     })
   }
 
   async RememberPassword(email){
-    return await Axios.post(`${settings.api}/recoverPassword`, {
-      email
-  }, {
-      headers: {
-          'Content-Type': 'application/json',
-          'Authorization': localStorage.getItem('oauth-bearer')
-      }
-  })
+    return await Axios.post(`${settings.api}/recoverPassword`, { email })
   }
 }
