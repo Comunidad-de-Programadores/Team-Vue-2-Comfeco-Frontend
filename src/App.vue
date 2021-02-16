@@ -12,6 +12,8 @@ import Body from '@/components/principal/Body.vue'
 import Header from '@/components/principal/Header.vue'
 import Footer from '@/components/principal/Footer.vue'
 
+import FirstPartService from '../src/services/FirstPartService'
+
 export default {
   name: 'App',
   components: {
@@ -19,15 +21,20 @@ export default {
     Header,
     Footer
   },
-  beforeCreate() {
-    this.$http.post(`http://localhost/Team-Vue-2-Comfeco-Backend/public/oauth/token`, {
+  data(){
+    return {
+      servicio : new FirstPartService()
+    }
+  },
+  async beforeCreate() {
+    let response = await this.$http.post(`http://localhost/Team-Vue-2-Comfeco-Backend/public/oauth/token`, {
       grant_type:  "client_credentials",
       client_id: 3,
       client_secret: "ZWPPLoZe0STTgSJuUg5ijeOlb2TRajRlEQD22rDf",
       scope: "app-client-guest"
-    }).then(response => {
-      localStorage.setItem('oauth-bearer',response.data.access_token)
-    }).catch(er => console.log(er))
+    })
+
+    localStorage.setItem('oauth-bearer',response.data.access_token)
     // if(localStorage.getItem('user'))
   }
 }

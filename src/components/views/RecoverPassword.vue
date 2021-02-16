@@ -21,7 +21,7 @@
 <script>
 
 import { required, minLength,sameAs  } from 'vuelidate/lib/validators';
-import { settings } from '../../settings';
+import FirstPartService from '../../services/FirstPartService'
 
 export default {
     name: 'RecoverPassword',
@@ -29,7 +29,8 @@ export default {
         return {            
             password: '',
             password_confirmation: '',
-            submitStatus: null
+            submitStatus: null,
+            service: new FirstPartService()
         }
     },
     validations: {
@@ -44,23 +45,13 @@ export default {
     },
     methods:{
         async recoverPassword(){
-            console.log('enviando!')
-            
             this.$v.$touch()
 
             if (this.$v.$invalid) {
                 this.submitStatus = 'ERROR'
             } else {
-                let response = await this.$http.post(`${settings.api}/generatePassword`, {
-                    email: this.$route.params.email,
-                    password: this.password,
-                    password_confirmation: this.password_confirmation
-                }, {
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': localStorage.getItem('oauth-bearer')
-                    }
-                })
+                let response = await this.service.RecoverPassword(this.$route.params.email,this.password,this.password_confirmation) 
+
                 if(!response.date.error){
                     this.password = ''
                     this.password_confirmation = ''
@@ -68,8 +59,6 @@ export default {
                 } else {
                     this.submitStatus = 'ERROR'
                 }
-                
-                
             }
         }
     }

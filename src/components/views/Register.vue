@@ -34,7 +34,7 @@
 <script>
 
 import { required, email, sameAs, minLength  } from 'vuelidate/lib/validators';
-import { settings } from '../../settings';
+import FirstPartService from '../../services/FirstPartService'
 
 export default {
     name: 'Register',
@@ -45,7 +45,8 @@ export default {
             password_confirmation: '',
             name: '',
             submitStatus: null,
-            validationTexts: []
+            validationTexts: [],
+            service: new FirstPartService()
         }
     },
     validations: {
@@ -74,30 +75,19 @@ export default {
             if (this.$v.$invalid) {
                 this.submitStatus = 'ERROR'
             } else {
-                let userCreated = await this.$http.post(`${settings.api}/register`, {
-                    name: this.name,
-                    email: this.email,
-                    password: this.password,
-                    password_confirmation: this.password_confirmation
-                }, {
-                    headers: {
-                        'Content-Type': 'application/json',
-                        accept: 'application/json',
-                        Authorization: `${localStorage.getItem('oauth-bearer')}`
-                    }
-                })
+                let response = await this.service.Register(this.name, this.email, this.password, this.password_confirmation)
 
-                if(!userCreated.error){
-                    localStorage.setItem('token',userCreated.user.access_token)
+                if(!response.data.error){
+                    localStorage.setItem('token',response.data.user.access_token)
                     this.submitStatus = 'SUCCESS';
                     this.validationTexts.push('USUARIO CREADO')
                     // return this.$router.push('/inside')
                 } else {
                     this.submitStatus = 'ERROR';
-                    (userCreated.errors.password_confirmation.length > 0) && (this.validationTexts.push(userCreated.errors.password_confirmation));
-                    (userCreated.errors.password.length > 0) && (this.validationTexts.push(userCreated.errors.password));
-                    (userCreated.errors.name.length > 0) && (this.validationTexts.push(userCreated.errors.name));
-                    (userCreated.errors.email.length > 0) && (this.validationTexts.push(userCreated.errors.email));
+                    (response.data.errors.password_confirmation.length > 0) && (this.validationTexts.push(response.data.errors.password_confirmation));
+                    (response.data.errors.password.length > 0) && (this.validationTexts.push(response.data.errors.password));
+                    (response.data.errors.name.length > 0) && (this.validationTexts.push(response.data.errors.name));
+                    (response.data.errors.email.length > 0) && (this.validationTexts.push(response.data.errors.email));
                 }
             }
             

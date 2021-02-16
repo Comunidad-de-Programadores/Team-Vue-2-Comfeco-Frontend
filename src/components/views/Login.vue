@@ -43,7 +43,7 @@
 <script>
 
 import { required, email } from 'vuelidate/lib/validators';
-import { settings } from '../../settings';
+import FirstPartService from '../../services/FirstPartService'
 
 export default {
     name: 'Login',
@@ -52,7 +52,8 @@ export default {
             email: '',
             password: '',
             submitStatus: null,
-            rememberMe: false
+            rememberMe: false,
+            service: new FirstPartService()
         }
     },
     validations: {
@@ -74,16 +75,7 @@ export default {
             if (this.$v.$invalid) {
                 this.submitStatus = 'ERROR'
             } else {
-                let response = await this.$http.post(`${settings.api}/login`, {
-                    email: this.email,
-                    password: this.password,
-                    rememberMe: this.rememberMe
-                }, {
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': localStorage.getItem('oauth-bearer')
-                    }
-                })
+                let response = await this.service.Login(this.email,this.password,this.rememberMe)
 
                 if(!response.data.error){
                     this.email = ''

@@ -9,29 +9,23 @@
                     button( v-if="cancel" @click="$router.push('/')" class="block text-center p-3 duration-300 rounded hover:bg-purple-500 w-full mt-10 bg-purple-600 text-white font-bold uppercase text-xs px-4 py-2 focus:outline-none") Volver al inicio.
 </template>
 <script>
-
-import { settings } from '../../settings';
+import FirstPartService from '../../services/FirstPartService'
 
 export default {
     name: 'CancelPassword',
     data(){
         return {            
-            cancel: ''
+            cancel: '',
+            service: new FirstPartService()
         }
     },
     async beforeCreate() {
-        let response = await this.$http.post(`${settings.api}/cancelRecoverPassword`, {
-            email: this.$route.params.email
-        }, {
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': localStorage.getItem('oauth-bearer')
-            }
-        })
-        console.log(response)
+        let response = await this.service.CancelPassword(this.$route.params.email)
+
         if(!response.data.error) this.cancel = response.data.message
     },
-    methods:{        
+    methods:{     
+
     }
 }
 </script>

@@ -20,14 +20,15 @@
 <script>
 
 import { required, email  } from 'vuelidate/lib/validators';
-import { settings } from '../../settings';
+import FirstPartService from '../../services/FirstPartService'
 
 export default {
     name: 'RememberPassword',
     data(){
         return {            
             email: '',
-            submitStatus: null
+            submitStatus: null,
+            service: new FirstPartService()
         }
     },
     validations: {
@@ -45,14 +46,7 @@ export default {
             if (this.$v.$invalid) {
                 this.submitStatus = 'ERROR'
             } else {
-                let response = await this.$http.post(`${settings.api}/recoverPassword`, {
-                    email: this.email
-                }, {
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': localStorage.getItem('oauth-bearer')
-                    }
-                })
+                let response = await this.service.RememberPassword(this.email) 
                 console.log(response)
             }
         }
