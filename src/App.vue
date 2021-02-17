@@ -1,45 +1,19 @@
 <template lang="pug">
-  div(id="app" class="relative z-10 max-w-screen-lg xl:max-w-screen-xl mx-auto") 
-    Header
-    Body.w-full.max-w-8xl.mx-auto(class="min-h-screen-good")
-    Footer  
-  </div>  
+	General
 </template>
 
 <script>
-
-import Body from '@/components/principal/Body.vue'
-import Header from '@/components/principal/Header.vue'
-import Footer from '@/components/principal/Footer.vue'
-
-import FirstPartService from '../src/services/FirstPartService'
+import General from "@/templates/General.vue";
 
 export default {
-  name: 'App',
-  components: {
-    Body,
-    Header,
-    Footer
-  },
-  data(){
-    return {
-      servicio : new FirstPartService()
+    name: "App",
+    components: {
+        General
+    },
+    data() {
+        return {};
     }
-  },
-  async beforeCreate() {
-    let response = await this.$http.post(`http://localhost/Team-Vue-2-Comfeco-Backend/public/oauth/token`, {
-      grant_type:  "client_credentials",
-      client_id: 3,
-      client_secret: "ZWPPLoZe0STTgSJuUg5ijeOlb2TRajRlEQD22rDf",
-      scope: "app-client-guest"
-    })
-
-    localStorage.setItem('oauth-bearer',response.data.access_token)
-    // if(localStorage.getItem('user'))
-  }
-}
+};
 </script>
 
-<style lang="scss">
-
-</style>
+<style lang="scss"></style>
