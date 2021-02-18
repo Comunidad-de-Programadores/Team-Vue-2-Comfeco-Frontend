@@ -2,6 +2,7 @@ import manageStorage from "./manageStorage";
 // import Vue from "vue";
 
 import axiosService from "./axiosService";
+import hello from 'hellojs';
 
 export default class authService {
     // axios = this.axios;
@@ -9,6 +10,7 @@ export default class authService {
         // console.log(window);
         // console.log(window.axios);
     }
+    
     getAuthToken = async () => {
         const url = "/oauth/token";
         try {
@@ -24,7 +26,7 @@ export default class authService {
         }
     };
 
-    login = async model => {
+    login = async (model) => {
         const url = "/v1/login";
         try {
             const { data } = await axiosService({
@@ -34,11 +36,45 @@ export default class authService {
             if (!data.error) manageStorage.setObject("user", data.user);
             return data;
         } catch (error) {
-            return Promise.reject(error.response);
+            console.log(error.messages)
+            return Promise.reject(error.messages);
         }
     };
 
-    register = async model => {
+    loginSocial = async (socialNetwork) => {
+        const url = "/v1/socialLogin";
+        try {            
+            hello(socialNetwork).login({ scope: 'email' })
+
+            return hello.on('auth.login', async (auth) => {
+                let user = await hello(auth.network).api('me')
+
+                let model = {
+                    user_id: null,
+                    name : user.name,
+                    email : user.email,
+                    provider : socialNetwork,
+                    token : auth.authResponse.access_token,
+                    expiresIn : auth.authResponse.expires_in,
+                    id : user.id,
+                    avatar : user.picture
+                }
+
+                const { data } = await axiosService({
+                    requiresAuth: true,
+                    isGeneralApi: true
+                }).post(url, model);
+                if (!data.error) manageStorage.setObject("user", data.user);
+
+                return data;
+            });
+        } catch (error) {
+            return Promise.reject(error.messages);
+        }
+    };
+
+
+    register = async (model) => {
         const url = "/v1/register";
         try {
             const { data } = await axiosService({
@@ -52,8 +88,8 @@ export default class authService {
         }
     };
 
-    recoverPassword = async model => {
-        const url = "/v1/recoverPassword";
+    recoverPassword = async (model) => {
+        const url = "/v1/generatePassword";
         try {
             const { data } = await axiosService({
                 requiresAuth: true,
@@ -67,7 +103,22 @@ export default class authService {
         }
     };
 
-    cancelRecoverPassword = async model => {
+    RememberPassword = async (model) => {
+        const url = "/v1/recoverPassword";
+        try {
+            const { data } = await axiosService({
+                requiresAuth: true,
+                isGeneralApi: true
+            }).post(url, model);
+
+            return data;
+        } catch (error) {
+            alert("ERROR");
+            console.log("error", error.response.data);
+        }
+    }
+
+    cancelRecoverPassword = async (model) => {
         const url = "/v1/cancelRecoverPassword";
         try {
             const { data } = await axiosService({
@@ -83,7 +134,7 @@ export default class authService {
         }
     };
 
-    generatePassword = async model => {
+    generatePassword = async (model) => {
         const url = "/v1/generatePassword";
         try {
             const { data } = await axiosService({

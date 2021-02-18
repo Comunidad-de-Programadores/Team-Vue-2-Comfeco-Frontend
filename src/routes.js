@@ -5,6 +5,8 @@ import Inside from "@/pages/Inside.vue";
 import RecoverPassword from "@/pages/RecoverPassword.vue";
 import CancelPassword from "@/pages/CancelPassword.vue";
 
+import manageStorage from "./services/manageStorage";
+
 import VueRouter from "vue-router";
 import Vue from "vue";
 
@@ -25,20 +27,16 @@ const router = new VueRouter({
 	mode: "history",
 });
 
-router.beforeEach((to, from, next) => {
-	const authUser = JSON.parse(localStorage.getItem("user"));
+router.beforeEach( (to, from, next) => {
+	const authUser = manageStorage.getObject("user");
+	const isAuth = to.matched.some((record) => record.meta.requiresAuth);
 
-	if (to.meta.requiresAuth) {
-		if (authUser && authUser.access_token) {
-			next();
-		} else {
-			next({ path: "/" });
-		}
+	if (isAuth && authUser && !authUser.access_token) {		
+		return next({ path: "/login" });
 	} else if (authUser && authUser.access_token) {
-		next({ path: "/inside" });
-	} else {
-		next();
+		return next({path: "/inside"});
 	}
+	next();	
 });
 
 export default router;

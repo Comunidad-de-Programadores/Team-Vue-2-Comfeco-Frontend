@@ -1,61 +1,63 @@
 <template lang="pug">
-    section
-        div(class="bg-white lg:w-4/12 md:6/12 w-10/12 m-auto my-40")
-            div()   
-                div(class="grid md:grid-cols-1 gap-2 mt-7")                                  
-                    h4(class="text-2xl text-gray-800 dark:text-white font-extrabold tracking-tight text-words") Reasignar contrase;a
-                    p Te enviaremos un correo electronico con un enlace privado para que reasignes tu contrase;a. Este enlace sera valido por una hora.
-                form(@submit.prevent="remeberPassword()" class="mt-9")
-                    div.my-5.text-sm( :class="{ 'form-group--error': $v.email.$error }")
-                        input( type="text" autofocus class="rounded px-4 py-3 mt-3 focus:outline-none bg-gray-100 w-full" placeholder="Correo" v-model.trim="$v.email.$model")
-                        .error.text-error.text-xs.text-center(v-if="!$v.email.required") Email es necesario
-                        .error.text-error.text-xs.text-center(v-if="!$v.email.email")
-                            | Debe ser un email.        
-
-                    button( class="block text-center p-3 duration-300 rounded hover:bg-purple-500 w-full mt-10 bg-purple-600 text-white font-bold uppercase text-xs px-4 py-2 focus:outline-none") Enviar enlace                      
-                    
-                    .error.text-xs.text-center.mt-3(:class="{'text-error': submitStatus == 'ERROR', 'text-success': submitStatus == 'SUCCESS',}" v-if="submitStatus") {{validationTexts}}     
-                    
+	div(class="bg-white lg:w-4/12 md:6/12 w-10/12 m-auto my-40")
+		div()   
+			div(class="grid md:grid-cols-1 gap-2 mt-7")                                  
+				h4(class="text-2xl text-gray-800 dark:text-white font-extrabold tracking-tight text-words") Reasignar contraseña
+				p Te enviaremos un correo electronico con un enlace privado para que reasignes tu contraseña. Este enlace sera valido por una hora.
+			form(@submit.prevent="remeberPassword()" class="mt-9")
+				div.my-5.text-sm( :class="{ 'form-group-error': $v.model.email.$error }")
+					input( type="text" autofocus class="rounded px-4 py-3 mt-3 focus:outline-none bg-gray-100 w-full" placeholder="Correo" v-model.trim="$v.model.email.$model")
+					div(v-if="$v.model.email.$dirty")
+						.error.text-error.text-xs.text-center(v-if="!$v.model.email.required") Email es necesario
+						.error.text-error.text-xs.text-center(v-if="!$v.model.email.email")
+							| Debe ser un email.
+				button( class="block text-center p-3 duration-300 rounded hover:bg-purple-500 w-full mt-10 bg-purple-600 text-white font-bold uppercase text-xs px-4 py-2 focus:outline-none") Enviar enlace                      
+				.error.text-md.font-semibold.text-center.mt-3(:class="{'text-error': submitStatus == 'ERROR', 'text-success': submitStatus == 'SUCCESS'}")
+					h4(v-for="error in errors") {{error}}
 </template>
 <script>
 import { required, email } from "vuelidate/lib/validators";
-import FirstPartService from "../services/FirstPartService";
+import authService from "../services/authService";
+import catchErrors from "../services/catchErrors";
 
 export default {
 	name: "RememberPassword",
 	data() {
 		return {
-			email: "",
+			model : {
+				email: ''
+			},
 			submitStatus: null,
-			service: new FirstPartService(),
+			auth: new authService(),
+			errorSvc: new catchErrors(),
+            errors: [],
 			validationTexts: "",
 		};
 	},
 	validations: {
-		email: {
-			required,
-			email,
-		},
+		model : {
+			email: {
+				required,
+				email,
+			},
+		}
 	},
 	methods: {
 		async remeberPassword() {
-			console.log("enviando!");
-
 			this.$v.$touch();
 
 			if (this.$v.$invalid) {
 				this.submitStatus = "ERROR";
 			} else {
-				let response = await this.service.RememberPassword(this.email);
+				let response = await this.auth.RememberPassword(this.model);
+
 				if (!response.data.error) {
 					this.submitStatus = "SUCCESS";
-					this.email = "";
-					this.validationTexts = "El correo ha sido enviado con exito";
+					this.mode.email = "";
 					return this.$router.push("/");
 				} else {
 					this.submitStatus = "ERROR";
-					this.validationTexts = response.data.message;
-					return this.$router.push("/");
+					this.errors = this.errorSvc.showErrors(response.errors);
 				}
 			}
 		},
