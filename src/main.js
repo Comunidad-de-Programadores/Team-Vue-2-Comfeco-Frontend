@@ -11,9 +11,8 @@ Vue.config.productionTip = false;
 
 hello.init(
     {
-        google:
-            "501944538956-torb6md00226jjhl2cvoioj4mqfb6dra.apps.googleusercontent.com",
-        facebook: "164641335271802"
+        google: process.env.VUE_APP_GOOGLE_ID,
+        facebook: process.env.VUE_APP_FACEBOOK_ID
     },
     { redirect_uri: "inside" }
 );
