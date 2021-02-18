@@ -13,30 +13,32 @@ import Vue from "vue";
 Vue.use(VueRouter);
 
 const routes = [
-	{ path: "/", component: Login },
-	{ path: "/register", component: Register },
-	{ path: "/recover-password", component: RememberPassword },
-	{ path: "/inside", component: Inside, meta: { requiresAuth: true } },
-	{ path: "/recuperarClave/:email", component: RecoverPassword },
-	{ path: "/anularRecuperarClave/:email", component: CancelPassword },
+    {
+        path: "/",
+        redirect: "/inside"
+    },
+    { path: "/login", component: Login },
+    { path: "/register", component: Register },
+    { path: "/recover-password", component: RememberPassword },
+    { path: "/inside", component: Inside, meta: { requiresAuth: true } },
+    { path: "/recuperarClave/:email", component: RecoverPassword },
+    { path: "/anularRecuperarClave/:email", component: CancelPassword }
 ];
 
 const router = new VueRouter({
-	routes,
-	linkExactActiveClass: "is-active",
-	mode: "history",
+    routes,
+    linkExactActiveClass: "is-active",
+    mode: "history"
 });
 
-router.beforeEach( (to, from, next) => {
-	const authUser = manageStorage.getObject("user");
-	const isAuth = to.matched.some((record) => record.meta.requiresAuth);
+router.beforeEach((to, from, next) => {
+    const authUser = manageStorage.getObject("user");
+    const requiredAuth = to.matched.some(record => record.meta.requiresAuth);
 
-	if (isAuth && authUser && !authUser.access_token) {		
-		return next({ path: "/login" });
-	} else if (authUser && authUser.access_token) {
-		return next({path: "/inside"});
-	}
-	next();	
+    if (requiredAuth && authUser && !authUser.access_token) {
+        return next({ path: "/login" });
+    }
+    next();
 });
 
 export default router;
