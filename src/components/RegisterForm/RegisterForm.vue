@@ -33,9 +33,9 @@
 
         div(class="grid md:grid-cols-2 gap-2 mt-7")
             div
-                button(class="rounded text-white font-bold uppercase text-xs text-center w-full text-white bg-red-900 p-2 duration-300 hover:bg-red-700" @click="loginGoogle()") Google
+                button(class="rounded text-white font-bold uppercase text-xs text-center w-full text-white bg-red-900 p-2 duration-300 hover:bg-red-700" @click="loginSocial('google')" type="button") Google
             div
-                button(class=" text-white font-bold uppercase text-xs text-center w-full bg-blue-900 p-2 duration-300 rounded hover:bg-blue-700" @click="loginFacebook()") Facebook    
+                button(class=" text-white font-bold uppercase text-xs text-center w-full bg-blue-900 p-2 duration-300 rounded hover:bg-blue-700" @click="loginSocial('facebook')" type="button") Facebook    
 
 </template>
 
@@ -102,36 +102,25 @@ export default {
                         this.$router.push("/inside");
                     } else {
                         this.submitStatus = "ERROR";
-                        this.errors = this.errorSvc.showErrors(response.errors)
+                        this.errors = this.errorSvc.showErrors(response.errors);
                     }
                 } catch (error) {
-                    console.log(error)
+                    console.log(error);
                     this.submitStatus = "ERROR";
                 }
             }
         },
-        async loginGoogle(){
+        async loginSocial(socialNetwork) {
+            this.sending = true;
             await this.auth.getAuthToken();
-            let response = await this.auth.loginSocial('google')
+            let response = await this.auth.loginSocial(socialNetwork);
             if (!response.error) {
-                this.submitStatus = "SUCCESS";
                 this.$router.push("/inside");
             } else {
-                this.errors = this.errorSvc.showErrors(response.errors)
-                this.submitStatus = "ERROR";
+                console.log(response);
             }
-        },
-        async loginFacebook(){
-            await this.auth.getAuthToken();
-            let response = await this.auth.loginSocial('facebook')
-             if (!response.error) {
-                this.submitStatus = "SUCCESS";
-                this.$router.push("/inside");
-            } else {
-                this.errors = this.errorSvc.showErrors(response.errors)
-                this.submitStatus = "ERROR";
-            }
-        },
+            this.sending = false;
+        }
     }
 };
 </script>

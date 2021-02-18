@@ -107,7 +107,6 @@ export default {
                     }
                 } catch (error) {
                     console.log(error);
-                    //seria recomendable crear una función para manejar los errores y poder reutilizar
                     this.submitStatus = "ERROR";
                 }
             }
@@ -117,13 +116,10 @@ export default {
             this.sending = true;
             await this.auth.getAuthToken();
             let response = await this.auth.loginSocial(socialNetwork);
-            console.log(response);
             if (!response.error) {
-                this.submitStatus = "SUCCESS";
                 this.$router.push("/inside");
             } else {
                 console.log(response);
-                this.submitStatus = "ERROR";
             }
             this.sending = false;
         }
