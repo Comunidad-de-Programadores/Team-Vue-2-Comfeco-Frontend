@@ -1,31 +1,31 @@
 ---
 name: Bug report
-about: Crea un reporte y ayudanos a mejorar
+about: Create a report to help us improve
 ---
 
 <!-- Please search existing issues to avoid creating duplicates. -->
 
 # Bug Report
 
-Bug: Bug Title
+Bug: Not so Awesome Bug Title
 
 ## Description
 
-Info del bug va aquí.
+Info about the bug goes here.
 
-### Pasos para reproducir el bug
+### Steps to Reproduce
 
-1. Paso 1
-2. Paso 2
+1. Step 1
+2. Step 2
 
-### Resultado Esperado
+### Expected Result
 
-El resultado que esperamos obtener (imagenes, texto, alguna evidencia)...
+The expected result was...
 
-Podrias agregar referencia del estado actual
+You may write the expected result or add a screenshot.
 
-### Resultados actuales
+### Actual Results
 
-El resultado actual fue (lo que se logró)...
+The actual result was...
 
-Agregar screeshots, links utiles o evidencia en general.
+Would be awesome to link screenshots here and/or error messages received.

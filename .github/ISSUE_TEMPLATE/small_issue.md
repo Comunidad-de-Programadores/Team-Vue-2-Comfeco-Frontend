@@ -1,20 +1,20 @@
 ---
 name: Task
-about: Una tarea concisa que es facil de agregar, usualmente se taggea como `good first issue`.
+about: A small task that is, most likely, part of an Epic. It will usually be labeled as `good first issue`.
 ---
 
-<!--Task Title. -->
+<!-- Issue title should mirror the Task Title. -->
 
 # Task Title
 
-Task: Task Title
+Task: Awesome Task Title
 
 ## Task Description
 
-Este Task hará...
+This Task will...
 
-## Titulo Épico
+## Epic Parent
 
-<!-- El link debe apuntar al issue EPIC o padre. -->
+<!-- The link below should link to its Epic Parent. -->
 
-[Feature: Feature Title](https://github.com/username/repository-name/issues/1)
+[Feature: Awesome Feature Title](https://github.com/username/repository-name/issues/1)

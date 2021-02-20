@@ -1,19 +1,16 @@
-# Titulo del PR
+# Story Title
 
-[Escribe el titulo del Issue](https://github.com/username/repository-name/issues/1)
+[This is the Issue Title](https://github.com/username/repository-name/issues/1)
 
-## Cambios realizados
+## Changes made
 
-- hice esto
-- agregue aquello
+- made this
+- did that
 
-## Como esta solución se adapta al problema.
+## How does the solution address the problem
 
-Este PR hará...
-Este PR cambiará...
-Este PR mejorará...
-Este PR solucionará...
+This PR will...
 
-## Linked Issues (linkear issues a resolver)
+## Linked issues
 
-Resolve #1 (id del issue o link)
+Resolves #1

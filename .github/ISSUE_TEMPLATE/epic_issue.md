@@ -1,19 +1,16 @@
----
-name: Feature
-about: Este tipo de task es lo suficientemente grande para dividirlo en tasks menores, usualmente se le taggean como `enhancement`.
----
+# Story Title
 
-<!-- Issue title should mirror the Epic Title. -->
+[This is the Issue Title](https://github.com/username/repository-name/issues/1)
 
-# Feature Title
+## Changes made
 
-Feature: Feature Title
+- made this
+- did that
 
-## Feature Description
+## How does the solution address the problem
 
-Este Feature hará...
+This PR will...
 
-## Lista de Tasks (Completa en order)
+## Linked issues
 
-1. [ ] [Task 1: Task Title](https://github.com/username/repository-name/issues/1)
-2. [ ] [Task 2: Task Title](https://github.com/username/repository-name/issues/2)
+Resolves #1
