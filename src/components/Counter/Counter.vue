@@ -71,9 +71,6 @@ export default {
                 this.to = new Date().getTime();
                 this.passed_time = typeTime == 0 ? false : true;
                 clearInterval(this.interval);
-                // this.interval = setInterval(() => {
-                //     this.displayTimer(this.end,this.start,!flag);
-                // }, 1000);
                 return;
             } else if (distance < 0 && descendientFlag > 0) {
                 this.calulateTimeFromDistanceValue(descendientFlag);
