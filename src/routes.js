@@ -20,7 +20,7 @@ const routes = [
     { path: "/login", component: Login },
     { path: "/register", component: Register },
     { path: "/recover-password", component: RememberPassword },
-    { path: "/inside", component: Inside, meta: { requiresAuth: true } },
+    { path: "/inside", component: Inside },
     { path: "/recuperarClave/:email", component: RecoverPassword },
     { path: "/anularRecuperarClave/:email", component: CancelPassword }
 ];
