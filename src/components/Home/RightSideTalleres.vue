@@ -23,7 +23,7 @@
                         div.text-black(class="w-8/12")
                             p.text-xs {{taller.name}}
                             p.text-xs.text-black.text-opacity-50 {{ formatTime(taller.created_at) }}
-                            p.text-xs By {{taller.name_user}}
+                            a.text-xs(:href="taller.url_social") By {{taller.name_user}}
             infinite-loading(:identifier="infiniteId" @infinite="infiniteHandler")
 </template>
 <script>
@@ -44,58 +44,6 @@ export default {
                 { id: 5, area: 'UI/UX'},
                 { id: 6, area: 'Database Developer'},
                 { id: 7, area: 'Cloud Computing'}                
-            ],
-            talleres : [
-                { 
-                    curso : 'State of javascript',
-                    hora: '2021-02-21 18:08:12',
-                    autor: 'Juan Pablo de la Torre',
-                    ruta_curso: 'google.com',
-                    area_id: 1
-                },
-                { 
-                    curso : 'IA Con Python',
-                    hora: '2021-02-21 14:08:12',
-                    autor: 'Juan Pablo de la Torre',
-                    ruta_curso: 'google.com',
-                    area_id: 2
-                },
-                { 
-                    curso : '5',
-                    hora: '2021-02-21 14:08:12',
-                    autor: 'Juan Pablo de la Torre',
-                    ruta_curso: 'google.com',
-                    area_id: 3
-                },
-                { 
-                    curso : '4',
-                    hora: '2021-02-21 14:08:12',
-                    autor: 'Juan Pablo de la Torre',
-                    ruta_curso: 'google.com',
-                    area_id: 4
-                },
-                { 
-                    curso : '3',
-                    hora: '2021-02-21 14:08:12',
-                    autor: 'Juan Pablo de la Torre',
-                    ruta_curso: 'google.com',
-                    area_id: 5
-                },
-                { 
-                    curso : '2',
-                    hora: '2021-02-21 14:08:12',
-                    autor: 'Juan Pablo de la Torre',
-                    ruta_curso: 'google.com',
-                    area_id: 6
-                },
-                { 
-                    curso : '1',
-                    hora: '2021-02-21 14:08:12',
-                    autor: 'Juan Pablo de la Torre',
-                    ruta_curso: 'google.com',
-                    area_id: 7
-                },
-
             ],
             page: 1,
             list: [],

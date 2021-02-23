@@ -1,4 +1,3 @@
-import manageStorage from "./manageStorage";
 import axiosService from "./axiosService";
 
 export default class authService {
@@ -10,7 +9,7 @@ export default class authService {
                 requiresAuth: true,
                 isGeneralApi: true
             }).get(url);
-            if (!data.error) manageStorage.setObject("user", data.user);
+
             return data;
         } catch (error) {
             console.log(error.messages);
