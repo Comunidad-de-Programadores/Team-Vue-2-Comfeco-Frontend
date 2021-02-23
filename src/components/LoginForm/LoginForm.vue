@@ -99,7 +99,7 @@ export default {
                             remember: false
                         };
                         this.submitStatus = "SUCCESS";
-                        this.$router.push("/inside");
+                        this.$router.push("/home");
                         window.bus.$emit("login");
                     } else {
                         this.submitStatus = "ERROR";

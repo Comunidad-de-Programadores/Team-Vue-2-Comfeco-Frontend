@@ -10,8 +10,8 @@
                     p(class="text-xs w-32") {{ user_connected.name.length > 10 ? `${ user_connected.name.substring(0,6) } ... ` : user_connected.name }}
                     svg( class="fill-current h-4 w-8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20") #[path(d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z")]                                          
                 ul( class="dropdown-menu absolute hidden text-gray-700 pt-1 z-10")
-                    li(v-if="user_connected" class="")
-                        a(class="rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-16 block whitespace-no-wrap text-xs" href="#") Cerrar Session
+                    li(v-if="user_connected" class="")                         
+                        router-link(class="rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-16 block whitespace-no-wrap text-xs" to="/login") Cerrar Session
                     li(v-if="user_connected" class="")
                         a(class="rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-16 block whitespace-no-wrap text-xs" href="#") Mi perfil                    
 </template>

@@ -11,12 +11,22 @@
 </template>
 <script>
 import LoginForm from "@/components/LoginForm/LoginForm";
+import authService from "../services/authService"
 
 export default {
     name: "Login",
     components: {
         LoginForm
-    }
+    },
+	data(){
+		return {
+			authService : new authService()
+		}
+	},
+	created(){
+		window.bus.$emit("login");
+		this.authService.logout()
+	}
 };
 </script>
 <style lang="scss" scoped>

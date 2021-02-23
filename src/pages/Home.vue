@@ -16,7 +16,7 @@ import AutoScrollSlider from "@/components/Slider/AutoScrollSlider";
 import ManualSlider from "@/components/Slider/ManualSlider";
 import RightSideTalleres from "@/components/Home/RightSideTalleres";
 export default {
-    name: "Inside",
+    name: "Home",
     components: {
         Communities,
         Counter,

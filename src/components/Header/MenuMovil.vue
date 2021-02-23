@@ -5,7 +5,7 @@
                 router-link.flex-initial( to="/" )                          
                     figure.logo-container.w-32(class='sm:w-40')
                         img(alt="Confeco logo" src="@/assets/images/comfeco.png")
-            div(v-if="Object.keys(user_connected).length > 0")
+            template(v-if="user_connected && Object.keys(user_connected).length > 0")
                 div(class="dropdown inline-block relative")
                     button(class="bg-gray-300 text-gray-700 font-semibold py-2 pl-4 rounded-l-3xl rounded inline-flex items-center" @click="showMenu()")
                         template(v-if="user_connected")
@@ -15,8 +15,8 @@
                     template(v-if="openMenu")
                         div(class="dropdown-menu absolute hidden text-gray-700 pt-1")
                             ul( class="")
-                                li(v-if="user_connected" class="")
-                                    a(class="rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-2 block whitespace-no-wrap text-xs" href="#") Cerrar Session
+                                li(v-if="user_connected" class="")                         
+                                    router-link(class="rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-2 block whitespace-no-wrap text-xs" to="/login") Cerrar Session
                                 li(v-if="user_connected" class="")
                                     a(class="rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-2 block whitespace-no-wrap text-xs" href="#") Mi Perfil
                                 li(class="")
