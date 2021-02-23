@@ -1,5 +1,5 @@
 <template lang="pug">
-    div(class="flex flex-col container mx-auto md:flex-row md:items-center md:justify-between mt py-4")
+    div(class="flex flex-col container mx-auto md:flex-row md:items-center md:justify-between mt py-4 px-4")
         TextHeader(:user_connected.sync="user")
         div(class="md:px-6 py-4 px-2 md:hidden")
             MenuMovil(:user_connected.sync="user")

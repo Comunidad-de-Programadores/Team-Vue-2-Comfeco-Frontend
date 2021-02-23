@@ -1,20 +1,28 @@
 <template lang="pug">
-    div
-        div(class="w-3/12 hidden lg:block")
-            p hola
-        div(class="mx-4 w-full lg:w-6/12")
+    div(class="grid lg:grid-cols-4 lg:gap-4 grid-cols-1 gap-10 px-4")
+        div(class="col-span-1 hidden lg:block")
+            Communities
+        div(class="w-full lg:col-span-2 ")
             Counter(:end="end")
-        div(class="w-3/12 hidden lg:block")
+            AutoScrollSlider
+            ManualSlider
+        div(class="col-span-1 hidden lg:block")
             RightSideTalleres
 </template>
 <script>
-import RightSideTalleres from "@/components/Home/RightSideTalleres";
+import Communities from "@/components/Communities/Communities";
 import Counter from "@/components/Counter/Counter";
+import AutoScrollSlider from "@/components/Slider/AutoScrollSlider";
+import ManualSlider from "@/components/Slider/ManualSlider";
+import RightSideTalleres from "@/components/Home/RightSideTalleres";
 export default {
     name: "Inside",
     components: {
+        Communities,
         Counter,
-        RightSideTalleres
+        RightSideTalleres,
+        AutoScrollSlider,
+        ManualSlider
     },
     data() {
         return {

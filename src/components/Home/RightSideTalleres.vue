@@ -2,7 +2,7 @@
     div(class="flex flex-col bg-white max-w-sm px-2 py-4 mx-auto rounded-lg shadow-md" )                
         div.flex.px-4.py-2
             h1(class="w-6/12") Talleres
-            a(href="#" class="text-right w-6/12") Ver mas            
+            a(href="#" class="text-right w-6/12") Ver más            
         div.flex.px-4.mt-2.mb-2
             div(class="dropdown inline-block relative")
                 button(class="flex bg-gray-300 text-gray-700 font-semibold py-2 pl-4 ml-4 rounded inline-flex items-center" )
@@ -27,45 +27,50 @@
             infinite-loading(:identifier="infiniteId" @infinite="infiniteHandler")
 </template>
 <script>
-import moment from 'moment';
+import moment from "moment";
 import workshopService from "../../services/workshopService";
 
 export default {
-    name: 'RightSideTalleres',
-    data(){
+    name: "RightSideTalleres",
+    data() {
         return {
-            areaSelect: '',
-            areasConocimiento : [
-                { id: '', area: 'Talleres por areas de conocimiento'},
-                { id: 1, area: 'frontend'},
-                { id: 2, area: 'backend'},
-                { id: 3, area: 'DevOps'},
-                { id: 4, area: 'Video Game Developers'},
-                { id: 5, area: 'UI/UX'},
-                { id: 6, area: 'Database Developer'},
-                { id: 7, area: 'Cloud Computing'}                
+            areaSelect: "",
+            areasConocimiento: [
+                { id: "", area: "Talleres por areas de conocimiento" },
+                { id: 1, area: "frontend" },
+                { id: 2, area: "backend" },
+                { id: 3, area: "DevOps" },
+                { id: 4, area: "Video Game Developers" },
+                { id: 5, area: "UI/UX" },
+                { id: 6, area: "Database Developer" },
+                { id: 7, area: "Cloud Computing" }
             ],
             page: 1,
             list: [],
             infiniteId: +new Date(),
             workshopService: new workshopService()
-        }
+        };
     },
     methods: {
-        seleccionArea(id){
-            this.areaSelect = id
+        seleccionArea(id) {
+            this.areaSelect = id;
             this.page = 1;
             this.list = [];
             this.infiniteId += 1;
         },
-        iconToShow(hora){
-            return moment().isBefore(moment(hora)) ? 'fas fa-ellipsis-h' : 'fas fa-check'
+        iconToShow(hora) {
+            return moment().isBefore(moment(hora))
+                ? "fas fa-ellipsis-h"
+                : "fas fa-check";
         },
-        formatTime(hora){
-            return moment(hora).format('LTS')
+        formatTime(hora) {
+            return moment(hora).format("LTS");
         },
         async infiniteHandler($state) {
-            let response = await this.workshopService.getWorkshops(this.page, this.areaSelect);
+            let response = await this.workshopService.getWorkshops(
+                this.page,
+                this.areaSelect
+            );
 
             if (response.records.data.length) {
                 this.page += 1;
@@ -74,10 +79,8 @@ export default {
             } else {
                 $state.complete();
             }
-        },
-    },    
-}
+        }
+    }
+};
 </script>
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

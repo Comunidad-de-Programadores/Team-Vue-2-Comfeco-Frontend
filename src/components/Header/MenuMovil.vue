@@ -13,7 +13,7 @@
                             p(class="text-xs w-8") {{ user_connected.name.length > 10 ? `${ user_connected.name.substring(0,6) } ... ` : user_connected.name }}
                         i(class="text-lg fas fa-bars w-8")
                     template(v-if="openMenu")
-                        div(class="dropdown-menu absolute hidden text-gray-700 pt-1"  style="width: 32vw")
+                        div(class="dropdown-menu absolute hidden text-gray-700 pt-1")
                             ul( class="")
                                 li(v-if="user_connected" class="")
                                     a(class="rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-2 block whitespace-no-wrap text-xs" href="#") Cerrar Session
