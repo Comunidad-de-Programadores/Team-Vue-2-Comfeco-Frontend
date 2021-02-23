@@ -5,3 +5,7 @@
 .is-active{
     color: rgba(139, 92, 246, var(--tw-bg-opacity));
 }
+
+.exact-active{
+    color: rgb('#acc547' , var(--tw-bg-opacity));
+}
