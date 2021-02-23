@@ -15,12 +15,18 @@
                     template(v-if="openMenu")
                         div(class="dropdown-menu absolute hidden text-gray-700 pt-1"  style="width: 32vw")
                             ul( class="")
+                                li(v-if="user_connected" class="")
+                                    a(class="rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-2 block whitespace-no-wrap text-xs" href="#") Cerrar Session
+                                li(v-if="user_connected" class="")
+                                    a(class="rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-2 block whitespace-no-wrap text-xs" href="#") Mi Perfil
                                 li(class="")
-                                    a(class="rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-6 block whitespace-no-wrap text-xs" href="#") One
+                                    a(class="rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-2 block whitespace-no-wrap text-xs" href="#") Inicio
                                 li(class="")
-                                    a(class="rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-6 block whitespace-no-wrap text-xs" href="#") Two
+                                    a(class="rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-2 block whitespace-no-wrap text-xs" href="#") Comunidades
                                 li(class="")
-                                    a(class="rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-6 block whitespace-no-wrap text-xs" href="#") Three
+                                    a(class="rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-2 block whitespace-no-wrap text-xs" href="#") Talleres
+                                li(class="")
+                                    a(class="rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-2 block whitespace-no-wrap text-xs" href="#") Creadores de contenido
 </template>
 <script>
 export default {
