@@ -14,6 +14,8 @@ Vue.use(InfiniteLoading);
 Vue.use(Vuelidate);
 Vue.use(moment);
 
+
+
 Vue.config.productionTip = false;
 
 hello.init(
@@ -21,7 +23,7 @@ hello.init(
         google: process.env.VUE_APP_GOOGLE_ID,
         facebook: process.env.VUE_APP_FACEBOOK_ID
     },
-    { redirect_uri: "inside" }
+    { redirect_uri: "home" }
 );
 
 new Vue({
