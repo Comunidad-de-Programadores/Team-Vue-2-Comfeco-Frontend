@@ -4,7 +4,7 @@
 			div(class="grid md:grid-cols-1 gap-2 mt-7")                                  
 				h4(class="text-2xl text-gray-800 dark:text-white font-extrabold tracking-tight text-words") Reasignar contraseña
 				p Te enviaremos un correo electronico con un enlace privado para que reasignes tu contraseña. Este enlace sera valido por una hora.
-			form(@submit.prevent="remeberPassword()" class="mt-9")
+			form(@submit.prevent="recoverPassword()" class="mt-9")
 				div.my-5.text-sm( :class="{ 'form-group-error': $v.model.email.$error }")
 					input( type="text" autofocus class="rounded px-4 py-3 mt-3 focus:outline-none bg-gray-100 w-full" placeholder="Correo" v-model.trim="$v.model.email.$model")
 					div(v-if="$v.model.email.$dirty")
@@ -21,51 +21,51 @@ import authService from "../services/authService";
 import catchErrors from "../services/catchErrors";
 
 export default {
-	name: "RememberPassword",
-	data() {
-		return {
-			model : {
-				email: ''
-			},
-			submitStatus: null,
-			auth: new authService(),
-			errorSvc: new catchErrors(),
+    name: "RememberPassword",
+    data() {
+        return {
+            model: {
+                email: ""
+            },
+            submitStatus: null,
+            auth: new authService(),
+            errorSvc: new catchErrors(),
             errors: [],
-			validationTexts: "",
-		};
-	},
-	validations: {
-		model : {
-			email: {
-				required,
-				email,
-			},
-		}
-	},
-	methods: {
-		async remeberPassword() {
-			this.$v.$touch();
+            validationTexts: ""
+        };
+    },
+    validations: {
+        model: {
+            email: {
+                required,
+                email
+            }
+        }
+    },
+    methods: {
+        async recoverPassword() {
+            this.$v.$touch();
 
-			if (this.$v.$invalid) {
-				this.submitStatus = "ERROR";
-			} else {
-				let response = await this.auth.RememberPassword(this.model);
+            if (this.$v.$invalid) {
+                this.submitStatus = "ERROR";
+            } else {
+                let response = await this.auth.recoverPassword(this.model);
 
-				if (!response.data.error) {
-					this.submitStatus = "SUCCESS";
-					this.mode.email = "";
-					return this.$router.push("/");
-				} else {
-					this.submitStatus = "ERROR";
-					this.errors = this.errorSvc.showErrors(response.errors);
-				}
-			}
-		},
-	},
+                if (!response.data.error) {
+                    this.submitStatus = "SUCCESS";
+                    this.mode.email = "";
+                    return this.$router.push("/");
+                } else {
+                    this.submitStatus = "ERROR";
+                    this.errors = this.errorSvc.showErrors(response.errors);
+                }
+            }
+        }
+    }
 };
 </script>
 <style lang="scss" scoped>
 .border-gray {
-	border-right: 1px solid #d4cece;
+    border-right: 1px solid #d4cece;
 }
 </style>
