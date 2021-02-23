@@ -1,19 +1,20 @@
 <template lang="pug">
-    div
-        div(class="w-full lg:w-3/12")
-            p hola
-        div(class="-mx-8 w-6/12 hidden lg:block")
-            p chao
+    div(class="grid grid-cols-4 gap-4")
+        div(class="col-span-1")
+            Communities
+        div(class="col-span-2")
             Counter(:end="end")
-        div(class="-mx-8 w-3/12 hidden lg:block")
+        div(class="col-span-1")
             RightSideTalleres
 </template>
 <script>
-import RightSideTalleres from "@/components/Home/RightSideTalleres";
+import Communities from "@/components/Communities/Communities";
 import Counter from "@/components/Counter/Counter";
+import RightSideTalleres from "@/components/Home/RightSideTalleres";
 export default {
     name: "Inside",
     components: {
+        Communities,
         Counter,
         RightSideTalleres
     },

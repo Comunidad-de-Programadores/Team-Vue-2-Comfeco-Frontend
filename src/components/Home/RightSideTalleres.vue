@@ -2,7 +2,7 @@
     div(class="flex flex-col bg-white max-w-sm px-2 py-4 mx-auto rounded-lg shadow-md" )                
         div.flex.px-4.py-2
             h1(class="w-6/12") Talleres
-            a(href="#" class="text-right w-6/12") Ver mas            
+            a(href="#" class="text-right w-6/12") Ver más            
         div.flex.px-4.mt-2.mb-2
             div(class="dropdown inline-block relative")
                 button(class="flex bg-gray-300 text-gray-700 font-semibold py-2 pl-4 ml-4 rounded inline-flex items-center" )
@@ -27,97 +27,101 @@
             infinite-loading(:identifier="infiniteId" @infinite="infiniteHandler")
 </template>
 <script>
-import moment from 'moment';
+import moment from "moment";
 import workshopService from "../../services/workshopService";
 
 export default {
-    name: 'RightSideTalleres',
-    data(){
+    name: "RightSideTalleres",
+    data() {
         return {
-            areaSelect: '',
-            areasConocimiento : [
-                { id: '', area: 'Talleres por areas de conocimiento'},
-                { id: 1, area: 'frontend'},
-                { id: 2, area: 'backend'},
-                { id: 3, area: 'DevOps'},
-                { id: 4, area: 'Video Game Developers'},
-                { id: 5, area: 'UI/UX'},
-                { id: 6, area: 'Database Developer'},
-                { id: 7, area: 'Cloud Computing'}                
+            areaSelect: "",
+            areasConocimiento: [
+                { id: "", area: "Talleres por areas de conocimiento" },
+                { id: 1, area: "frontend" },
+                { id: 2, area: "backend" },
+                { id: 3, area: "DevOps" },
+                { id: 4, area: "Video Game Developers" },
+                { id: 5, area: "UI/UX" },
+                { id: 6, area: "Database Developer" },
+                { id: 7, area: "Cloud Computing" }
             ],
-            talleres : [
-                { 
-                    curso : 'State of javascript',
-                    hora: '2021-02-21 18:08:12',
-                    autor: 'Juan Pablo de la Torre',
-                    ruta_curso: 'google.com',
+            talleres: [
+                {
+                    curso: "State of javascript",
+                    hora: "2021-02-21 18:08:12",
+                    autor: "Juan Pablo de la Torre",
+                    ruta_curso: "google.com",
                     area_id: 1
                 },
-                { 
-                    curso : 'IA Con Python',
-                    hora: '2021-02-21 14:08:12',
-                    autor: 'Juan Pablo de la Torre',
-                    ruta_curso: 'google.com',
+                {
+                    curso: "IA Con Python",
+                    hora: "2021-02-21 14:08:12",
+                    autor: "Juan Pablo de la Torre",
+                    ruta_curso: "google.com",
                     area_id: 2
                 },
-                { 
-                    curso : '5',
-                    hora: '2021-02-21 14:08:12',
-                    autor: 'Juan Pablo de la Torre',
-                    ruta_curso: 'google.com',
+                {
+                    curso: "5",
+                    hora: "2021-02-21 14:08:12",
+                    autor: "Juan Pablo de la Torre",
+                    ruta_curso: "google.com",
                     area_id: 3
                 },
-                { 
-                    curso : '4',
-                    hora: '2021-02-21 14:08:12',
-                    autor: 'Juan Pablo de la Torre',
-                    ruta_curso: 'google.com',
+                {
+                    curso: "4",
+                    hora: "2021-02-21 14:08:12",
+                    autor: "Juan Pablo de la Torre",
+                    ruta_curso: "google.com",
                     area_id: 4
                 },
-                { 
-                    curso : '3',
-                    hora: '2021-02-21 14:08:12',
-                    autor: 'Juan Pablo de la Torre',
-                    ruta_curso: 'google.com',
+                {
+                    curso: "3",
+                    hora: "2021-02-21 14:08:12",
+                    autor: "Juan Pablo de la Torre",
+                    ruta_curso: "google.com",
                     area_id: 5
                 },
-                { 
-                    curso : '2',
-                    hora: '2021-02-21 14:08:12',
-                    autor: 'Juan Pablo de la Torre',
-                    ruta_curso: 'google.com',
+                {
+                    curso: "2",
+                    hora: "2021-02-21 14:08:12",
+                    autor: "Juan Pablo de la Torre",
+                    ruta_curso: "google.com",
                     area_id: 6
                 },
-                { 
-                    curso : '1',
-                    hora: '2021-02-21 14:08:12',
-                    autor: 'Juan Pablo de la Torre',
-                    ruta_curso: 'google.com',
+                {
+                    curso: "1",
+                    hora: "2021-02-21 14:08:12",
+                    autor: "Juan Pablo de la Torre",
+                    ruta_curso: "google.com",
                     area_id: 7
-                },
-
+                }
             ],
             page: 1,
             list: [],
             infiniteId: +new Date(),
             workshopService: new workshopService()
-        }
+        };
     },
     methods: {
-        seleccionArea(id){
-            this.areaSelect = id
+        seleccionArea(id) {
+            this.areaSelect = id;
             this.page = 1;
             this.list = [];
             this.infiniteId += 1;
         },
-        iconToShow(hora){
-            return moment().isBefore(moment(hora)) ? 'fas fa-ellipsis-h' : 'fas fa-check'
+        iconToShow(hora) {
+            return moment().isBefore(moment(hora))
+                ? "fas fa-ellipsis-h"
+                : "fas fa-check";
         },
-        formatTime(hora){
-            return moment(hora).format('LTS')
+        formatTime(hora) {
+            return moment(hora).format("LTS");
         },
         async infiniteHandler($state) {
-            let response = await this.workshopService.getWorkshops(this.page, this.areaSelect);
+            let response = await this.workshopService.getWorkshops(
+                this.page,
+                this.areaSelect
+            );
 
             if (response.records.data.length) {
                 this.page += 1;
@@ -126,10 +130,8 @@ export default {
             } else {
                 $state.complete();
             }
-        },
-    },    
-}
+        }
+    }
+};
 </script>
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>
