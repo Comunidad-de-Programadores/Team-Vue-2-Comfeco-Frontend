@@ -4,19 +4,25 @@
             Communities
         div(class="col-span-2")
             Counter(:end="end")
+            AutoScrollSlider
+            ManualSlider
         div(class="col-span-1")
             RightSideTalleres
 </template>
 <script>
 import Communities from "@/components/Communities/Communities";
 import Counter from "@/components/Counter/Counter";
+import AutoScrollSlider from "@/components/Slider/AutoScrollSlider";
+import ManualSlider from "@/components/Slider/ManualSlider";
 import RightSideTalleres from "@/components/Home/RightSideTalleres";
 export default {
     name: "Inside",
     components: {
         Communities,
         Counter,
-        RightSideTalleres
+        RightSideTalleres,
+        AutoScrollSlider,
+        ManualSlider
     },
     data() {
         return {
