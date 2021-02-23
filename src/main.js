@@ -7,7 +7,8 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 import router from "./routes";
 import hello from "hellojs";
 import moment from "moment";
-import InfiniteLoading from 'vue-infinite-loading';
+import InfiniteLoading from "vue-infinite-loading";
+require("./utils/EventBus");
 
 Vue.use(InfiniteLoading);
 Vue.use(Vuelidate);

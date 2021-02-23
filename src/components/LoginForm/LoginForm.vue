@@ -91,7 +91,6 @@ export default {
                 this.submitStatus = "ERROR";
             } else {
                 try {
-                    await this.auth.getAuthToken();
                     let response = await this.auth.login(this.model);
                     if (!response.error) {
                         this.model = {
@@ -101,6 +100,7 @@ export default {
                         };
                         this.submitStatus = "SUCCESS";
                         this.$router.push("/inside");
+                        window.bus.$emit("login");
                     } else {
                         this.submitStatus = "ERROR";
                         this.errors = this.errorSvc.showErrors(response.errors);

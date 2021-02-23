@@ -4,7 +4,7 @@
             router-link.flex-initial( to="/" )                          
                 figure.logo-container.w-32(class='sm:w-40')
                     img(alt="Confeco logo" src="@/assets/images/comfeco.png")
-        div(class="md:ml-28 ml-0 my-0 md:my-2")
+        div(class="md:ml-28 ml-0 my-0 md:my-2", v-if="Object.keys(user_connected).length > 0")
             router-link.flex-initial( to="/inicio" class="text-gray-800 text-sm hover:text-blue-500 md:mx-4 ") Inicio
             router-link.flex-initial( to="/comunidades" class="text-gray-800 text-sm hover:text-blue-500 md:mx-4 ") Comunidades
             router-link.flex-initial( to="/talleres" class="text-gray-800 text-sm hover:text-blue-500 md:mx-4 ") Talleres
@@ -12,23 +12,19 @@
 </template>
 <script>
 export default {
-    name: 'TextHeader',
+    name: "TextHeader",
     props: {
         user_connected: {
             type: Object,
-            default:null
+            default: null
         }
     },
-    data(){
-        return {
-
-        }
+    data() {
+        return {};
     },
-    created(){
-        console.log(this.user_connected)
+    created() {
+        console.log(this.user_connected);
     }
-}
+};
 </script>
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

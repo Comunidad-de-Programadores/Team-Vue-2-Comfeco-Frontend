@@ -5,7 +5,7 @@
                 router-link.flex-initial( to="/" )                          
                     figure.logo-container.w-32(class='sm:w-40')
                         img(alt="Confeco logo" src="@/assets/images/comfeco.png")
-            div
+            div(v-if="Object.keys(user_connected).length > 0")
                 div(class="dropdown inline-block relative")
                     button(class="bg-gray-300 text-gray-700 font-semibold py-2 pl-4 rounded-l-3xl rounded inline-flex items-center" @click="showMenu()")
                         template(v-if="user_connected")
@@ -30,25 +30,23 @@
 </template>
 <script>
 export default {
-    name: 'MenuMovil',
-    data(){
+    name: "MenuMovil",
+    data() {
         return {
             openMenu: false
-        }
+        };
     },
     props: {
         user_connected: {
             type: Object,
-            default:null
+            default: null
         }
     },
-    methods : {
-        showMenu(){            
-            return this.openMenu = !this.openMenu;
+    methods: {
+        showMenu() {
+            return (this.openMenu = !this.openMenu);
         }
     }
-}
+};
 </script>
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

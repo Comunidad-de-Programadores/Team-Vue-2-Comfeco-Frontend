@@ -3,7 +3,7 @@
 		div(class="bg-white lg:w-4/12 md:6/12 w-10/12 m-auto my-40")
 			div(class="grid md:grid-cols-1 gap-2 mt-7")
 				h4(class="text-2xl text-gray-800 dark:text-white font-extrabold tracking-tight text-words") Asignar contraseña
-			form(@submit.prevent="recoverPassword()" class="mt-9")
+			form(@submit.prevent="generatePassword()" class="mt-9")
 				.my-5.text-sm( :class="{ 'form-group-error': $v.model.password.$error }")
 					input( type="password" autofocus class="rounded px-4 py-3 mt-3 focus:outline-none bg-gray-100 w-full" placeholder="Contraseña" v-model.trim="$v.model.password.$model")
 					div(v-if="$v.model.password.$dirty")
@@ -29,57 +29,57 @@ import authService from "../services/authService";
 import catchErrors from "../services/catchErrors";
 
 export default {
-	name: "RecoverPassword",
-	data() {
-		return {
-			model : {
-				password: "",
-				password_confirmation: "",
-				email: this.$route.params.email
-			},
-			errors: [],
-			errorSvc: new catchErrors(),
-			submitStatus: null,
-			auth: new authService(),
-		};
-	},
-	validations: {
-		model :{
-			password: {
-				required,
-				minLength: minLength(6),
-			},
-			password_confirmation: {
-				required,
-				sameAsPassword: sameAs("password"),
-			}
-		}
-	},
-	methods: {
-		async recoverPassword() {
-			this.$v.$touch();
+    name: "RecoverPassword",
+    data() {
+        return {
+            model: {
+                password: "",
+                password_confirmation: "",
+                email: this.$route.params.email
+            },
+            errors: [],
+            errorSvc: new catchErrors(),
+            submitStatus: null,
+            auth: new authService()
+        };
+    },
+    validations: {
+        model: {
+            password: {
+                required,
+                minLength: minLength(6)
+            },
+            password_confirmation: {
+                required,
+                sameAsPassword: sameAs("password")
+            }
+        }
+    },
+    methods: {
+        async generatePassword() {
+            this.$v.$touch();
 
-			if (this.$v.$invalid) {
-				this.submitStatus = "ERROR";
-			} else {
-				let response = await this.auth.RecoverPassword(this.model);
+            if (this.$v.$invalid) {
+                this.submitStatus = "ERROR";
+            } else {
+                let response = await this.auth.generatePassword(this.model);
 
-				if (!response.date.error) {
-					this.submitStatus = "SUCCESS";
-					this.password = "";
-					this.password_confirmation = "";
-					this.$router.push("/");
-				} else {
-					this.errors = this.errorSvc.showErrors(response.errors)
-					this.submitStatus = "ERROR";
-				}
-			}
-		},
-	},
+                if (!response.date.error) {
+                    this.submitStatus = "SUCCESS";
+                    this.password = "";
+                    this.password_confirmation = "";
+                    this.$router.push("/");
+                } else {
+                    this.errors = this.errorSvc.showErrors(response.errors);
+                    this.submitStatus = "ERROR";
+                }
+            }
+        }
+    }
 };
 </script>
 <style lang="scss" scoped>
 .border-gray {
-	border-right: 1px solid #d4cece;
+    border-right: 1px solid #d4cece;
 }
 </style>

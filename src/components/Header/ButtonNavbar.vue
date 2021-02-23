@@ -1,5 +1,5 @@
 <template lang="pug">
-    section(class="flex justify-between items-center hidden md:flex")
+    section(class="flex justify-between items-center hidden md:flex", v-if="Object.keys(user_connected).length > 0")
         .container.mx-auto.bg-transparent
             a( class="", ref="bellContainer")
                 i( class="text-lg far fa-bell" )                        
@@ -17,15 +17,18 @@
 </template>
 <script>
 export default {
-    name : 'ButtonNavbar',
+    name: "ButtonNavbar",
     props: {
         user_connected: {
             type: Object,
-            default:null
+            default: null
         }
     },
-}
+    methods: {
+        logout: function() {
+            window.bus.$emit("logout");
+        }
+    }
+};
 </script>
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>
