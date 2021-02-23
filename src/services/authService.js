@@ -138,4 +138,8 @@ export default class authService {
             console.log("error", error.response.data);
         }
     };
+
+    logout = async function() {
+        await manageStorage.clear();
+    };
 }

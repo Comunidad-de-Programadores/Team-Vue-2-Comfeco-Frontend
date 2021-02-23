@@ -6,25 +6,37 @@
         ButtonNavbar(:user_connected.sync="user")            
 </template>
 <script>
-
 import manageStorage from "../services/manageStorage";
-import ButtonNavbar from "@/components/Header/ButtonNavbar"
-import MenuMovil from "@/components/Header/MenuMovil"
-import TextHeader from "@/components/Header/TextHeader"
+import ButtonNavbar from "@/components/Header/ButtonNavbar";
+import MenuMovil from "@/components/Header/MenuMovil";
+import TextHeader from "@/components/Header/TextHeader";
 
 export default {
-	name: "Header",
+    name: "Header",
     components: {
         ButtonNavbar,
         MenuMovil,
         TextHeader
     },
-    data(){
-        return{
-            user : manageStorage.getObject('user'),            
-        }
+    data() {
+        return {
+            user: manageStorage.getObject("user")
+        };
     },
+    created() {
+        window.bus.$on("login", () => {
+            this.fillUser();
+        });
+        window.bus.$on("logout", () => {
+            this.fillUser();
+        });
+    },
+    methods: {
+        fillUser: function() {
+            console.log("HERE");
+            this.user = manageStorage.getObject("user");
+        }
+    }
 };
 </script>
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

@@ -100,6 +100,7 @@ export default {
                         };
                         this.submitStatus = "SUCCESS";
                         this.$router.push("/inside");
+                        window.bus.$emit("login");
                     } else {
                         this.submitStatus = "ERROR";
                         this.errors = this.errorSvc.showErrors(response.errors);

@@ -98,6 +98,7 @@ export default {
                             password_confirmation: ""
                         };
                         this.submitStatus = "SUCCESS";
+                        window.bus.$emit("login");
                         this.$router.push("/inside");
                     } else {
                         this.submitStatus = "ERROR";
