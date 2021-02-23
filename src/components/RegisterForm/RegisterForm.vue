@@ -83,13 +83,12 @@ export default {
     created() {},
     methods: {
         async register() {
+            this.sending = true;
             this.$v.$touch();
-
             if (this.$v.$invalid) {
                 this.submitStatus = "ERROR";
             } else {
                 try {
-                    await this.auth.getAuthToken();
                     let response = await this.auth.register(this.model);
                     if (!response.error) {
                         this.model = {
@@ -105,14 +104,13 @@ export default {
                         this.errors = this.errorSvc.showErrors(response.errors);
                     }
                 } catch (error) {
-                    console.log(error);
                     this.submitStatus = "ERROR";
                 }
             }
+            this.sending = false;
         },
         async loginSocial(socialNetwork) {
             this.sending = true;
-            await this.auth.getAuthToken();
             let response = await this.auth.loginSocial(socialNetwork);
             if (!response.error) {
                 this.$router.push("/inside");

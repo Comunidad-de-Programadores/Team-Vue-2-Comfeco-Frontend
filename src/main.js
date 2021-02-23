@@ -2,10 +2,16 @@ import Vue from "vue";
 import Vuelidate from "vuelidate";
 import App from "./App.vue";
 import "@/assets/tailwind/tailwind.css";
+import "@/assets/styles/main.scss";
+import "@fortawesome/fontawesome-free/css/all.min.css";
 import router from "./routes";
 import hello from "hellojs";
+import moment from "moment";
+import InfiniteLoading from 'vue-infinite-loading';
 
+Vue.use(InfiniteLoading);
 Vue.use(Vuelidate);
+Vue.use(moment);
 
 Vue.config.productionTip = false;
 

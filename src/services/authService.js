@@ -80,21 +80,6 @@ export default class authService {
     };
 
     recoverPassword = async model => {
-        const url = "/v1/generatePassword";
-        try {
-            const { data } = await axiosService({
-                requiresAuth: true,
-                isGeneralApi: true
-            }).post(url, model);
-
-            return data;
-        } catch (error) {
-            alert("ERROR");
-            console.log("error", error.response.data);
-        }
-    };
-
-    RememberPassword = async model => {
         const url = "/v1/recoverPassword";
         try {
             const { data } = await axiosService({
@@ -104,7 +89,20 @@ export default class authService {
 
             return data;
         } catch (error) {
-            alert("ERROR");
+            console.log("error", error.response.data);
+        }
+    };
+
+    generatePassword = async model => {
+        const url = "/v1/generatePassword";
+        try {
+            const { data } = await axiosService({
+                requiresAuth: true,
+                isGeneralApi: true
+            }).post(url, model);
+
+            return data;
+        } catch (error) {
             console.log("error", error.response.data);
         }
     };
@@ -125,8 +123,8 @@ export default class authService {
         }
     };
 
-    generatePassword = async model => {
-        const url = "/v1/generatePassword";
+    validateRecoverPasswordExpiration = async model => {
+        const url = "/v1/validateRecoverPasswordExpiration";
         try {
             const { data } = await axiosService({
                 requiresAuth: true,

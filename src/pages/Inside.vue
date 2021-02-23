@@ -1,14 +1,21 @@
 <template lang="pug">
-    section
-        p inside
-        Counter(:end="end")
+    div
+        div(class="w-full lg:w-3/12")
+            p hola
+        div(class="-mx-8 w-6/12 hidden lg:block")
+            p chao
+            Counter(:end="end")
+        div(class="-mx-8 w-3/12 hidden lg:block")
+            RightSideTalleres
 </template>
 <script>
+import RightSideTalleres from "@/components/Home/RightSideTalleres";
 import Counter from "@/components/Counter/Counter";
 export default {
     name: "Inside",
     components: {
-        Counter
+        Counter,
+        RightSideTalleres
     },
     data() {
         return {

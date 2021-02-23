@@ -91,7 +91,6 @@ export default {
                 this.submitStatus = "ERROR";
             } else {
                 try {
-                    await this.auth.getAuthToken();
                     let response = await this.auth.login(this.model);
                     if (!response.error) {
                         this.model = {
