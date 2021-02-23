@@ -1,10 +1,10 @@
 <template lang="pug">
     div
-        div(class="w-full lg:w-3/12")
+        div(class="w-3/12 hidden lg:block")
             p hola
-        div(class="-mx-8 w-6/12 hidden lg:block")
+        div(class="mx-4 w-full lg:w-6/12")
             Counter(:end="end")
-        div(class="-mx-8 w-3/12 hidden lg:block")
+        div(class="w-3/12 hidden lg:block")
             RightSideTalleres
 </template>
 <script>
