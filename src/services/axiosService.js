@@ -5,7 +5,7 @@ export default ({ requiresAuth = false, isGeneralApi = false } = {}) => {
     const options = {};
     const headers = {};
     options.baseURL = process.env.VUE_ROOT_API;
-    console.log(process.env);
+    console.log("PROCESS", process.env);
     // options.baseURL = "http://localhost/Team-Vue-2-Comfeco-Backend/public/api";
 
     function checkOAuthToken() {

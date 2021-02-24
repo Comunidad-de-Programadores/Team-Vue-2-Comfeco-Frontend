@@ -6,24 +6,25 @@
 </template>
 <script>
 import LoginForm from "@/components/LoginForm/LoginForm";
-import authService from "../services/authService"
-import OptionChoiceLoginOrRegister from "@/components/UiComponents/OptionChoiceLoginOrRegister"
+import authService from "../services/authService";
+import OptionChoiceLoginOrRegister from "@/components/UiComponents/OptionChoiceLoginOrRegister";
 
 export default {
     name: "Login",
     components: {
         LoginForm,
-		OptionChoiceLoginOrRegister
+        OptionChoiceLoginOrRegister
     },
-	data(){
-		return {
-			authService : new authService()
-		}
-	},
-	created(){
-		window.bus.$emit("login");
-		this.authService.logout()
-	}
+    data() {
+        return {
+            authService: new authService()
+        };
+    },
+    created() {
+        window.bus.$emit("login");
+        console.log("PROCESS", process.env);
+        // this.authService.logout()
+    }
 };
 </script>
 <style lang="scss" scoped>
