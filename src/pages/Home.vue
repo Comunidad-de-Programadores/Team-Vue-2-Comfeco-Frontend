@@ -1,12 +1,12 @@
 <template lang="pug">
-    div(class="grid grid-cols-4 gap-4")
-        div(class="col-span-1")
+    div(class="grid lg:grid-cols-4 lg:gap-4 grid-cols-1 gap-10 px-4")
+        div(class="col-span-1 hidden lg:block")
             Communities
-        div(class="col-span-2")
+        div(class="w-full lg:col-span-2 ")
             Counter(:end="end")
             AutoScrollSlider
             ManualSlider
-        div(class="col-span-1")
+        div(class="col-span-1 hidden lg:block")
             RightSideTalleres
 </template>
 <script>
@@ -16,7 +16,7 @@ import AutoScrollSlider from "@/components/Slider/AutoScrollSlider";
 import ManualSlider from "@/components/Slider/ManualSlider";
 import RightSideTalleres from "@/components/Home/RightSideTalleres";
 export default {
-    name: "Inside",
+    name: "Home",
     components: {
         Communities,
         Counter,

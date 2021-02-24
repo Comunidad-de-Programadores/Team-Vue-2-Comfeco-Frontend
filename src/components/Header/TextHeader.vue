@@ -23,7 +23,7 @@ export default {
         return {};
     },
     created() {
-        console.log(this.user_connected);
+        console.log(this.user_connected, 'TextHeader');
     }
 };
 </script>
