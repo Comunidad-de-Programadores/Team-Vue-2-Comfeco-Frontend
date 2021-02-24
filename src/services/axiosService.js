@@ -4,7 +4,7 @@ import manageStorage from "./manageStorage";
 export default ({ requiresAuth = false, isGeneralApi = false } = {}) => {
     const options = {};
     const headers = {};
-    options.baseURL = "https://comfeco.tk/api";
+    options.baseURL = process.env.VUE_ROOT_API;
     // options.baseURL = "http://localhost/Team-Vue-2-Comfeco-Backend/public/api";
 
     function checkOAuthToken() {
