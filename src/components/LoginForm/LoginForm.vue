@@ -115,10 +115,9 @@ export default {
         },
         async loginSocial(socialNetwork) {
             this.sending = true;
-            await this.auth.getAuthToken();
             let response = await this.auth.loginSocial(socialNetwork);
             if (!response.error) {
-                this.$router.push("/inside");
+                this.$router.push("/home");
             } else {
                 console.log(response);
             }
