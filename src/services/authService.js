@@ -28,8 +28,9 @@ export default class authService {
             if (!data.error) manageStorage.setObject("user", data.user);
             return data;
         } catch (error) {
-            console.log(error.messages);
-            return Promise.reject(error.messages);
+            // console.log(error);
+            console.log("error2", error);
+            return Promise.reject(error);
         }
     };
 
@@ -60,7 +61,7 @@ export default class authService {
                     resolve(data);
                 });
             } catch (error) {
-                return reject(error.messages);
+                return reject(error);
             }
         });
     };
@@ -75,7 +76,7 @@ export default class authService {
             if (!data.error) manageStorage.setObject("user", data.user);
             return data;
         } catch (error) {
-            return Promise.reject(error.response);
+            return Promise.reject(error);
         }
     };
 
@@ -89,7 +90,7 @@ export default class authService {
 
             return data;
         } catch (error) {
-            console.log("error", error.response.data);
+            console.log("error", error);
         }
     };
 
@@ -103,7 +104,7 @@ export default class authService {
 
             return data;
         } catch (error) {
-            console.log("error", error.response.data);
+            console.log("error", error);
         }
     };
 
@@ -119,7 +120,7 @@ export default class authService {
                 return;
             }
         } catch (error) {
-            console.log("error", error.response.data);
+            console.log("error", error);
         }
     };
 
@@ -135,7 +136,7 @@ export default class authService {
                 return;
             }
         } catch (error) {
-            console.log("error", error.response.data);
+            console.log("error", error);
         }
     };
 

@@ -22,9 +22,7 @@ export default {
     data() {
         return {};
     },
-    created() {
-        console.log(this.user_connected, 'TextHeader');
-    }
+    created() {}
 };
 </script>
 <style lang="scss" scoped></style>

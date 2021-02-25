@@ -92,6 +92,7 @@ export default {
             } else {
                 try {
                     let response = await this.auth.login(this.model);
+                    console.log("RESPONSE", response);
                     if (!response.error) {
                         this.model = {
                             email: "",
@@ -106,7 +107,7 @@ export default {
                         this.errors = this.errorSvc.showErrors(response.errors);
                     }
                 } catch (error) {
-                    console.log(error);
+                    console.log("ERROR3", error.response.data);
                     this.submitStatus = "ERROR";
                 }
             }

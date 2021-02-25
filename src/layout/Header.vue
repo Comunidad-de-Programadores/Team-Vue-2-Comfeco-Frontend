@@ -29,7 +29,6 @@ export default {
     },
     methods: {
         fillUser: function() {
-            console.log("HERE");
             this.user = manageStorage.getObject("user");
         }
     }

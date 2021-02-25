@@ -22,7 +22,6 @@ export default {
     },
     created() {
         window.bus.$emit("login");
-        console.log("PROCESS", process.env);
         // this.authService.logout()
     }
 };
