@@ -1,8 +1,8 @@
 <template lang="pug">
     div(class="flex flex-col bg-white max-w-sm px-2 py-4 mx-auto rounded-lg shadow-md" )                
         div.flex.px-4.py-2
-            h1(class="w-6/12") Talleres
-            a(href="#" class="text-right w-6/12") Ver más            
+            h1(class="w-7/12") Talleres
+            a(href="#" class="text-xs text-right text-blue-500 w-5/12 flex justify-end items-center") Ver más            
         div.flex.px-4.mt-2.mb-2
             div(class="dropdown inline-block relative")
                 button(class="flex bg-gray-300 text-gray-700 font-semibold py-2 pl-4 ml-4 rounded inline-flex items-center" )
@@ -22,8 +22,8 @@
                                 i(:class="iconToShow(taller.created_at)")
                         div.text-black(class="w-8/12")
                             p.text-xs {{taller.name}}
-                            p.text-xs.text-black.text-opacity-50 {{ formatTime(taller.created_at) }}
-                            a.text-xs(:href="taller.url_social") By {{taller.name_user}}
+                            p.text-xs.text-black.text-opacity-50 {{ formatTime(taller.created_at) }}                            
+                            a( target="_blank" :href="taller.url_social" class="text-xs text-right text-blue-500 items-center") By {{taller.name_user}}
             infinite-loading(:identifier="infiniteId" @infinite="infiniteHandler")
 </template>
 <script>
