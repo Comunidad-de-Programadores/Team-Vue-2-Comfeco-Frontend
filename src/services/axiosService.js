@@ -4,7 +4,7 @@ import manageStorage from "./manageStorage";
 export default ({ requiresAuth = false, isGeneralApi = false } = {}) => {
     const options = {};
     const headers = {};
-    options.baseURL = process.env.VUE_ROOT_API;
+    options.baseURL = process.env.VUE_APP_ROOT_API;
     console.log("PROCESS", process.env);
     // options.baseURL = "http://localhost/Team-Vue-2-Comfeco-Backend/public/api";
 
@@ -41,7 +41,7 @@ export default ({ requiresAuth = false, isGeneralApi = false } = {}) => {
                         grant_type: "client_credentials",
                         client_id: 3,
                         client_secret:
-                            "gbDi1yBYvoYkDRtk3waVp3KfFNLJpCRI4I874yjw",
+                            "QnQCQoTP5zdn0KgEEyTqbnMnVwHtxNAlepon6pHB",
                         scope: "app-client-guest"
                     }
                 );
