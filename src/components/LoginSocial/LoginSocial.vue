@@ -13,10 +13,12 @@
 </template>
 
 <script>
+import authService from "@/services/authService";
 export default {
     data() {
         return {
-            sending: false
+            sending: false,
+            auth: new authService()
         };
     },
     methods: {
