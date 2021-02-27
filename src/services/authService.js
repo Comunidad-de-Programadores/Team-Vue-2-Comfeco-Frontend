@@ -5,11 +5,13 @@ import hello from "hellojs";
 export default class authService {
     getAuthToken = async () => {
         const url = "/oauth/token";
+        const oauthkey = process.env.VUE_APP_OAUTH_KEY ?? "4lBcdZEMhkWjBzqzKcdyNoMd3nGYK2HaY5n0x6L7";
+        //const clientId = process.env.API_CLIENT_ID ?? 3
         try {
             const { data } = await axiosService().post(url, {
                 grant_type: "client_credentials",
-                client_id: 3,
-                client_secret: "4lBcdZEMhkWjBzqzKcdyNoMd3nGYK2HaY5n0x6L7",
+                client_id: 2,
+                client_secret: oauthkey,
                 scope: "app-client-guest"
             });
             manageStorage.setObject("oauth", data);

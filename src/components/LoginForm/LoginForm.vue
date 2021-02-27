@@ -48,7 +48,7 @@
 import { required, email } from "vuelidate/lib/validators";
 import LoginSocial from "@/components/LoginSocial/LoginSocial";
 import authService from "@/services/authService";
-import errorManagement from "@/mixins/errorManagement";
+import errorManagement from "../../mixins/errorManagement";
 
 export default {
     name: "LoginForm",

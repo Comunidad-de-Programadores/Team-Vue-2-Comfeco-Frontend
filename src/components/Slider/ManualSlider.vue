@@ -1,26 +1,22 @@
-<template>
-    <div class="swiper-container manual-swiper">
-        <div class="swiper-wrapper">
-            <template v-for="item in items">
-                <div class="swiper-slide" :key="item.id">
-                    <div class="flex justify-center items-center">
-                        <a href="#">
-                            <img class="inline object-cover w-16 h-16 mr-2 rounded-full" src="https://images.pexels.com/photos/2589653/pexels-photo-2589653.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" alt="Profile image"/>
-                        </a>
-                    </div>
-                </div>
-            </template>
-        </div>
-        <!-- Add Arrows -->
-        <div class="swiper-button-next"></div>
-        <div class="swiper-button-prev"></div>
-    </div>
+<template lang="pug">
+.swiper-container.manual-swiper
+  .swiper-wrapper
+    template(v-for='item in sponsors')
+      .swiper-slide(:key='item.id')
+        .flex.justify-center.items-center.overflow-hidden
+          a(href='#')
+            img.block-inline.object-cover.w-100.h-100.mr-2.rounded-full(:src='`${item.image_url}`' :alt='`${item.name}`')
+  // Add Arrows
+  .swiper-button-next
+  .swiper-button-prev
 </template>
 
 <script>
 import Swiper, { Navigation }  from 'swiper'
 Swiper.use([Navigation]);
 import commonSwiperConfig from "@/utils/CommonSwiperConfig"
+import sponsorService from '../../services/sponsorService'
+
 import "swiper/swiper-bundle.css"
 export default {
     name: "ManualSlider",
@@ -31,8 +27,19 @@ export default {
             default: () => {}
         }
     },
+    created() {
+        this.getSponsors();
+    },
+    methods: {
+          getSponsors: async function() {
+            const data = await this.sponsorService.get();
+            this.sponsors = data.records;
+        }
+    },
     data() {
         return {
+            sponsorService: new sponsorService(),
+            sponsors: [],
             items: [
                 '',
                 '',
@@ -51,7 +58,7 @@ export default {
             ],
         }
     },
-    mounted() {
+    updated() {
         new Swiper('.manual-swiper', {
             ...commonSwiperConfig,
             navigation: {
@@ -68,6 +75,10 @@ export default {
                     slidesPerGroup: 4,
                 },
                 720: {
+                    slidesPerView: 6,
+                    slidesPerGroup: 6,
+                },
+                 1020: {
                     slidesPerView: 8,
                     slidesPerGroup: 8,
                 }

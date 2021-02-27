@@ -23,6 +23,7 @@ export default ({ requiresAuth = false, isGeneralApi = false } = {}) => {
 
     options.headers = headers;
     const instance = axios.create(options);
+    const clientId = process.env.API_CLIENT_ID ?? 2;
 
     instance.interceptors.request.use(
         async request => {
@@ -38,7 +39,7 @@ export default ({ requiresAuth = false, isGeneralApi = false } = {}) => {
                     `${options.baseURL}/oauth/token`,
                     {
                         grant_type: "client_credentials",
-                        client_id: 3,
+                        client_id: clientId,
                         client_secret: oauthkey,
                         scope: "app-client-guest"
                     }

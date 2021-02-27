@@ -1,44 +1,19 @@
-<template>
-    <div class="swiper-container auto-swiper-container justify-center">
-        <div class="swiper-wrapper">
-            <template v-for="item in items" >
-                <div class="swiper-slide" :key="item.id">
-                    <article class="overflow-hidden rounded-lg shadow-lg my-10">
-                        <a href="#">
-                            <img alt="Placeholder" class="block h-auto w-full" src="https://picsum.photos/600/400/?random">
-                        </a>
-
-                        <header class="flex items-center justify-between leading-tight p-2 md:p-4">
-                            <h1 class="text-lg">
-                                <a class="no-underline hover:underline text-black" href="#">
-                                    Article Title
-                                </a>
-                            </h1>
-                            <p class="text-grey-darker text-sm">
-                                14/4/19
-                            </p>
-                        </header>
-
-                        <footer class="flex items-center justify-between leading-none p-2 md:p-4">
-                            <a class="flex flex-di items-center no-underline hover:underline text-black" href="#">
-                                <img alt="Placeholder" class="block rounded-full" src="https://picsum.photos/32/32/?random">
-                                <p class="ml-2 text-sm">
-                                    Author Name
-                                </p>
-                            </a>
-                            <a class="no-underline text-grey-darker hover:text-red-dark" href="#">
-                                <span class="hidden">Like</span>
-                                <i class="fa fa-heart"></i>
-                            </a>
-                        </footer>
-
-                    </article>
-                </div>
-            </template>
-        </div>
-        <!-- Add Pagination -->
-        <div class="swiper-pagination"></div>
-    </div>
+<template lang="pug">
+   .swiper-container.auto-swiper-container
+    .swiper-wrapper
+      template(v-for='item in mentors')
+        .swiper-slide(:key='item.id')
+          article.overflow-hidden.rounded-lg.shadow-lg.my-10
+            a(href='#')
+              img.block.h-100.w-full(alt='Placeholder' :src='`${item.image_url}`')
+            header.flex.flex-col.items-center.justify-center.leading-tight.px-2.-mt-5.bg-white(class='md:p-4')
+              a.flex.flex-di.items-center.no-underline.text-black(class='hover:underline' href='#')
+                img.inline-block.h-6.w-6.rounded-full.ring-2.ring-comfeco(alt='Placeholder' :src='`${item.master_on_image}`')
+              a.flex.flex-di.items-center.no-underline.text-black(class='hover:underline' href='#')
+                p.ml-2.text-sm
+                  | {{item.name}}
+    // Add Pagination
+    .swiper-pagination
 </template>
 
 <script>
@@ -46,6 +21,8 @@ import Swiper, {Autoplay, Pagination} from 'swiper'
 Swiper.use([Autoplay, Pagination]);
 import "swiper/swiper-bundle.css"
 import commonSwiperConfig from "@/utils/CommonSwiperConfig"
+import mentorService from '../../services/mentorService'
+
 export default {
     name: "AutoScrollSlider",
     props: {
@@ -57,6 +34,8 @@ export default {
     },
     data() {
         return {
+            mentorService: new mentorService(),
+            mentors: [],
             items: [
                 '',
                 '',
@@ -75,9 +54,19 @@ export default {
             ],
         }
     },
-    mounted() {
+    created() {
+        this.getMentors();
+    },
+    methods: {
+          getMentors: async function() {
+            const data = await this.mentorService.get();
+            this.mentors = data.records;
+        }
+    },
+    updated() {
         new Swiper('.auto-swiper-container', {
             ...commonSwiperConfig,
+            observer: true,
             pagination: {
                 el: '.swiper-pagination',
                 clickable: true,

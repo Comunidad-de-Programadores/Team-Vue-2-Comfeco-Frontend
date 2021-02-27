@@ -1,7 +1,7 @@
 const commonSwiperConfig = {
     slidesPerView: 3,
     slidesPerGroup: 3,
-    spaceBetween: 30,
+    spaceBetween: 20,
     centeredSlides: true,
     grabCursor: true,
     loop: true,

@@ -1,5 +1,5 @@
 <template lang="pug">
-    div(id="app" class="relative z-10 max-w-screen-lg xl:max-w-screen-xl mx-auto") 
+    div(id="app" class="main relative z-10") 
         Header
         Body.w-full.max-w-8xl.mx-auto(class="min-h-screen-good")
         Footer  
@@ -38,5 +38,12 @@ export default {
 </script>
 
 <style lang="scss">
-
+.main {
+  min-height: 100vh;
+  height: 100%;
+  width: 100%;
+  background: url("../assets/images/Fondo.jpg") no-repeat fixed;
+  background-size: cover;
+  opacity: 90%;
+}
 </style>
