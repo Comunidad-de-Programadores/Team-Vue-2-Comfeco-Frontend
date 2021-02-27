@@ -26,6 +26,7 @@ export default {
             this.sending = true;
             let response = await this.auth.loginSocial(socialNetwork);
             if (!response.error) {
+                window.bus.$emit("login");
                 this.$router.push("/home");
             } else {
                 console.log(response);
