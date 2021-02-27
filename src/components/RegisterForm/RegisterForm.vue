@@ -97,7 +97,10 @@ export default {
                         };
                         this.submitStatus = "SUCCESS";
                         window.bus.$emit("login");
-                        this.$router.push("/inside");
+                        this.$toast.open({
+                            message: "Bienvenido a COMFECO",
+                            type: "success"
+                        });
                     }
                 } catch (error) {
                     this.showErrors(error);
