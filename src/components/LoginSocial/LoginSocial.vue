@@ -27,6 +27,10 @@ export default {
             let response = await this.auth.loginSocial(socialNetwork);
             if (!response.error) {
                 window.bus.$emit("login");
+                this.$toast.open({
+                    message: "Bienvenido a COMFECO",
+                    type: "success"
+                });
                 this.$router.push("/home");
             } else {
                 console.log(response);
