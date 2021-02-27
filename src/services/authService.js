@@ -28,8 +28,6 @@ export default class authService {
             if (!data.error) manageStorage.setObject("user", data.user);
             return data;
         } catch (error) {
-            // console.log(error);
-            console.log("error2", error);
             return Promise.reject(error);
         }
     };
@@ -90,7 +88,7 @@ export default class authService {
 
             return data;
         } catch (error) {
-            console.log("error", error);
+            return Promise.reject(error);
         }
     };
 
@@ -104,7 +102,7 @@ export default class authService {
 
             return data;
         } catch (error) {
-            console.log("error", error);
+            return Promise.reject(error);
         }
     };
 
@@ -120,7 +118,7 @@ export default class authService {
                 return;
             }
         } catch (error) {
-            console.log("error", error);
+            return Promise.reject(error);
         }
     };
 
@@ -136,7 +134,7 @@ export default class authService {
                 return;
             }
         } catch (error) {
-            console.log("error", error);
+            return Promise.reject(error);
         }
     };
 

@@ -15,6 +15,9 @@
                 .error.text-error.text-xs.text-center( v-if="!$v.model.email.required") Correo electrónico es necesario
                 .error.text-error.text-xs.text-center(v-if="!$v.model.email.email")
                     | Debe ser un correo electrónico.        
+            div(v-if="customErrors.email")
+                .error.text-error.text-xs.text-center
+                    | {{ customErrors.email }}
         div.my-5.text-sm( :class="{ 'form-group-error': $v.model.password.$error }")
             input( 
                 type="password" 
@@ -34,35 +37,29 @@
                 
         button( class="block text-center p-3 duration-300 rounded hover:bg-purple-500 w-full mt-10 bg-purple-600 text-white font-bold uppercase text-xs px-4 py-2 focus:outline-none", :disabled="sending") Ingresar
         
-        .error.text-md.font-semibold.text-center.mt-3(:class="{'text-error': submitStatus == 'ERROR', 'text-success': submitStatus == 'SUCCESS',}")
-            h4(v-for="error in errors") {{error}}
+        .error.text-md.font-semibold.text-center.mt-3(:class="{'text-error': submitStatus == 'ERROR', 'text-success': submitStatus == 'SUCCESS',}")(v-if="errors != ''")
+            h5 {{errors}}
 
-        div(class="flex md:justify-between justify-center items-center mt-10")
-            div(style="height: 1px;" class="bg-gray-300 md:block hidden w-4/12")
-            p(class="md:mx-1 text-sm font-light text-gray-400") Redes Sociales
-            div(style="height: 1px;" class="bg-gray-300 md:block hidden w-4/12")
-
-        div(class="grid md:grid-cols-2 gap-2 mt-7")
-            div
-                button(class="rounded text-white font-bold uppercase text-xs text-center w-full text-white bg-red-900 p-2 duration-300 hover:bg-red-700" @click="loginSocial('google')" type="button") Google
-            div
-                button(class=" text-white font-bold uppercase text-xs text-center w-full bg-blue-900 p-2 duration-300 rounded hover:bg-blue-700" @click="loginSocial('facebook')" type="button") Facebook    
+        LoginSocial
 
 </template>
 
 <script>
 import { required, email } from "vuelidate/lib/validators";
-import authService from "../../services/authService";
-import catchErrors from "../../services/catchErrors";
+import LoginSocial from "@/components/LoginSocial/LoginSocial";
+import authService from "@/services/authService";
+import errorManagement from "@/mixins/errorManagement";
 
 export default {
     name: "LoginForm",
+    mixins: [errorManagement],
+    components: {
+        LoginSocial
+    },
     data() {
         return {
             submitStatus: null,
             auth: new authService(),
-            errorSvc: new catchErrors(),
-            errors: [],
             sending: false,
             model: {
                 email: "",
@@ -89,10 +86,13 @@ export default {
             this.$v.$touch();
             if (this.$v.$invalid) {
                 this.submitStatus = "ERROR";
+                this.$toast.open({
+                    message: "Hubo un error",
+                    type: "error"
+                });
             } else {
                 try {
                     let response = await this.auth.login(this.model);
-                    console.log("RESPONSE", response);
                     if (!response.error) {
                         this.model = {
                             email: "",
@@ -102,25 +102,14 @@ export default {
                         this.submitStatus = "SUCCESS";
                         this.$router.push("/home");
                         window.bus.$emit("login");
-                    } else {
-                        this.submitStatus = "ERROR";
-                        this.errors = this.errorSvc.showErrors(response.errors);
+                        this.$toast.open({
+                            message: "Bienvenido a COMFECO",
+                            type: "success"
+                        });
                     }
                 } catch (error) {
-                    console.log("ERROR3", error.response.data);
-                    this.submitStatus = "ERROR";
+                    this.showErrors(error);
                 }
-            }
-            this.sending = false;
-        },
-        async loginSocial(socialNetwork) {
-            this.sending = true;
-            let response = await this.auth.loginSocial(socialNetwork);
-            if (!response.error) {
-                window.bus.$emit("login");
-                this.$router.push("/home");
-            } else {
-                console.log(response);
             }
             this.sending = false;
         }

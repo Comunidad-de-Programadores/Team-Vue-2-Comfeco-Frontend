@@ -2,7 +2,6 @@ import axiosService from "./axiosService";
 
 export default class authService {
     getWorkshops = async (page, area) => {
-        console.log(page, area)
         const url = `v1/workshops?page=${page}&area=${area}`;
         try {
             const { data } = await axiosService({
@@ -16,5 +15,4 @@ export default class authService {
             return Promise.reject(error.messages);
         }
     };
-
 }

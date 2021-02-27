@@ -36,10 +36,19 @@ router.beforeEach((to, from, next) => {
     const authUser = manageStorage.getObject("user");
     const requiredAuth = to.matched.some(record => record.meta.requiresAuth);
 
-    if (requiredAuth && !authUser.access_token) {
-        return next({ path: "/login" });
+    if (requiredAuth) {
+        if (!authUser.access_token) {
+            return next({ path: "/login" });
+        } else {
+            next();
+        }
+    } else {
+        if (authUser.access_token) {
+            return next({ path: "/home" });
+        } else {
+            next();
+        }
     }
-    next();
 });
 
 export default router;

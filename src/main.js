@@ -4,17 +4,18 @@ import App from "./App.vue";
 import "@/assets/tailwind/tailwind.css";
 import "@/assets/styles/main.scss";
 import "@fortawesome/fontawesome-free/css/all.min.css";
+import "vue-toast-notification/dist/theme-sugar.css";
 import router from "./routes";
 import hello from "hellojs";
 import moment from "moment";
 import InfiniteLoading from "vue-infinite-loading";
+import VueToast from "vue-toast-notification";
 require("./utils/EventBus");
 
 Vue.use(InfiniteLoading);
 Vue.use(Vuelidate);
 Vue.use(moment);
-
-
+Vue.use(VueToast);
 
 Vue.config.productionTip = false;
 

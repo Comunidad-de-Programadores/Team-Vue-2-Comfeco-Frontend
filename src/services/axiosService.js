@@ -4,9 +4,8 @@ import manageStorage from "./manageStorage";
 export default ({ requiresAuth = false, isGeneralApi = false } = {}) => {
     const options = {};
     const headers = {};
+    const oauthkey = process.env.VUE_APP_OAUTH_KEY;
     options.baseURL = process.env.VUE_APP_ROOT_API;
-    console.log("PROCESS", process.env);
-    // options.baseURL = "http://localhost/Team-Vue-2-Comfeco-Backend/public/api";
 
     function checkOAuthToken() {
         return new Promise(resolve => {
@@ -40,8 +39,7 @@ export default ({ requiresAuth = false, isGeneralApi = false } = {}) => {
                     {
                         grant_type: "client_credentials",
                         client_id: 3,
-                        client_secret:
-                            "QnQCQoTP5zdn0KgEEyTqbnMnVwHtxNAlepon6pHB",
+                        client_secret: oauthkey,
                         scope: "app-client-guest"
                     }
                 );

@@ -23,29 +23,25 @@
 
         button( class="block text-center p-3 duration-300 rounded hover:bg-purple-500 w-full mt-10 bg-purple-600 text-white font-bold uppercase text-xs px-4 py-2 focus:outline-none", :disabled="sending") Crear una cuenta
 
-        .error.text-md.font-semibold.text-center.mt-3(:class="{'text-error': submitStatus == 'ERROR', 'text-success': submitStatus == 'SUCCESS'}")
-            h4(v-for="error in errors") {{error}}
+        .error.text-md.font-semibold.text-center.mt-3(:class="{'text-error': submitStatus == 'ERROR', 'text-success': submitStatus == 'SUCCESS',}")(v-if="errors != ''")
+            h5 {{errors}}
 
-        div(class="flex md:justify-between justify-center items-center mt-10")
-            div(style="height: 1px;" class="bg-gray-300 md:block hidden w-4/12")
-            p(class="md:mx-1 text-sm font-light text-gray-400") Redes Sociales
-            div(style="height: 1px;" class="bg-gray-300 md:block hidden w-4/12")
-
-        div(class="grid md:grid-cols-2 gap-2 mt-7")
-            div
-                button(class="rounded text-white font-bold uppercase text-xs text-center w-full text-white bg-red-900 p-2 duration-300 hover:bg-red-700" @click="loginSocial('google')" type="button") Google
-            div
-                button(class=" text-white font-bold uppercase text-xs text-center w-full bg-blue-900 p-2 duration-300 rounded hover:bg-blue-700" @click="loginSocial('facebook')" type="button") Facebook    
+        LoginSocial
 
 </template>
 
 <script>
 import { required, email, sameAs, minLength } from "vuelidate/lib/validators";
+import LoginSocial from "@/components/LoginSocial/LoginSocial";
 import authService from "../../services/authService";
-import catchErrors from "../../services/catchErrors";
+import errorManagement from "@/mixins/errorManagement";
 
 export default {
     name: "RegisterForm",
+    mixins: [errorManagement],
+    components: {
+        LoginSocial
+    },
     data() {
         return {
             model: {
@@ -56,9 +52,7 @@ export default {
             },
             sending: false,
             submitStatus: null,
-            auth: new authService(),
-            errorSvc: new catchErrors(),
-            errors: []
+            auth: new authService()
         };
     },
     validations: {
@@ -87,6 +81,10 @@ export default {
             this.$v.$touch();
             if (this.$v.$invalid) {
                 this.submitStatus = "ERROR";
+                this.$toast.open({
+                    message: "Hubo un error",
+                    type: "error"
+                });
             } else {
                 try {
                     let response = await this.auth.register(this.model);
@@ -100,23 +98,10 @@ export default {
                         this.submitStatus = "SUCCESS";
                         window.bus.$emit("login");
                         this.$router.push("/inside");
-                    } else {
-                        this.submitStatus = "ERROR";
-                        this.errors = this.errorSvc.showErrors(response.errors);
                     }
                 } catch (error) {
-                    this.submitStatus = "ERROR";
+                    this.showErrors(error);
                 }
-            }
-            this.sending = false;
-        },
-        async loginSocial(socialNetwork) {
-            this.sending = true;
-            let response = await this.auth.loginSocial(socialNetwork);
-            if (!response.error) {
-                this.$router.push("/inside");
-            } else {
-                console.log(response);
             }
             this.sending = false;
         }
