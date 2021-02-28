@@ -9,7 +9,7 @@ export default class authService {
             const { data } = await axiosService().post(url, {
                 grant_type: "client_credentials",
                 client_id: 3,
-                client_secret: "4lBcdZEMhkWjBzqzKcdyNoMd3nGYK2HaY5n0x6L7",
+                client_secret: process.env.VUE_APP_OAUTH_KEY,
                 scope: "app-client-guest"
             });
             manageStorage.setObject("oauth", data);

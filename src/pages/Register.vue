@@ -1,6 +1,6 @@
 <template lang="pug">
     section
-        div(class="bg-white lg:w-4/12 md:6/12 w-10/12 m-auto my-40")
+        div(class="bg-white lg:w-4/12 md:6/12 w-10/12 m-auto md:my-40 my-5")
             OptionChoiceLoginOrRegister
             RegisterForm
 

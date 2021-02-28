@@ -8,13 +8,13 @@
                 div(class="dropdown inline-block relative")
                     button(class="bg-gray-300 text-gray-700 font-semibold py-2 pl-4 rounded-l-3xl rounded inline-flex items-center" )
                         img(src="https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=731&amp;q=80" alt="avatar" class="-ml-2 w-10 h-10 object-cover rounded-full mr-2")                        
-                        p(class="text-xs w-32") {{ user_connected.name.length > 10 ? `${ user_connected.name.substring(0,6) } ... ` : user_connected.name }}
-                        svg( class="fill-current h-4 w-8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20") #[path(d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z")]                                          
+                        p(class="text-xs w-40") {{ user_connected.name.length > 10 ? `${ user_connected.name.substring(0,30) } ... ` : user_connected.name }}
+                        svg( class="fill-current h-4 w-8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20") #[path(d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z")]
                     ul( class="dropdown-menu absolute hidden text-gray-700 pt-1 z-10")
                         li(v-if="user_connected" class="")                         
-                            a(class="rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-16 block whitespace-no-wrap text-xs" @click="logout()") Cerrar Session
+                            a(class="rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-16 block whitespace-no-wrap text-xs cursor-pointer" @click="logout()") Cerrar Session
                         li(v-if="user_connected" class="")
-                            a(class="rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-16 block whitespace-no-wrap text-xs" href="#") Mi perfil                    
+                            router-link(class="rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-16 block whitespace-no-wrap text-xs" to="perfil") Mi perfil                    
         div(class="lg:px-6 py-4 px-2 lg:hidden")
             div(class="flex flex-col container mx-auto lg:flex-row lg:items-center lg:justify-between ")
                 div(class="flex justify-between items-center")
@@ -27,23 +27,23 @@
                             button(class="bg-gray-300 text-gray-700 font-semibold py-2 pl-4 rounded-l-3xl rounded inline-flex items-center" @click="showMenu()")
                                 template(v-if="user_connected")
                                     img(src="https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=731&amp;q=80" alt="avatar" class="-ml-2 w-10 h-10 object-cover rounded-full mr-2")
-                                    span(class="text-xs w-8 pr-14") {{ user_connected.name.length > 10 ? `${ user_connected.name.substring(0,8) }... ` : user_connected.name }}
+                                    span(class="text-small w-16") {{ user_connected.name.length > 10 ? `${ user_connected.name.substring(0,30) }... ` : user_connected.name }}
                                 i(class="text-lg fas fa-bars w-8")
                             template(v-if="openMenu")
                                 div(class="dropdown-menu absolute hidden text-gray-700 pt-1")
                                     ul( class="")
                                         li(v-if="user_connected" class="")                         
-                                            a(class="rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-2 block whitespace-no-wrap text-xs" @click="logout()") Cerrar Session
+                                            a(class="rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-12 block whitespace-no-wrap text-xs cursor-pointer" @click="logout()") Cerrar Session
                                         li(v-if="user_connected" class="")
-                                            a(class="rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-2 block whitespace-no-wrap text-xs" href="#") Mi Perfil
+                                            router-link(class="rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-12 block whitespace-no-wrap text-xs" to="perfil") Mi Perfil
                                         li(class="")
-                                            a(class="rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-2 block whitespace-no-wrap text-xs" href="#") Inicio
+                                            a(class="rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-12 block whitespace-no-wrap text-xs" href="#") Inicio
                                         li(class="")
-                                            a(class="rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-2 block whitespace-no-wrap text-xs" href="#") Comunidades
+                                            a(class="rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-12 block whitespace-no-wrap text-xs" href="#") Comunidades
                                         li(class="")
-                                            a(class="rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-2 block whitespace-no-wrap text-xs" href="#") Talleres
+                                            a(class="rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-12 block whitespace-no-wrap text-xs" href="#") Talleres
                                         li(class="")
-                                            a(class="rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-2 block whitespace-no-wrap text-xs" href="#") Creadores de contenido
+                                            a(class="rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-12 block whitespace-no-wrap text-xs" href="#") Creadores de contenido
 </template>
 <script>
 export default {
@@ -69,4 +69,8 @@ export default {
     }
 };
 </script>
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+    .text-small{
+        font-size: 9px;   
+    }
+</style>

@@ -1,9 +1,9 @@
 <template lang="pug">
     form(@submit.prevent="register()" class="mt-9")
         .my-5.text-sm( :class="{ 'form-group--error': $v.model.name.$error }")
-            input( type="text" autofocus class="rounded px-4 py-3 mt-3 focus:outline-none bg-gray-100 w-full" placeholder="Nombre" v-model.trim="$v.model.name.$model")
+            input( type="text" autofocus class="rounded px-4 py-3 mt-3 focus:outline-none bg-gray-100 w-full" placeholder="Nick" v-model.trim="$v.model.name.$model")
             div(v-if="$v.model.name.$dirty")
-                .error.text-error.text-xs.text-center(v-if="!$v.model.name.required") Un nombre es necesario
+                .error.text-error.text-xs.text-center(v-if="!$v.model.name.required") Un nick es necesario
         .my-5.text-sm( :class="{ 'form-group--error': $v.model.email.$error }")
             input( type="text" autofocus class="rounded px-4 py-3 mt-3 focus:outline-none bg-gray-100 w-full" placeholder="Correo electrónico" v-model.trim="$v.model.email.$model")
             div(v-if="$v.model.email.$dirty")
@@ -20,13 +20,15 @@
             div(v-if="$v.model.password_confirmation.$dirty")
                 .error.text-error.text-xs.text-center(v-if="!$v.model.password_confirmation.required") Contraseña necesaria                        
                 .error.text-error.text-xs.text-center.mt-3(v-if="!$v.model.password_confirmation.sameAsPassword") Las contraseñas deben ser identicas.
+        .items-center.justify-between(class="text-center md:flex")
+            .flex.items-center
+                input.h-4.w-4.text-indigo-600.border-gray-300.rounded(id="term_conditions" v-model="model.term_conditions" type="checkbox" class="focus:ring-indigo-500")
+                label.ml-2.block.text-sm.text-gray-900() Terminos y condiciones
+            .text-sm(class="mt-3 md:mt-0")
+                a.font-medium.text-gray-900(class="text-xs text-right text-blue-500 cursor-pointer" @click="terminosCondiciones()") Visualizar terminos
+        button( class="block text-center p-3 duration-300 rounded hover:bg-purple-500 w-full mt-10 bg-purple-600 text-white font-bold uppercase text-xs px-4 py-2 focus:outline-none", :disabled="sending") Crear una cuenta    
 
-        button( class="block text-center p-3 duration-300 rounded hover:bg-purple-500 w-full mt-10 bg-purple-600 text-white font-bold uppercase text-xs px-4 py-2 focus:outline-none", :disabled="sending") Crear una cuenta
-
-        .error.text-md.font-semibold.text-center.mt-3(:class="{'text-error': submitStatus == 'ERROR', 'text-success': submitStatus == 'SUCCESS',}")(v-if="errors != ''")
-            h5 {{errors}}
-
-        LoginSocial
+        LoginSocial(:termCondicionRegister="model.term_conditions" )
 
 </template>
 
@@ -48,7 +50,8 @@ export default {
                 email: "",
                 password: "",
                 password_confirmation: "",
-                name: ""
+                name: "",
+                term_conditions: false
             },
             sending: false,
             submitStatus: null,
@@ -71,11 +74,19 @@ export default {
             password_confirmation: {
                 required,
                 sameAsPassword: sameAs("password")
+            },
+            term_conditions : {
+                required,
+                sameAs: sameAs( () => true ) 
             }
         }
     },
     created() {},
     methods: {
+        terminosCondiciones(){
+            let routeData = this.$router.resolve({path : '/terminos-condiciones'});
+            window.open(routeData.href, '_blank');
+        },
         async register() {
             this.sending = true;
             this.$v.$touch();
@@ -93,14 +104,15 @@ export default {
                             name: "",
                             email: "",
                             password: "",
-                            password_confirmation: ""
+                            password_confirmation: "",
                         };
                         this.submitStatus = "SUCCESS";
-                        window.bus.$emit("login");
                         this.$toast.open({
                             message: "Bienvenido a COMFECO",
                             type: "success"
                         });
+                        window.bus.$emit("login");
+                        this.$router.push("/home");
                     }
                 } catch (error) {
                     this.showErrors(error);

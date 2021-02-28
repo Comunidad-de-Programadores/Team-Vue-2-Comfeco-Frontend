@@ -15,6 +15,12 @@
 <script>
 import authService from "@/services/authService";
 export default {
+    props: {
+        termCondicionRegister: {
+            type: Boolean,
+            default: null
+        }
+    },
     data() {
         return {
             sending: false,
@@ -23,6 +29,12 @@ export default {
     },
     methods: {
         async loginSocial(socialNetwork) {
+            if(this.termCondicionRegister !== null && !this.termCondicionRegister) {
+                return this.$toast.open({
+                    message: "Tiene que colocar, los terminos y condiciones para registro",
+                    type: "error"
+                });
+            }
             this.sending = true;
             let response = await this.auth.loginSocial(socialNetwork);
             if (!response.error) {
@@ -31,7 +43,7 @@ export default {
                     message: "Bienvenido a COMFECO",
                     type: "success"
                 });
-                this.$router.push("/home");
+                this.$router.push("/");
             } else {
                 console.log(response);
             }

@@ -4,3 +4,18 @@
 .width-10-screen {
     width: 10vw;
 }
+
+.hover\:text-morado-500:hover {
+    --tw-text-opacity: 1;
+    color: rgba(#8b5cf6, var(--tw-text-opacity));
+}
+
+.text-morado-500 {
+    --tw-text-opacity: 1;
+    color: rgba(#8b5cf6, var(--tw-text-opacity));
+}
+
+.border-morado-500 {
+    --tw-border-opacity: 1;
+    border-color: rgba(#8b5cf6, var(--tw-border-opacity));
+}

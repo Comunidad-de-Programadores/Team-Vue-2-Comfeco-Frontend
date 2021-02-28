@@ -4,6 +4,9 @@ import RememberPassword from "@/pages/RememberPassword.vue";
 import Home from "@/pages/Home";
 import RecoverPassword from "@/pages/RecoverPassword.vue";
 import CancelPassword from "@/pages/CancelPassword.vue";
+import TerminosCondiciones from "@/pages/TerminosCondiciones.vue";
+import Talleres from "@/pages/Talleres.vue";
+import MiPerfil from "@/pages/MiPerfil.vue";
 
 import manageStorage from "./services/manageStorage";
 
@@ -22,7 +25,10 @@ const routes = [
     { path: "/recover-password", component: RememberPassword },
     { path: "/home", component: Home, meta: { requiresAuth: true } },
     { path: "/recuperarClave/:email", component: RecoverPassword },
-    { path: "/anularRecuperarClave/:email", component: CancelPassword }
+    { path: "/anularRecuperarClave/:email", component: CancelPassword },
+    { path: "/terminos-condiciones", component: TerminosCondiciones },
+    { path: "/talleres", component: Talleres, meta: { requiresAuth: true } },    
+    { path: "/perfil", component: MiPerfil, meta: { requiresAuth: true } },
 ];
 
 const router = new VueRouter({
@@ -35,10 +41,10 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
     const authUser = manageStorage.getObject("user");
     const requiredAuth = to.matched.some(record => record.meta.requiresAuth);
-
+    
     if (requiredAuth) {
         if (!authUser.access_token) {
-            return next({ path: "/login" });
+            return next({ path: "/" });
         } else {
             next();
         }
