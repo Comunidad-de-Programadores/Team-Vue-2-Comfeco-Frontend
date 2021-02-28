@@ -12,7 +12,7 @@
     "@tailwindcss/postcss7-compat": "^2.0.3",
     "autoprefixer": "^9.8.6",
     "axios": "^0.21.1",
-    "core-js": "^3.6.5",
+    "core-js": "^3.9.0",
     "hellojs": "^1.18.8",
     "moment": "^2.29.1",
     "postcss": "^7.0.35",
