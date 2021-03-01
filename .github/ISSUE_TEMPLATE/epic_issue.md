@@ -1,16 +1,19 @@
-# Story Title
+---
+name: Epic
+about: A task large enough that it needs to be divided into smaller tasks. It will usually be labeled as `enhancement`.
+---
 
-[This is the Issue Title](https://github.com/username/repository-name/issues/1)
+<!-- Issue title should mirror the Epic Title. -->
 
-## Changes made
+# Epic Title
 
-- made this
-- did that
+Feature: Awesome Feature Title
 
-## How does the solution address the problem
+## Epic Description
 
-This PR will...
+This Feature will...
 
-## Linked issues
+## List of Tasks (Complete in order)
 
-Resolves #1
+1. [ ] [Task 1: Awesome Task Title](https://github.com/username/repository-name/issues/1)
+2. [ ] [Task 2: Awesome Task Title](https://github.com/username/repository-name/issues/2)
