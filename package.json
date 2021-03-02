@@ -10,7 +10,7 @@
   "dependencies": {
     "@fortawesome/fontawesome-free": "5.15.2",
     "@tailwindcss/postcss7-compat": "^2.0.3",
-    "autoprefixer": "^9.8.6",
+    "autoprefixer": "^10.2.4",
     "axios": "^0.21.1",
     "core-js": "^3.9.1",
     "hellojs": "^1.18.8",
