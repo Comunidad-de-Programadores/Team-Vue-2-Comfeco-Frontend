@@ -177,7 +177,7 @@ export default {
             github_url: {
                 required
             },
-            description: {
+            biography: {
                 required
             },
             area_id: {
@@ -272,18 +272,15 @@ export default {
                     type: "error"
                 });
             } else {
-                try {
-                    this.model.birthday = moment(this.model.birthday).format('DD/MM/YYYY')
-                    let response = await this.perfilService.updateUser(this.model);                    
-                    if (!response.error) {                    
-                        this.$toast.open({
-                            message: "Tus datos se han actualizado",
-                            type: "success"
-                        });
-                        
-                    }
-                } catch (error) {
-                    // this.showErrors(error);
+                this.model.birthday = moment(this.model.birthday).format('DD/MM/YYYY')
+                let response = await this.perfilService.updateUser(this.model);                    
+                if (!response.error) {                    
+                    this.$toast.open({
+                        message: "Tus datos se han actualizado",
+                        type: "success"
+                    });                        
+                } else {
+                    this.showErrors(response);
                 }
             }
             this.sending = false;
