@@ -31,31 +31,18 @@
             div(class="col-span-1 text-center")
                 p 3
         
-                                        class="rounded py-3 px-3 mt-3 focus:outline-none bg-gray-100 w-full " 
-                                placeholder="Correo electrónico" 
-                            )
-                    div(class="lg:w-1/2 w-full lg:m-4 flex p-4")
-                        div(class="w-1/3 text-left m-auto")
-                            p Red Social
-                        div(class="w-2/3 lg:ml-4 m-auto")
-                            input( 
-                                type="text" 
-                                autofocus 
-                                class="rounded py-3 px-3 mt-3 focus:outline-none bg-gray-100 w-full " 
-                                placeholder="Correo electrónico" 
-                            )
-                div(class="lg:flex mx-auto xl:max-w-screen-xl px-4")
-                    div(class="lg:w-full m-4")
-                        textarea( 
-                            type="text" 
-                            autofocus 
-                            class="rounded py-3 px-3 mt-3 focus:outline-none bg-gray-100 w-full " 
-                            placeholder="Correo electrónico" 
-                        )          
+        PerfilForm(v-if="tabPerfil" :tabPerfil.sync="tabPerfil")            
+
+
 </template>
 <script>
+import PerfilForm from '@/components/Perfil/PerfilForm'
+
 export default {
     name: 'MiPerfil',
+    components:{
+        PerfilForm
+    },
     data(){
         return {
             tabPerfil: false,

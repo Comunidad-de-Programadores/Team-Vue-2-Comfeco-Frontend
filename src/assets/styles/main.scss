@@ -19,3 +19,10 @@
     --tw-border-opacity: 1;
     border-color: rgba(#8b5cf6, var(--tw-border-opacity));
 }
+
+@media (min-width: 1024px) {    
+    .lg\:p-20x{
+        padding-left: 18rem;
+        padding-right: 18rem;
+    }
+}
