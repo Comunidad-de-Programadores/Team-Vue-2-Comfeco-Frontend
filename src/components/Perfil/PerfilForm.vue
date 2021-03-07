@@ -135,7 +135,7 @@
 import manageStorage from "../../services/manageStorage.js";
 import perfilService from '../../services/perfilService.js';
 import { required, email, sameAs } from "vuelidate/lib/validators";
-import moment from "moment";
+// import moment from "moment";
 import errorManagement from "../../mixins/errorManagement";
 
 import AvatarCropper from "vue-avatar-cropper"
@@ -272,7 +272,7 @@ export default {
                     type: "error"
                 });
             } else {
-                this.model.birthday = moment(this.model.birthday).format('DD/MM/YYYY')
+                // this.model.birthday = moment(this.model.birthday).format('DD/MM/YYYY')
                 let response = await this.perfilService.updateUser(this.model);                    
                 if (!response.error) {                    
                     this.$toast.open({
