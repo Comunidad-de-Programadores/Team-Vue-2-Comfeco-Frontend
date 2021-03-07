@@ -4,7 +4,7 @@ import RememberPassword from "@/pages/RememberPassword.vue";
 import Home from "@/pages/Home";
 import RecoverPassword from "@/pages/RecoverPassword.vue";
 import CancelPassword from "@/pages/CancelPassword.vue";
-
+import Profile from "@/pages/Profile"
 import manageStorage from "./services/manageStorage";
 
 import VueRouter from "vue-router";
@@ -21,6 +21,7 @@ const routes = [
     { path: "/register", component: Register },
     { path: "/recover-password", component: RememberPassword },
     { path: "/home", component: Home, meta: { requiresAuth: true } },
+    { path: "/profile", component: Profile, meta: { requiresAuth: true } },
     { path: "/recuperarClave/:email", component: RecoverPassword },
     { path: "/anularRecuperarClave/:email", component: CancelPassword }
 ];

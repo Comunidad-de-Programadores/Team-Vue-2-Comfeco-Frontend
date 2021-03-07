@@ -14,7 +14,7 @@
                         li(v-if="user_connected" class="")                         
                             a(class="rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-16 block whitespace-no-wrap text-xs" @click="logout()") Cerrar Session
                         li(v-if="user_connected" class="")
-                            a(class="rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-16 block whitespace-no-wrap text-xs" href="#") Mi perfil                    
+                            router-link(class="rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-16 block whitespace-no-wrap text-xs" to="/profile") Mi perfil                    
         div(class="lg:px-6 py-4 px-2 lg:hidden")
             div(class="flex flex-col container mx-auto lg:flex-row lg:items-center lg:justify-between ")
                 div(class="flex justify-between items-center")

@@ -6,7 +6,7 @@ export default ({ requiresAuth = false, isGeneralApi = false } = {}) => {
     const headers = {};
     const oauthkey = process.env.VUE_APP_OAUTH_KEY;
     options.baseURL = process.env.VUE_APP_ROOT_API;
-
+    const client_id = process.env.API_CLIENT_ID ?? 1
     function checkOAuthToken() {
         return new Promise(resolve => {
             let oauthObject = manageStorage.getObject("oauth");
@@ -38,7 +38,7 @@ export default ({ requiresAuth = false, isGeneralApi = false } = {}) => {
                     `${options.baseURL}/oauth/token`,
                     {
                         grant_type: "client_credentials",
-                        client_id: 3,
+                        client_id: client_id,
                         client_secret: oauthkey,
                         scope: "app-client-guest"
                     }
