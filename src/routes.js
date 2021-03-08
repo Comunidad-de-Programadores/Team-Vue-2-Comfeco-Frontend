@@ -5,8 +5,8 @@ import Home from "@/pages/Home";
 import RecoverPassword from "@/pages/RecoverPassword.vue";
 import CancelPassword from "@/pages/CancelPassword.vue";
 import TerminosCondiciones from "@/pages/TerminosCondiciones.vue";
-import Talleres from "@/pages/Talleres.vue";
-import MiPerfil from "@/pages/MiPerfil.vue";
+import Workshops from "@/pages/Workshops.vue";
+import MyProfile from "@/pages/MyProfile.vue";
 
 import manageStorage from "./services/manageStorage";
 
@@ -27,8 +27,8 @@ const routes = [
     { path: "/recuperarClave/:email", component: RecoverPassword },
     { path: "/anularRecuperarClave/:email", component: CancelPassword },
     { path: "/terminos-condiciones", component: TerminosCondiciones },
-    { path: "/talleres", component: Talleres, meta: { requiresAuth: true } },    
-    { path: "/perfil", component: MiPerfil, meta: { requiresAuth: true } },
+    { path: "/talleres", component: Workshops, meta: { requiresAuth: true } },
+    { path: "/perfil", component: MyProfile, meta: { requiresAuth: true } }
 ];
 
 const router = new VueRouter({
@@ -41,18 +41,18 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
     const authUser = manageStorage.getObject("user");
     const requiredAuth = to.matched.some(record => record.meta.requiresAuth);
-    
+
     if (requiredAuth) {
         if (!authUser.access_token) {
-            return next({ path: "/" });
+            return next({ path: "/login" });
         } else {
-            next();
+            return next();
         }
     } else {
         if (authUser.access_token) {
             return next({ path: "/home" });
         } else {
-            next();
+            return next();
         }
     }
 });

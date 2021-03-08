@@ -25,6 +25,9 @@ export default {
         window.bus.$on("login", () => {
             this.fillUser();
         });
+        window.bus.$on("updateUser", () => {
+            this.fillUser();
+        });
         window.bus.$on("logout", () => {
             this.fillUser();
         });

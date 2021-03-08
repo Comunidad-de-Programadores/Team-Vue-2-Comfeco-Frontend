@@ -4,16 +4,16 @@ import manageStorage from "./manageStorage";
 export default ({ requiresAuth = false, isGeneralApi = false } = {}) => {
     const options = {};
     const headers = {};
-    const oauthkey  = process.env.VUE_APP_OAUTH_KEY;
+    const oauthkey = process.env.VUE_APP_OAUTH_KEY;
     options.baseURL = process.env.VUE_APP_ROOT_API;
 
     let checkOAuthToken = () => {
         return new Promise(resolve => {
             let oauthObject = manageStorage.getObject("oauth");
-            ( JSON.stringify(oauthObject) === "{}" ) && (resolve(false));
+            JSON.stringify(oauthObject) === "{}" && resolve(false);
             resolve(true);
         });
-    }
+    };
 
     if (requiresAuth) {
         const storageKey = isGeneralApi ? "oauth" : "user";
@@ -25,16 +25,20 @@ export default ({ requiresAuth = false, isGeneralApi = false } = {}) => {
     const instance = axios.create(options);
 
     instance.interceptors.request.use(
-        async (request) => {
+        async request => {
             request.headers["Accept"] = "application/json";
             request.headers["X-Requested-With"] = "XMLHttpRequest";
 
-            if (request.url.includes("v1") && isGeneralApi && !(await checkOAuthToken())) {
+            if (
+                request.url.includes("v1") &&
+                isGeneralApi &&
+                !(await checkOAuthToken())
+            ) {
                 const { data } = await axios.post(
                     `${options.baseURL}/oauth/token`,
                     {
                         grant_type: "client_credentials",
-                        client_id: 1,
+                        client_id: 3,
                         client_secret: oauthkey,
                         scope: "app-client-guest"
                     }
@@ -47,16 +51,16 @@ export default ({ requiresAuth = false, isGeneralApi = false } = {}) => {
             }
             return request;
         },
-        (error) => {
+        error => {
             return Promise.reject(error);
         }
     );
 
     instance.interceptors.response.use(
-        (response) => {
+        response => {
             return response;
         },
-        (error) => {
+        error => {
             return Promise.reject(error);
         }
     );

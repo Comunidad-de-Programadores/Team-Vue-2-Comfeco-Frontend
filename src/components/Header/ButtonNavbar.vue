@@ -7,7 +7,7 @@
             div
                 div(class="dropdown inline-block relative")
                     button(class="bg-gray-300 text-gray-700 font-semibold py-2 pl-4 rounded-l-3xl rounded inline-flex items-center" )
-                        img(src="https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=731&amp;q=80" alt="avatar" class="-ml-2 w-10 h-10 object-cover rounded-full mr-2")
+                        img(:src="user_connected.avatar" alt="avatar" class="-ml-2 w-10 h-10 object-cover rounded-full mr-2")
                         p(class="text-xs w-40") {{ user_connected.name.length > 10 ? `${ user_connected.name.substring(0,30) } ... ` : user_connected.name }}
                         svg( class="fill-current h-4 w-8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20") #[path(d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z")]
                     ul( class="dropdown-menu absolute hidden text-gray-700 pt-1 z-10")
@@ -26,7 +26,7 @@
                         div(class="dropdown inline-block relative")
                             button(class="bg-gray-300 text-gray-700 font-semibold py-2 pl-4 rounded-l-3xl rounded inline-flex items-center" @click="showMenu()")
                                 template(v-if="user_connected")
-                                    img(src="https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=731&amp;q=80" alt="avatar" class="-ml-2 w-10 h-10 object-cover rounded-full mr-2")
+                                    img(:src="user_connected.avatar" alt="avatar" class="-ml-2 w-10 h-10 object-cover rounded-full mr-2")
                                     span(class="text-small w-16") {{ user_connected.name.length > 10 ? `${ user_connected.name.substring(0,30) }... ` : user_connected.name }}
                                 i(class="text-lg fas fa-bars w-8")
                             template(v-if="openMenu")
@@ -54,10 +54,10 @@ export default {
             default: null
         }
     },
-    data(){
+    data() {
         return {
             openMenu: false
-        }
+        };
     },
     methods: {
         logout: function() {
@@ -70,7 +70,7 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-    .text-small{
-        font-size: 9px;   
-    }
+.text-small {
+    font-size: 9px;
+}
 </style>

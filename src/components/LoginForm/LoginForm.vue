@@ -27,6 +27,9 @@
             )
             div(v-if="$v.model.password.$dirty")
                 .error.text-error.text-xs.text-center(v-if="!$v.model.password.required") Contraseña necesaria
+            div(v-if="customErrors.password")
+                .error.text-error.text-xs.text-center
+                    | {{ customErrors.password }}
 
         .items-center.justify-between(class="text-center md:flex")
             .flex.items-center
@@ -88,7 +91,7 @@ export default {
                     type: "error"
                 });
             } else {
-                // try {
+                try {
                     let response = await this.auth.login(this.model);
                     if (!response.error) {
                         this.model = {
@@ -103,13 +106,12 @@ export default {
                             message: "Bienvenido a COMFECO",
                             type: "success"
                         });
-                    }else{
-                        this.showErrors(response)
-                    }                                    
-                // } catch (error) {
-                //     console.log(error)
-                //     this.showErrors(error);
-                // }
+                    } else {
+                        this.showErrors(response);
+                    }
+                } catch (error) {
+                    this.showErrors(error);
+                }
             }
             this.sending = false;
         }
