@@ -4,7 +4,10 @@ import RememberPassword from "@/pages/RememberPassword.vue";
 import Home from "@/pages/Home";
 import RecoverPassword from "@/pages/RecoverPassword.vue";
 import CancelPassword from "@/pages/CancelPassword.vue";
-import Profile from "@/pages/Profile"
+import TerminosCondiciones from "@/pages/TerminosCondiciones.vue";
+import Workshops from "@/pages/Workshops.vue";
+import MyProfile from "@/pages/MyProfile.vue";
+
 import manageStorage from "./services/manageStorage";
 
 import VueRouter from "vue-router";
@@ -21,9 +24,12 @@ const routes = [
     { path: "/register", component: Register },
     { path: "/recover-password", component: RememberPassword },
     { path: "/home", component: Home, meta: { requiresAuth: true } },
-    { path: "/profile", component: Profile, meta: { requiresAuth: true } },
+    // { path: "/profile", component: Profile, meta: { requiresAuth: true } },
     { path: "/recuperarClave/:email", component: RecoverPassword },
-    { path: "/anularRecuperarClave/:email", component: CancelPassword }
+    { path: "/anularRecuperarClave/:email", component: CancelPassword },
+    { path: "/terminos-condiciones", component: TerminosCondiciones },
+    { path: "/talleres", component: Workshops, meta: { requiresAuth: true } },
+    { path: "/perfil", component: MyProfile, meta: { requiresAuth: true } }
 ];
 
 const router = new VueRouter({
@@ -41,13 +47,13 @@ router.beforeEach((to, from, next) => {
         if (!authUser.access_token) {
             return next({ path: "/login" });
         } else {
-            next();
+            return next();
         }
     } else {
         if (authUser.access_token) {
             return next({ path: "/home" });
         } else {
-            next();
+            return next();
         }
     }
 });

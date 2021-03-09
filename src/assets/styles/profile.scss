@@ -1,0 +1,11 @@
+.color-profile {
+    --tw-text-opacity: 1;
+    --tw-border-opacity: 1;
+    color: rgba(#8b5cf6, var(--tw-text-opacity));
+    border-color: rgba(#8b5cf6, var(--tw-border-opacity));
+}
+
+.hover\:color-profile:hover {
+    --tw-text-opacity: 1;
+    color: rgba(#8b5cf6, var(--tw-text-opacity));
+}

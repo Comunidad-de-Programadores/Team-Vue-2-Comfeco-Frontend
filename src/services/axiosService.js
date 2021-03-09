@@ -6,11 +6,11 @@ export default ({ requiresAuth = false, isGeneralApi = false } = {}) => {
     const headers = {};
     const oauthkey = process.env.VUE_APP_OAUTH_KEY;
     options.baseURL = process.env.VUE_APP_ROOT_API;
-    const client_id = process.env.API_CLIENT_ID ?? 1
+    const client_id = process.env.API_CLIENT_ID ?? 3;
     function checkOAuthToken() {
         return new Promise(resolve => {
             let oauthObject = manageStorage.getObject("oauth");
-            if (JSON.stringify(oauthObject) === "{}") resolve(false);
+            JSON.stringify(oauthObject) === "{}" && resolve(false);
             resolve(true);
         });
     }
@@ -43,6 +43,7 @@ export default ({ requiresAuth = false, isGeneralApi = false } = {}) => {
                         scope: "app-client-guest"
                     }
                 );
+
                 manageStorage.setObject("oauth", data);
                 request.headers.Authorization = `Bearer ${data.access_token}`;
 

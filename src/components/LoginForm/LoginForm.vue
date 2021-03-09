@@ -27,6 +27,9 @@
             )
             div(v-if="$v.model.password.$dirty")
                 .error.text-error.text-xs.text-center(v-if="!$v.model.password.required") Contraseña necesaria
+            div(v-if="customErrors.password")
+                .error.text-error.text-xs.text-center
+                    | {{ customErrors.password }}
 
         .items-center.justify-between(class="text-center md:flex")
             .flex.items-center
@@ -37,9 +40,6 @@
                 
         button( class="block text-center p-3 duration-300 rounded hover:bg-purple-500 w-full mt-10 bg-purple-600 text-white font-bold uppercase text-xs px-4 py-2 focus:outline-none", :disabled="sending") Ingresar
         
-        .error.text-md.font-semibold.text-center.mt-3(:class="{'text-error': submitStatus == 'ERROR', 'text-success': submitStatus == 'SUCCESS',}")(v-if="errors != ''")
-            h5 {{errors}}
-
         LoginSocial
 
 </template>
@@ -106,6 +106,8 @@ export default {
                             message: "Bienvenido a COMFECO",
                             type: "success"
                         });
+                    } else {
+                        this.showErrors(response);
                     }
                 } catch (error) {
                     this.showErrors(error);

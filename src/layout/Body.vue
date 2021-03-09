@@ -2,7 +2,7 @@
     section
         div(class="")
             div(id="content-wrapper")
-                router-view(class="flex justify-between container mx-auto")
+                router-view(class="")
 </template>
 <script>
 export default {

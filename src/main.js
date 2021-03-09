@@ -11,6 +11,7 @@ import moment from "moment";
 import InfiniteLoading from "vue-infinite-loading";
 import VueToast from "vue-toast-notification";
 require("./utils/EventBus");
+require('dotenv').config();
 
 Vue.use(InfiniteLoading);
 Vue.use(Vuelidate);

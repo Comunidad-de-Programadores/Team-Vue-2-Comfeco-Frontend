@@ -1,6 +1,6 @@
 <template lang="pug">
 	div
-		div(class="bg-white lg:w-4/12 md:6/12 w-10/12 m-auto my-40")
+		div(class="bg-white lg:w-4/12 md:6/12 w-10/12 m-auto md:my-40 my-5")
 			div(class="grid md:grid-cols-1 gap-2 mt-7")
 				h4(class="text-2xl text-gray-800 dark:text-white font-extrabold tracking-tight text-words") Asignar contraseña
 			form(@submit.prevent="generatePassword()" class="mt-9")
