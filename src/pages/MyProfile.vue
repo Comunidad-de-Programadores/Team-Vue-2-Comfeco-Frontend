@@ -9,12 +9,9 @@
                         p {{ item.title }}
         
         Profile(v-if="tabs[0].active")
-        div(v-if="tabs[1].active")
-            h2 {{ tabs[1].title }}
-        div(v-if="tabs[2].active")
-            h2 {{ tabs[2].title }}
-        div(v-if="tabs[3].active")
-            h2 {{ tabs[3].title }}
+        Badges(v-if="tabs[1].active")
+        Groups(v-if="tabs[2].active")
+        Events(v-if="tabs[3].active")
         
         ProfileForm(v-if="tabs[4].active" :tabProfile.sync="tabs[4].active")            
 
@@ -23,12 +20,18 @@
 <script>
 import ProfileForm from "@/components/Profile/ProfileForm";
 import Profile from "@/components/Profile/Profile";
+import Badges from "@/components/Badges/Badges";
+import Groups from "@/components/Groups/Groups";
+import Events from "@/components/Events/Events";
 
 export default {
     name: "MyProfile",
     components: {
         ProfileForm,
-        Profile
+        Profile,
+        Badges,
+        Groups,
+        Events
     },
     data() {
         return {
