@@ -8278,6 +8278,11 @@
     "unquote" "~1.1.1"
     "util.promisify" "~1.0.0"
 
+"sweetalert2@^10.15.5":
+  "integrity" "sha512-zHZqVpsEyfBVy/O25D7RMYyh+/h0jbmHXGK9DWEDnkPvsl4JlMueJRSEidAFS+mtYDLI8fFkGKltgHRvDPRV1g=="
+  "resolved" "https://registry.npmjs.org/sweetalert2/-/sweetalert2-10.15.5.tgz"
+  "version" "10.15.5"
+
 "swiper@^6.4.15":
   "integrity" "sha512-FuURJ7hE9lCxPnXIJRKu2QCe+roE8CZV2WYsZxz+dcEd3kebgK0JRvV32HpM3LmFOz7UW+k2Dkdfxekk2kTfMg=="
   "resolved" "https://registry.npmjs.org/swiper/-/swiper-6.4.15.tgz"

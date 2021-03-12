@@ -17,6 +17,7 @@
     "hellojs": "^1.18.8",
     "moment": "^2.29.1",
     "postcss": "^8.2.6",
+    "sweetalert2": "^10.15.5",
     "swiper": "^6.4.15",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.0.3",
     "uikit": "^3.6.17",

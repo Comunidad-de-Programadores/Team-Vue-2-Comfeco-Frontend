@@ -10,13 +10,16 @@ import hello from "hellojs";
 import moment from "moment";
 import InfiniteLoading from "vue-infinite-loading";
 import VueToast from "vue-toast-notification";
+import swalPlugin from "@/plugins/SwalPlugin";
+
 require("./utils/EventBus");
-require('dotenv').config();
+require("dotenv").config();
 
 Vue.use(InfiniteLoading);
 Vue.use(Vuelidate);
 Vue.use(moment);
 Vue.use(VueToast);
+Vue.use(swalPlugin);
 
 Vue.config.productionTip = false;
 

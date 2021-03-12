@@ -11,7 +11,6 @@ export default class authService {
 
             return data;
         } catch (error) {
-            console.log(error.messages);
             return Promise.reject(error.messages);
         }
     };
