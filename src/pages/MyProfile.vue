@@ -55,10 +55,7 @@ export default {
             return this.tabs.every(tab => !tab.active)
         }
     },
-    methods: {
-        activarPerfil(event){
-            console.log(event)
-        },
+    methods: {        
         changeTab(value, title){
            this.tabs.forEach(element => element.active = element.title != title ? false : value);
         },
