@@ -7,6 +7,8 @@
                 div(class="desc p-4 text-gray-800")
                     span(class="title font-bold block") {{ badge.name }}
                     span( class="description text-sm block py-2 border-gray-400 mb-2") {{ badge.description }}
+                    hr
+                    span( class="description text-sm block py-2 border-gray-400 mb-2") {{ badge.how_win }}
             infinite-loading(:identifier="infiniteId" @infinite="infiniteHandler")
 </template>
 <script>
