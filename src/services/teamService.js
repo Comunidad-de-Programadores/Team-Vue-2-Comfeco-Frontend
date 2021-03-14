@@ -43,4 +43,18 @@ export default class teamService {
             return Promise.reject(error.messages);
         }
     };
+     leave = async () => {
+        const url = `v1/teams/me`;
+        try {
+            const { data } = await axiosService({
+                requiresAuth: true,
+                isGeneralApi: false
+            }).delete(url);
+
+            return data;
+        } catch (error) {
+            console.error(error.messages);
+            return Promise.reject(error.messages);
+        }
+    };
 }

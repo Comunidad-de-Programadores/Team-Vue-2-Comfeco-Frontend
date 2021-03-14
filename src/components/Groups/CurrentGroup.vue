@@ -5,9 +5,14 @@
                     h3.text-black.text-sm.bold.font-sans 
                         strong {{currentGroup.name}}
                     p.mt-2.font-sans.font-light.text-grey-dark {{currentGroup.description}}
-                ul  
-                    li(v-for="member in currentGroup.members") {{member.name}}
-                button.text-gray-700.font-semibold.py-2.px-4.w-full(@click='' :class="'bg-red-300'")
+                h1 Miembros
+                hr
+                ul
+                    li(v-for="(member, index) in currentGroup.members")
+                        .flex-1.pl-1.mr-16
+                            .font-medium - {{member.name}}
+                            .text-gray-600.text-sm {{member.email}}
+                button.text-gray-700.font-semibold.py-2.px-4.w-full(@click='leaveTeam(currentGroup)' :class="'bg-red-300'")
                         template
                             i.text-lg.fas.fa-ban 
                             | Abandonar  
@@ -27,6 +32,11 @@ export default {
             required: false,
             type: Object,
             default : () => {}
+        }
+    },
+    methods: {
+        leaveTeam(currentGroup) {
+            this.$emit('leaveTeam', currentGroup)
         }
     }
 }

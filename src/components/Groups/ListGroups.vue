@@ -11,14 +11,17 @@
                         small
                         | {{group.description}}
                 footer.flex.items-center.justify-between.leading-none(class='bg-blue-300')
-                    button.text-gray-700.font-semibold.py-2.px-4.w-full(@click='handleClickJoin(group)' :class="currentGroup.id === group.id ? 'bg-red-300' : 'bg-gray-300'")
-                        template(v-if="!group")
-                            i.text-lg.fas.fa-sign-in-alt.w-8
-                            | Unirse
-                        template(v-if="group && currentGroup.id === group.id")
-                            i.text-lg.fas.fa-ban &nbsp;Abandonar
+                    
+                        template(v-if="!currentGroup")
+                            button.text-gray-700.font-semibold.py-2.px-4.w-full(@click='handleClickJoin(group)' :class="(group && currentGroup && currentGroup.id === group.id) ? 'bg-red-300' : 'bg-gray-300'")
+                                i.text-lg.fas.fa-sign-in-alt.w-8
+                                | Unirse
+                        template(v-else-if="group && currentGroup && currentGroup.id === group.id" )
+                            button.text-gray-700.font-semibold.py-2.px-4.w-full(@click='leaveTeam(currentGroup)' :class="(group && currentGroup && currentGroup.id === group.id) ? 'bg-red-300' : 'bg-gray-300'")
+                                i.text-lg.fas.fa-ban &nbsp;Abandonar
                         template(v-else)
-                            i.text-lg.fas.fa-ban
+                            button.text-gray-700.font-semibold.py-2.px-4.w-full(@click='handleClickJoin(group)' :class="(group && currentGroup && currentGroup.id === group.id) ? 'bg-red-300' : 'bg-gray-300'")
+                                i.text-lg.fas.fa-ban
 </template>
 
 <script>
@@ -45,17 +48,24 @@ export default {
         }
     },
     methods: {
-        handleClickJoin(group)
+         leaveTeam(currentGroup) {
+            this.$emit('leaveTeam', currentGroup)
+        },
+        async handleClickJoin(group)
         {
-            if (group.id === this.currentGroup.id) {
+            if (this.currentGroup && 
+            (group.id === this.currentGroup.id)
+            ) {
                 console.log(group)
                 return false;
             }
-            if (this.currentGroup.id) {
+            if (this.currentGroup) {
                 console.log(group)
                 return false;
             }
-            this.teamService.joinTeam(group)
+            const userInformation = await this.teamService.joinTeam(group)
+        
+            this.$emit('setTeam' , userInformation.team)
         },
     },
     mounted() {
