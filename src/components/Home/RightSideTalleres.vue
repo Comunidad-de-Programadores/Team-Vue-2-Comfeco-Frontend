@@ -67,7 +67,7 @@ export default {
                 : "fas fa-check";
         },
         formatTime(hora) {
-            return dateFormat(parseISO(hora), "LTS");
+            return dateFormat(parseISO(hora), "dd-MM-yyyy");
         },
         async infiniteHandler($state) {
             let response = await this.workshopService.getWorkshops(
