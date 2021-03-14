@@ -21,9 +21,7 @@
 <script>
 export default {
     methods: {
-        goToEditProfile: () => {
-            window.bus.$emit("profileTab", false);
-        }
+        goToEditProfile: () => window.bus.$emit("profileTab")
     }
 };
 </script>

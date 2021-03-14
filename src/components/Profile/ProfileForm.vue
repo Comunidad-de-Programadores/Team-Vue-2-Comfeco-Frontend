@@ -1,7 +1,7 @@
 <template lang="pug">
     div
         div(class="flex mx-auto xl:max-w-screen-xl px-4")
-            a( @click="closeEditProfile()" class="w-1/6 m-auto cursor-pointer lg:text-left text-center", ref="bellContainer")
+            a( @click="profile = !profile" class="w-1/6 m-auto cursor-pointer text-center")
                 i( class="text-lg fas fa-chevron-left" )  
             div(class="w-5/6 text-center lg:mr-40 mr-20")
                 p(class="text-base lg:text-3xl m-5 font-bold") Editar Perfil
@@ -171,7 +171,7 @@ import AvatarCropper from "vue-avatar-cropper";
 
 export default {
     name: "ProfileForm",
-    props: ["tabProfile"],
+    props: ["tabProfileForm"],
     mixins: [errorManagement],
     validations: {
         model: {
@@ -224,10 +224,10 @@ export default {
     computed: {
         profile: {
             get: function() {
-                return this.tabProfile;
+                return this.tabProfileForm;
             },
             set: function() {
-                this.$emit("update:tabProfile", false);
+                this.$emit("update:tabProfileForm", false);
             }
         }
     },

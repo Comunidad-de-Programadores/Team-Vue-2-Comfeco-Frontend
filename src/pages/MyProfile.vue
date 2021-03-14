@@ -1,18 +1,17 @@
 <template lang="pug">
     div
         div(class=" ")
-            nav(class="flex lg:flex-row flex-col justify-center p-10 lg:bg-gray-200")
-                button(v-for="(tab, $index) in tabs" :key="$index" @click="changeTab(tab, tab.title)" :class="{'border-morado-500 text-morado-500' : tab.active}" class="flex rounded text-gray-600 hover:text-morado-500 py-4 px-6 block focus:outline-none border-2 font-medium ")
+            nav(class="flex lg:flex-row flex-col justify-center p-10 bg-gray-200")
+                button(v-for="(tab, $index) in tabs" :key="$index" @click="changeTab(tab, tab.title)" :class="{'border-morado-500 text-morado-500' : tab.active}" class="flex my-2 rounded text-gray-600 hover:text-morado-500 py-4 px-6 focus:outline-none border-2 font-medium ")
                     .mr-4
                         i(class="text-lg far fa-bell" )                        
                     .w-auto
                         p {{ tab.title }}                
-        div(v-if="tabDefault")
-            ProfileForm(:tabProfile.sync="tabDefault")
-        div(v-for="(tab, $index) in tabs" )
-            Profile(v-if="tab.active && tab.title == 'Mi perfil'" :tabProfile.sync="tab.active") 
-            Badges(v-if="tab.active && tab.title == 'Insignias'" :tabInsignias.sync="tab.active") 
-            Events(v-if="tab.active && tab.title == 'Eventos'") 
+        ProfileForm(v-if="profileForm" :tabProfileForm.sync="profileForm")               
+        div(v-else v-for="(tab, $index) in tabs" )
+            Profile( v-if="tab.active && tab.title == 'Mi perfil'" :tabProfile.sync="tab.active" )
+            Badges(  v-if="tab.active && tab.title == 'Insignias'" :tabInsignias.sync="tab.active" )
+            Events(  v-if="tab.active && tab.title == 'Eventos'" :tabEventos.sync="tab.active") 
 </template>
 <script>
 import ProfileForm from "@/components/Profile/ProfileForm";
@@ -32,7 +31,7 @@ export default {
         return {
             tabs: [
                 {
-                    active: false,
+                    active: true,
                     title: "Mi perfil"
                 },
                 {
@@ -47,29 +46,25 @@ export default {
                     active: false,
                     title: "Eventos"
                 }
-            ]
+            ],
+            profileForm: false
         };
     },
-    created() {
-        window.bus.$on(
-            "profileTab",
-            value =>
-                (this.tabs.find(tab => tab.title == "Mi perfil").active = value)
-        );
-        this.tabs[0].active = true;
+    watch:{
+      profileForm(val){
+          !val && (this.tabs.find(tab => tab.title == 'Mi perfil').active = true);
+      }  
     },
-    computed: {
-        tabDefault() {
-            return this.tabs.every(tab => !tab.active);
-        }
+    created() {
+        window.bus.$on("profileTab", () => {
+            this.tabs.map(tab => tab.active = false)
+            this.profileForm = true
+        });
     },
     methods: {
-        changeTab(tab, title) {
-            tab.active = true;
-            this.tabs.forEach(
-                element =>
-                    (element.active = element.title != title ? false : true)
-            );
+        changeTab(value, title) {
+            this.profileForm = false
+            this.tabs.forEach(element => element.active = element.title != title ? false : value);
         }
     }
 };
