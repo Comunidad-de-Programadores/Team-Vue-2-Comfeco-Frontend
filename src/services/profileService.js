@@ -64,6 +64,7 @@ export default class perfilService {
             return Promise.reject(error);
         }
     };
+    
     updateUserStorage = async currentUser => {
         const { access_token, expires_at } = manageStorage.getObject("user");
 

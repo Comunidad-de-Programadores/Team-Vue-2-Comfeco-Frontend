@@ -1,14 +1,20 @@
 <template lang="pug">
     div
-        div(class="flex mx-auto xl:max-w-screen-xl px-4")                
-            a( @click="goToMyProfile()" class="w-1/6 m-auto cursor-pointer lg:text-left text-center", ref="bellContainer")
+        div(class="flex mx-auto xl:max-w-screen-xl px-4")
+            a( @click="closeEditProfile()" class="w-1/6 m-auto cursor-pointer lg:text-left text-center", ref="bellContainer")
                 i( class="text-lg fas fa-chevron-left" )  
             div(class="w-5/6 text-center lg:mr-40 mr-20")
                 p(class="text-base lg:text-3xl m-5 font-bold") Editar Perfil
-        form(@submit.prevent="updateProfile()" class="lg:p-20x pb-20")                
+        form(@submit.prevent="updateProfile()" class="lg:p-20x pb-20")
             div(class="flex mx-auto xl:max-w-screen-xl px-4")
-                div(class="w-full box px-4")                        
-                    img( :src="model.avatar" alt="avatar" class="w-40 h-40 object-cover rounded-full m-auto" )
+                div(class="w-full box px-4")        
+                    img(v-if="model.avatar" :src="model.avatar" alt="avatar" class="w-40 h-40 object-cover rounded-full m-auto" )
+                    template(v-else)
+                        div(class="flex justify-center")
+                            <svg class="m-auto animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                            </svg>
                     .w-full.px-4.text-center
                         input( @change="handleImage" type="file" accept="image/*" )
             div(class="lg:flex mx-auto xl:max-w-screen-xl px-4")
@@ -158,7 +164,7 @@
 <script>
 import profileService from "../../services/profileService.js";
 import { required, email } from "vuelidate/lib/validators";
-import moment from "moment";
+import { format as dateFormat } from "date-fns";
 import errorManagement from "../../mixins/errorManagement";
 
 import AvatarCropper from "vue-avatar-cropper";
@@ -220,8 +226,8 @@ export default {
             get: function() {
                 return this.tabProfile;
             },
-            set: function(newValue) {
-                this.$emit("update:tabProfile", newValue);
+            set: function() {
+                this.$emit("update:tabProfile", false);
             }
         }
     },
@@ -258,24 +264,6 @@ export default {
         this.arr_areas = areas;
 
         this.model = userConnected;
-
-        // this.model.nickname = userConnected.nickname;
-        // this.model.email = userConnected.email;
-        // this.model.genre = userConnected.genre ? userConnected.genre : 0;
-        // this.model.area_id = userConnected.area_id ? userConnected.area_id : 0;
-        // this.model.biography = userConnected.biography;
-        // this.model.birthday = userConnected.birthday;
-        // this.model.country_id = userConnected.country_id
-        //     ? userConnected.country_id
-        //     : 0;
-        // this.model.avatar = userConnected.avatar
-        //     ? userConnected.avatar
-        //     : "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=731&amp;q=80";
-        // this.model.twitter_url = userConnected.twitter_url;
-        // this.model.facebook_url = userConnected.facebook_url;
-        // this.model.linkedin_url = userConnected.linkedin_url;
-        // this.model.github_url = userConnected.github_url;
-
         this.model.avatar = userConnected.avatar
             ? userConnected.avatar
             : "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=731&amp;q=80";
@@ -310,21 +298,21 @@ export default {
                     this.modelDataToSend.birthday != "" &&
                     this.modelDataToSend.birthday != null
                 ) {
-                    this.modelDataToSend.birthday = moment(
-                        this.modelDataToSend.birthday
-                    ).format("DD/MM/YYYY");
+                    this.modelDataToSend.birthday = dateFormat(
+                        this.modelDataToSend.birthday,
+                        "DD/MM/YYYY"
+                    );
                 }
                 try {
                     let response = await this.profileService.updateUser(
                         this.modelDataToSend
                     );
+
                     if (!response.error) {
                         this.$toast.open({
                             message: "Tus datos se han actualizado",
                             type: "success"
                         });
-                    } else {
-                        this.showErrors(response);
                     }
                 } catch (error) {
                     this.showErrors(error);
@@ -332,8 +320,8 @@ export default {
             }
             this.sending = false;
         },
-        goToMyProfile: () => {
-            window.bus.$emit("activeTab", 0);
+        closeEditProfile() {
+            window.bus.$emit("profileTab", true);
         }
     }
 };

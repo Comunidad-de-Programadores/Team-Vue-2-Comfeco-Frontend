@@ -22,11 +22,8 @@ export default {
         }
     },
     methods: {
-        RequestGroup() {
-            //
-        },
-		goToEditProfile: () => {
-            window.bus.$emit("activeTab", 4);
+  		goToEditProfile: () => {
+            window.bus.$emit("profileTab", false);
         }
     },
     mounted() {
