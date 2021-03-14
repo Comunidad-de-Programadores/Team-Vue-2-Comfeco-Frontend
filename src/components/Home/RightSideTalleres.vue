@@ -29,7 +29,12 @@
             infinite-loading(:identifier="infiniteId" @infinite="infiniteHandler")
 </template>
 <script>
-import moment from "moment";
+import {
+    isBefore as dateIsBefore,
+    format as dateFormat,
+    toDate,
+    parseISO
+} from "date-fns";
 import workshopService from "../../services/workshopService";
 import profileService from "../../services/profileService.js";
 
@@ -57,12 +62,12 @@ export default {
             this.infiniteId += 1;
         },
         iconToShow(hora) {
-            return moment().isBefore(moment(hora))
+            return dateIsBefore(new Date(), toDate(parseISO(hora)))
                 ? "fas fa-ellipsis-h"
                 : "fas fa-check";
         },
         formatTime(hora) {
-            return moment(hora).format("LTS");
+            return dateFormat(parseISO(hora), "LTS");
         },
         async infiniteHandler($state) {
             let response = await this.workshopService.getWorkshops(

@@ -61,6 +61,13 @@ export default ({ requiresAuth = false, isGeneralApi = false } = {}) => {
             return response;
         },
         error => {
+            if (
+                error.response.status === 401 &&
+                error.response.data.message === "Unauthenticated."
+            ) {
+                console.log("AQUI");
+                window.bus.$emit("logout");
+            }
             return Promise.reject(error);
         }
     );

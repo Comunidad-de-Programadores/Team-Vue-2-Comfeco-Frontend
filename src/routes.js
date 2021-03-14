@@ -21,14 +21,33 @@ const routes = [
         path: "/",
         redirect: "/home"
     },
-    { path: "/login", component: Login },
-    { path: "/register", component: Register },
-    { path: "/recover-password", component: RememberPassword },
+    { path: "/login", component: Login, meta: { layout: "SimpleTemplate" } },
+    {
+        path: "/register",
+        component: Register,
+        meta: { layout: "SimpleTemplate" }
+    },
+    {
+        path: "/recover-password",
+        component: RememberPassword,
+        meta: { layout: "SimpleTemplate" }
+    },
+    {
+        path: "/recuperarClave/:email",
+        component: RecoverPassword,
+        meta: { layout: "SimpleTemplate" }
+    },
+    {
+        path: "/anularRecuperarClave/:email",
+        component: CancelPassword,
+        meta: { layout: "SimpleTemplate" }
+    },
+    {
+        path: "/terminos-condiciones",
+        component: TerminosCondiciones,
+        meta: { layout: "SimpleTemplate" }
+    },
     { path: "/home", component: Home, meta: { requiresAuth: true } },
-    // { path: "/profile", component: Profile, meta: { requiresAuth: true } },
-    { path: "/recuperarClave/:email", component: RecoverPassword },
-    { path: "/anularRecuperarClave/:email", component: CancelPassword },
-    { path: "/terminos-condiciones", component: TerminosCondiciones },
     { path: "/talleres", component: Workshops, meta: { requiresAuth: true } },
     { path: "/perfil", component: MyProfile, meta: { requiresAuth: true } },
     { path: "/badges-admin", component: BadgesPage, meta: { requiresAuth: true } }

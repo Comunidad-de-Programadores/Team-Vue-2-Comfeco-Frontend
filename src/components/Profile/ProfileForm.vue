@@ -164,7 +164,7 @@
 <script>
 import profileService from "../../services/profileService.js";
 import { required, email } from "vuelidate/lib/validators";
-import moment from "moment";
+import { format as dateFormat } from "date-fns";
 import errorManagement from "../../mixins/errorManagement";
 
 import AvatarCropper from "vue-avatar-cropper";
@@ -264,7 +264,6 @@ export default {
         this.arr_areas = areas;
 
         this.model = userConnected;
-
         this.model.avatar = userConnected.avatar
             ? userConnected.avatar
             : "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=731&amp;q=80";
@@ -299,9 +298,10 @@ export default {
                     this.modelDataToSend.birthday != "" &&
                     this.modelDataToSend.birthday != null
                 ) {
-                    this.modelDataToSend.birthday = moment(
-                        this.modelDataToSend.birthday
-                    ).format("DD/MM/YYYY");
+                    this.modelDataToSend.birthday = dateFormat(
+                        this.modelDataToSend.birthday,
+                        "DD/MM/YYYY"
+                    );
                 }
                 try {
                     let response = await this.profileService.updateUser(

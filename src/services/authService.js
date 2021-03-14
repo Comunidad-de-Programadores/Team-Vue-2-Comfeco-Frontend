@@ -34,9 +34,21 @@ export default class authService {
 
     loginSocial = async socialNetwork => {
         const url = "/v1/socialLogin";
+        let scope = "";
+        switch (socialNetwork) {
+            case "facebook":
+                scope = "public_profile,email";
+                break;
+            case "google":
+                scope = "https://www.googleapis.com/auth/userinfo.email";
+                break;
+            default:
+                scope = "email";
+                break;
+        }
         return new Promise((resolve, reject) => {
             try {
-                hello(socialNetwork).login({ scope: "email" });
+                hello(socialNetwork).login({ scope: scope });
                 hello.on("auth.login", async auth => {
                     let user = await hello(auth.network).api("me");
                     let model = {
