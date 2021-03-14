@@ -12,13 +12,15 @@
         div(v-for="(tab, $index) in tabs" )
             Profile(v-if="tab.active && tab.title == 'Mi perfil'" :tabProfile.sync="tab.active") 
             Badges(v-if="tab.active && tab.title == 'Insignias'" :tabInsignias.sync="tab.active") 
-            Events(v-if="tab.active && tab.title == 'Eventos'") 
+            Events(v-if="tab.active && tab.title == 'Eventos'")
+            Groups(v-if="tab.active && tab.title == 'Grupos'")
 </template>
 <script>
 import ProfileForm from "@/components/Profile/ProfileForm";
 import Profile from "@/components/Profile/Profile";
 import Badges from "@/components/Profile/Badge";
 import Events from "@/components/Events/Events";
+import Groups from "@/components/Groups/Groups";
 
 export default {
     name: "ProfilePage",
@@ -26,7 +28,8 @@ export default {
         ProfileForm,
         Profile,
         Badges,
-        Events
+        Events,
+        Groups,
     },
     data() {
         return {
