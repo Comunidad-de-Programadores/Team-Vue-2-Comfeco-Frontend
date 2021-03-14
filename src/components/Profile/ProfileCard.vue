@@ -22,7 +22,7 @@ export default {
         }
     },
     methods: {
-  		goToEditProfile: () => {
+		goToEditProfile: () => {
             window.bus.$emit("profileTab", false);
         }
     },
