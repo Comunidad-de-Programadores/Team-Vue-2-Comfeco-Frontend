@@ -23,13 +23,7 @@ export default {
             auth: new authService()
         };
     },
-    created() {
-        window.bus.$on("logout", async () => {
-            this.auth.logout().then(() => {
-                this.$router.push("/login");
-            });
-        });
-    }
+    created() {}
 };
 </script>
 
