@@ -8,7 +8,7 @@ export default class authService {
         try {
             const { data } = await axiosService().post(url, {
                 grant_type: "client_credentials",
-                client_id: process.env.API_CLIENT_ID ?? 3,
+                client_id: process.env.VUE_API_CLIENT_ID ? process.env.VUE_API_CLIENT_ID: 3,
                 client_secret: process.env.VUE_APP_OAUTH_KEY,
                 scope: "app-client-guest"
             });

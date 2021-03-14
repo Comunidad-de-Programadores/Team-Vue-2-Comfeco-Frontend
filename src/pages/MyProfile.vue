@@ -1,8 +1,13 @@
 <template lang="pug">
     div
         div(class=" ")
-            nav(class="flex lg:flex-row flex-col justify-center p-10 lg:bg-gray-200")
-                button(v-for="(item,index) in tabsTop" :key="index" @click="selectTab(index)" :class="item.active ? item.color: ''" class="'flex rounded text-gray-600 py-4 px-6 block focus:outline-none border-2 font-medium")
+            nav.flex.flex-col.justify-center(class='sm:flex-row bg-gray-300')
+                button(
+                    v-for="(item,index) in tabsTop" 
+                    :key="index" @click="selectTab(index)" 
+                    :class="item.active ? item.color: ''" 
+                    class="'flex rounded text-gray-600 py-4 px-6 block focus:outline-none border-2 font-medium"
+                    )
                     .mr-4
                         i(:class="'text-lg ' + item.icon" )                        
                     .w-auto
