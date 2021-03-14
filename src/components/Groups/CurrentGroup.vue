@@ -2,17 +2,15 @@
   div.rounded.rounded-t-lg.overflow-hidden.shadow.my-3.bg-white(class="h-4/6 sm:w-3/3 md:w-1/4")
             template(v-if="currentGroup")
                 .text-center.px-3.pb-6.pt-2
-                    h3.text-black.text-sm.bold.font-sans Olivia Dunham
-                    p.mt-2.font-sans.font-light.text-grey-dark Hello, i&apos;m from another the other side!
-                .flex.justify-center.pb-3.text-grey-dark
-                    .text-center.mr-3.border-r.pr-3
-                    h2 34
-                    span Photos
-                    .text-center
-                    h2 42
-                    span Friends
-                a.block.text-center.mb-4.cursor-pointer(@click="goToEditProfile()")
-                    | Editar perfil
+                    h3.text-black.text-sm.bold.font-sans 
+                        strong {{currentGroup.name}}
+                    p.mt-2.font-sans.font-light.text-grey-dark {{currentGroup.description}}
+                ul  
+                    li(v-for="member in currentGroup.members") {{member.name}}
+                button.text-gray-700.font-semibold.py-2.px-4.w-full(@click='' :class="'bg-red-300'")
+                        template
+                            i.text-lg.fas.fa-ban 
+                            | Abandonar  
             template(v-else)
                 div
                     p.flex.justify-center.px-3.py-2.underline

@@ -11,14 +11,19 @@
                         small
                         | {{group.description}}
                 footer.flex.items-center.justify-between.leading-none(class='bg-blue-300')
-                    button.bg-gray-300.text-gray-700.font-semibold.py-2.px-4.w-full(@click='handleClickJoin(group)')
-                        i.text-lg.fas.fa-sign-in-alt.w-8
-                        | Unirse
-
+                    button.text-gray-700.font-semibold.py-2.px-4.w-full(@click='handleClickJoin(group)' :class="currentGroup.id === group.id ? 'bg-red-300' : 'bg-gray-300'")
+                        template(v-if="!group")
+                            i.text-lg.fas.fa-sign-in-alt.w-8
+                            | Unirse
+                        template(v-if="group && currentGroup.id === group.id")
+                            i.text-lg.fas.fa-ban &nbsp;Abandonar
+                        template(v-else)
+                            i.text-lg.fas.fa-ban
 </template>
 
 <script>
 import manageStorage from "../../services/manageStorage";
+import teamService from "../../services/teamService"
 export default {
     name: 'ListGroups',
     props: {
@@ -26,16 +31,32 @@ export default {
             required: true,
             type: Array
         },
+        currentGroup: {
+            required: false,
+            type: Object,
+            default : () => {}
+        }
     },
     data() {
         return {
-            user: {}
+            user: {},
+            teamService: new teamService(),
+        
         }
     },
     methods: {
-        handleClickJoin(group) {
-            console.log(group)
-        }
+        handleClickJoin(group)
+        {
+            if (group.id === this.currentGroup.id) {
+                console.log(group)
+                return false;
+            }
+            if (this.currentGroup.id) {
+                console.log(group)
+                return false;
+            }
+            this.teamService.joinTeam(group)
+        },
     },
     mounted() {
         this.user = manageStorage.getObject("user")

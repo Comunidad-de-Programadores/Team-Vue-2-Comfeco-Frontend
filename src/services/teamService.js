@@ -29,4 +29,18 @@ export default class teamService {
             return Promise.reject(error.messages);
         }
     };
+    joinTeam = async (team) => {
+        const url = `v1/teams/${team.id}/members`;
+        try {
+            const { data } = await axiosService({
+                requiresAuth: true,
+                isGeneralApi: false
+            }).post(url);
+
+            return data;
+        } catch (error) {
+            console.error(error.messages);
+            return Promise.reject(error.messages);
+        }
+    };
 }
