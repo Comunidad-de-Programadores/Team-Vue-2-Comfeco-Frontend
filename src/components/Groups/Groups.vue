@@ -1,13 +1,15 @@
 <template lang="pug">
     div
-        div(class="flex flex-wrap mx-5 pt-2 justify-between mb-20")
+        div(class="flex flex-wrap pt-2 justify-around mb-20")
             CurrentGroup(:currentGroup="currentGroup" @leaveTeam="handleLeaveTeam")
-            div(class="bg-gray-300 mx-5 rounded shadow-lg sm:w-3/3 md:w-2/3")
-                .bg-grey.col-12.align-middle.justify-content-center.flex.mx-5.mt-5
+            div(class="rounded shadow-lg sm:w-3/3 md:w-2/3")
+                .col-12.align-middle.justify-content-center.flex.mx-5.mt-5
                     select.col-4.py-3.px-2(type='button' data-toggle='collapse' data-target='#filters' v-model="technology" @change="handleChangeTechnology")
                         option(value="") Filtrar por tecnología
                         option(v-for="technology in technologies" :value="technology.id") {{technology.name}}
-                    input#search-filter.w-full.py-3.px-2(type='text' placeholder='Buscar' @keyup="handleSearchGroup")
+                    input#search-filter.w-full.py-3.px-2(type='text' placeholder='Buscar' @keyup="handleSearchGroup" v-model="searchInput")
+                    button.bg-gray-300.py-3.px-2(:disabled="!technology && !searchInput" @click="clearFilters")
+                        i.text-lg.fas.fa-trash 
                 ListGroups(
                     :groups="filteredGroups  ? filteredGroups : groups" :currentGroup="currentGroup" 
                     @setTeam="handleSetCurrentGroup" 
@@ -39,12 +41,22 @@ export default {
         this.getTechnologies();
     },
     methods: {
+        clearFilters: function() {
+            this.loader = this.$loading.show();
+            this.filteredGroups = undefined
+            this.searchInput = ''
+            this.technology = ''
+            return this.loader.hide();
+        },
         handleLeaveTeam: async function() {
+            this.loader = this.$loading.show();
             await this.teamService.leave();
             this.currentGroup = undefined;
+            await this.getTeams();
+             this.loader.hide();
         },
-        handleSetCurrentGroup: function(team) {
-            console.log(team,'team')
+        handleSetCurrentGroup: async function(team) {
+            await this.getTeams();
             this.currentGroup = team;
         },
         getTeams: async function() {
@@ -61,22 +73,36 @@ export default {
         },
         handleSearchGroup(value) {
             let text = value.target.value
-            const filteredGroups = this.groups.filter(group => {
-                console.log(group.name.includes(text))
-                return group.name.includes(text)
+            this.loader = this.$loading.show();
+            let filteredGroups = [...this.groups]
+            filteredGroups = filteredGroups.filter(group => {
+                const groupName = group.name.toLowerCase()
+                const groupDescription = group.description.toLowerCase()
+                const filterText = text.toLowerCase()
+                if (
+                    groupName.includes(filterText) ||
+                    groupDescription.includes(filterText)
+                )
+                    return group
             })
-            console.log(filteredGroups)
-
+            this.loader.hide();
             return this.filteredGroups = filteredGroups;
         },
-        handleChangeTechnology(value) {
-            let text = value.target.value
-            const filteredGroups = this.groups.filter(group => {
-                console.log(group.name.includes(text))
-                return group.name.includes(text)
+        async handleChangeTechnology(value) {
+            this.loader = this.$loading.show();
+            let id = value.target.value
+            let filteredGroups = [...this.groups]
+            if (!id) {
+                this.loader.hide();
+                return this.filteredGroups = undefined
+            }
+            filteredGroups = await filteredGroups.filter(group => {
+                if (group.technology_id === parseInt(id)) {
+                    return group
+                }
+                 
             })
-            console.log(filteredGroups)
-
+            this.loader.hide();
             return this.filteredGroups = filteredGroups;
         },
     },
@@ -88,7 +114,9 @@ export default {
             currentGroup: {},
             filteredGroups: undefined,
             technology: '',
-            technologies: []
+            technologies: [],
+            loader : {},
+            searchInput: ''
         }
     },
 };
