@@ -5,7 +5,7 @@
       .swiper-slide(:key='item.id')
         .flex.justify-center.items-center.overflow-hidden
           a(href='#')
-            img.block-inline.object-cover.w-100.h-100.mr-2.rounded-full(:src='`${item.image_url}`' :alt='`${item.name}`')
+            img.block-inline.object-cover.w-full.h-100.rounded-full(:src='`${item.image_url}`' :alt='`${item.name}`')
   // Add Arrows
   .swiper-button-next
   .swiper-button-prev

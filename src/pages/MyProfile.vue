@@ -7,17 +7,20 @@
                         i(class="text-lg far fa-bell" )                        
                     .w-auto
                         p {{ tab.title }}                
-        ProfileForm(v-if="profileForm" :tabProfileForm.sync="profileForm")               
-        div(v-else v-for="(tab, $index) in tabs" )
-            Profile( v-if="tab.active && tab.title == 'Mi perfil'" :tabProfile.sync="tab.active" )
-            Badges(  v-if="tab.active && tab.title == 'Insignias'" :tabInsignias.sync="tab.active" )
-            Events(  v-if="tab.active && tab.title == 'Eventos'" :tabEventos.sync="tab.active") 
+        div(v-if="tabDefault")
+            ProfileForm(:tabProfile.sync="tabDefault")
+        div(v-for="(tab, $index) in tabs" )
+            Profile(v-if="tab.active && tab.title == 'Mi perfil'" :tabProfile.sync="tab.active") 
+            Badges(v-if="tab.active && tab.title == 'Insignias'" :tabInsignias.sync="tab.active") 
+            Events(v-if="tab.active && tab.title == 'Eventos'")
+            Groups(v-if="tab.active && tab.title == 'Grupos'")
 </template>
 <script>
 import ProfileForm from "@/components/Profile/ProfileForm";
 import Profile from "@/components/Profile/Profile";
 import Badges from "@/components/Profile/Badge";
 import Events from "@/components/Events/Events";
+import Groups from "@/components/Groups/Groups";
 
 export default {
     name: "ProfilePage",
@@ -25,7 +28,8 @@ export default {
         ProfileForm,
         Profile,
         Badges,
-        Events
+        Events,
+        Groups
     },
     data() {
         return {
@@ -50,21 +54,25 @@ export default {
             profileForm: false
         };
     },
-    watch:{
-      profileForm(val){
-          !val && (this.tabs.find(tab => tab.title == 'Mi perfil').active = true);
-      }  
+    watch: {
+        profileForm(val) {
+            !val &&
+                (this.tabs.find(tab => tab.title == "Mi perfil").active = true);
+        }
     },
     created() {
         window.bus.$on("profileTab", () => {
-            this.tabs.map(tab => tab.active = false)
-            this.profileForm = true
+            this.tabs.map(tab => (tab.active = false));
+            this.profileForm = true;
         });
     },
     methods: {
         changeTab(value, title) {
-            this.profileForm = false
-            this.tabs.forEach(element => element.active = element.title != title ? false : value);
+            this.profileForm = false;
+            this.tabs.forEach(
+                element =>
+                    (element.active = element.title != title ? false : value)
+            );
         }
     }
 };

@@ -1,5 +1,5 @@
 <template lang="pug">
-.flex.flex-col.w-full.shadow.rounded.rounded-t-lg
+.flex.flex-col.w-full.shadow.rounded-full
   .w-full.h-full.bg-top.bg-cover.rounded-t.mt-5
     img(src="@/assets/images/vue.png", alt="alt")
   .flex.flex-col.w-full(class='md:flex-row')

@@ -3,7 +3,7 @@
     .swiper-wrapper
       template(v-for='item in mentors')
         .swiper-slide(:key='item.id')
-          article.overflow-hidden.rounded-lg.shadow-lg.my-10
+          article.overflow-hidden.rounded-lg.shadow-lg.my-10.max-h-48
             a(href='#')
               img.block.h-100.w-full(alt='Placeholder' :src='`${item.image_url}`')
             header.flex.flex-col.items-center.justify-center.leading-tight.px-2.-mt-5.bg-white(class='md:p-4')

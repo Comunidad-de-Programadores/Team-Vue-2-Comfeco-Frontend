@@ -1,5 +1,5 @@
 <template lang="pug">
-    section.bottom-0.left-0.w-full.px-3.py-4.flex.flex-wrap.items-center(class="md:px-10 static md:fixed")
+    section.bottom-0.left-0.w-full.px-3.py-4.flex.flex-wrap.items-center(class="md:px-10 static md:fixed bg-gray-300")
         div.first-title.mr-auto.order-1
             h1
                 img.w-12(src="../assets/images/brand.png")
