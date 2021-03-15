@@ -1,32 +1,43 @@
 <template lang="pug">
-  div.flex.flex-wrap.justify-around
-    template(v-for="group in groups")
-            article.overflow-hidden.rounded-lg.shadow-lg.my-2
-                a(href='#')
-                    img.block.h-auto.w-full.max-h-48(alt='Placeholder' src='https://picsum.photos/300/200/?random')
-                header.flex.flex-col.items-center.justify-between.leading-tight.p-2(class='md:p-2 bg-blue-300')
-                    h1.text-lg
-                    | {{group.name}}
-                    p.text-grey-100.text-sm
-                        small
-                        | {{group.description}}
-                footer.flex.items-center.justify-between.leading-none(class='bg-blue-300')
-                    
+    div
+        div(v-if="groups.length === 0" class="w-full px-2 grid grid-cols-1")   
+            .w-full.m-2.bg-blue-600.flex.justify-center
+                p.font-sans.text-white.error-text No encontramos coincidencias
+        div(v-if="groups.length > 0" class="holder w-full px-2 grid sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4")   
+            template(v-for="group in groups")
+                .each.m-2.shadow-lg.border-gray-800.bg-gray-100.relative
+                    img.w-full.h-32(
+                        width="70"
+                        height="50"
+                        :src='group.image ? group.image : "https://i.ytimg.com/vi/qew27BNl7io/maxresdefault.jpg"' 
+                        :alt='group.name'
+                        )
+                    .badge.absolute.top-0.right-0.m-1.text-gray-200.p-1.px-2.text-xs.font-bold.rounded(:class="group.technology.color ? `bg-${group.technology.color}-500` : 'bg-gray-500'") {{group.technology.name}}
+                    .info-box.text-xs.flex.p-1.font-semibold.text-gray-500.bg-gray-300
+                        span.mr-1.p-1.px-2.font-bold {{group.members_count}} miembros
+                    .desc.p-4.text-gray-800
+                        a.title.font-bold.block.cursor-pointer(class='hover:underline') {{group.name}}
+                        span.description.text-sm.block.py-2.border-gray-400.mb-2.max-h-10.overflow-hidden {{group.description}}
                         template(v-if="!currentGroup")
                             button.text-gray-700.font-semibold.py-2.px-4.w-full(@click='handleClickJoin(group)' :class="(group && currentGroup && currentGroup.id === group.id) ? 'bg-red-300' : 'bg-gray-300'")
                                 i.text-lg.fas.fa-sign-in-alt.w-8
                                 | Unirse
                         template(v-else-if="group && currentGroup && currentGroup.id === group.id" )
                             button.text-gray-700.font-semibold.py-2.px-4.w-full(@click='leaveTeam(currentGroup)' :class="(group && currentGroup && currentGroup.id === group.id) ? 'bg-red-300' : 'bg-gray-300'")
-                                i.text-lg.fas.fa-ban &nbsp;Abandonar
+                                i.text-lg.fas.fa-sign-out-alt
+                                | &nbsp;Abandonar
                         template(v-else)
                             button.text-gray-700.font-semibold.py-2.px-4.w-full(@click='handleClickJoin(group)' :class="(group && currentGroup && currentGroup.id === group.id) ? 'bg-red-300' : 'bg-gray-300'")
-                                i.text-lg.fas.fa-ban
+                                i.text-lg.fas.fa-ban 
 </template>
 
 <script>
+import Vue from 'vue'
 import manageStorage from "../../services/manageStorage";
 import teamService from "../../services/teamService"
+import VueConfetti from 'vue-confetti'
+
+Vue.use(VueConfetti)
 export default {
     name: 'ListGroups',
     props: {
@@ -53,6 +64,7 @@ export default {
         },
         async handleClickJoin(group)
         {
+            const loader = this.$loading.show();
             if (this.currentGroup && 
             (group.id === this.currentGroup.id)
             ) {
@@ -66,6 +78,11 @@ export default {
             const userInformation = await this.teamService.joinTeam(group)
         
             this.$emit('setTeam' , userInformation.team)
+             this.$confetti.start();
+             setTimeout(() => {
+                loader.hide();
+                this.$confetti.stop(); 
+             }, 1000)
         },
     },
     mounted() {
