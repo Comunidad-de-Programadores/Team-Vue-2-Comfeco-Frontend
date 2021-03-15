@@ -1,7 +1,7 @@
 <template lang="pug">
     div.main(id="app") 
         Header(class="")
-        Body.w-full.max-w-8xl(class="min-h-screen-good")
+        Body.w-full.max-w-8xl(class="min-h-screen-good pb-14")
         Footer  
 </template>
 

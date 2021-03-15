@@ -1,4 +1,10 @@
 module.exports = {
-    // publicPath: "testeando"
-    publicPath: process.env.NODE_ENV === "production" ? "/" : "/"
+    publicPath: process.env.NODE_ENV === "production" ? "/" : "/",
+    css: {
+        loaderOptions: {
+            sass: {
+                additionalData: `@import "@/assets/styles/_variables.scss";`
+            }
+        }
+    }
 };
