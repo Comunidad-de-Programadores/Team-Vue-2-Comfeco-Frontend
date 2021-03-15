@@ -5909,12 +5909,6 @@ postcss@^6.0.9:
     chalk "^2.4.1"
     source-map "^0.6.1"
     supports-color "^5.4.0"
-  version "7.0.35"
-  resolved "https://registry.npmjs.org/postcss/-/postcss-7.0.35.tgz"
-  dependencies:
-    chalk "^2.4.2"
-    source-map "^0.6.1"
-    supports-color "^6.1.0"
 postcss@^8.2.1, postcss@^8.2.8:
 postcss@^8.2.1:
   version "8.2.8"
@@ -7048,10 +7042,9 @@ svgo@^1.0.0:
 sweetalert2@^10.15.5:
   version "10.15.5"
   resolved "https://registry.npmjs.org/sweetalert2/-/sweetalert2-10.15.5.tgz"
-
-swiper@^6.4.15:
-  version "6.4.15"
-  resolved "https://registry.npmjs.org/swiper/-/swiper-6.4.15.tgz"
+swiper@^6.5.0:
+  version "6.5.0"
+  resolved "https://registry.yarnpkg.com/swiper/-/swiper-6.5.0.tgz#4ca2243b44fccef47ee28199377666607d8c5141"
   dependencies:
     dom7 "^3.0.0"
     ssr-window "^3.0.0"
@@ -7276,9 +7269,10 @@ uglify-js@3.4.x:
   dependencies:
     commander "~2.19.0"
     source-map "~0.6.1"
-uikit@^3.6.18:
-  version "3.6.18"
-  resolved "https://registry.yarnpkg.com/uikit/-/uikit-3.6.18.tgz#5ee147b5de13ccd1ef32809a9f4e0551fd895da9"
+uikit@^3.6.17:
+  version "3.6.17"
+  resolved "https://registry.npmjs.org/uikit/-/uikit-3.6.17.tgz"
+
 unicode-canonical-property-names-ecmascript@^1.0.4:
   version "1.0.4"
   resolved "https://registry.npmjs.org/unicode-canonical-property-names-ecmascript/-/unicode-canonical-property-names-ecmascript-1.0.4.tgz"

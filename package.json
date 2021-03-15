@@ -24,7 +24,7 @@
     "hellojs": "^1.18.8",
     "postcss": "^8.2.8",
     "sweetalert2": "^10.15.5",
-    "swiper": "^6.4.15",
+    "swiper": "^6.5.0",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.0.3",
     "uikit": "^3.6.18",
     "vue": "^2.6.11",
