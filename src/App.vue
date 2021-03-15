@@ -1,17 +1,22 @@
 <template lang="pug">
-	General
+    component(:is="layout")
+        slot
 </template>
 
 <script>
-import General from "@/templates/General.vue";
-
+const defaultLayout = "General";
 export default {
-    name: "App",
-    components: {
-        General
+    name: "AppLayout",
+    computed: {
+        layout() {
+            const layout = this.$route.meta.layout || defaultLayout;
+            return () => import(`@/templates/${layout}.vue`);
+        }
     },
-    data() {
-        return {};
+    created() {
+        window.bus.$on("logout", () => {
+            this.$router.push("/home");
+        });
     }
 };
 </script>

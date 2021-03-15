@@ -1,8 +1,5 @@
 <template lang="pug">
-    section
-        div(class="")
-            div(id="content-wrapper")
-                router-view(class="")
+    router-view(class="")
 </template>
 <script>
 export default {
