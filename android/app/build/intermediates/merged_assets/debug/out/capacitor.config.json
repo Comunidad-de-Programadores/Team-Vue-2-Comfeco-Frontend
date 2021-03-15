@@ -1,0 +1,13 @@
+{
+  "appId": "com.comfeco.vue2",
+  "appName": "TeamVue2",
+  "bundledWebRuntime": false,
+  "npmClient": "yarn",
+  "webDir": "dist",
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 0
+    }
+  },
+  "cordova": {}
+}

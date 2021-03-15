@@ -106,8 +106,6 @@ export default {
                             message: "Bienvenido a COMFECO",
                             type: "success"
                         });
-                    } else {
-                        this.showErrors(response);
                     }
                 } catch (error) {
                     this.showErrors(error);

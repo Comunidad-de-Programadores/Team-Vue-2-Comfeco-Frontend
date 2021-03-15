@@ -1,0 +1,44 @@
+.events-container {
+    .container {
+        .list {
+            .event {
+                background-color: #ffffff;
+                border-radius: 10px;
+                overflow: hidden;
+                .portrait {
+                    figure {
+                        height: 130px;
+                        img {
+                            height: 100%;
+                            object-fit: cover;
+                            object-position: center;
+                            width: 100%;
+                        }
+                    }
+                }
+                .body-event {
+                    padding: 1rem;
+                    .title {
+                        text-align: center;
+                        margin-bottom: 1rem;
+                        h5 {
+                            margin: 0;
+                        }
+                    }
+                    .content {
+                        margin-bottom: 0.5rem;
+                        * {
+                            font-size: 0.8rem;
+                        }
+                    }
+                    .buttons-container {
+                        a {
+                        }
+                        button {
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

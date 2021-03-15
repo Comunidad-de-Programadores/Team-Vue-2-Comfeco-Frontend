@@ -1,22 +1,23 @@
 import Vue from "vue";
 import Vuelidate from "vuelidate";
 import App from "./App.vue";
-import "@/assets/tailwind/tailwind.css";
-import "@/assets/styles/main.scss";
+import "./assets/tailwind/tailwind.css";
+import "./assets/styles/main.scss";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "vue-toast-notification/dist/theme-sugar.css";
 import router from "./routes";
 import hello from "hellojs";
-import moment from "moment";
 import InfiniteLoading from "vue-infinite-loading";
 import VueToast from "vue-toast-notification";
+import swalPlugin from "@/plugins/SwalPlugin";
+
 require("./utils/EventBus");
-require('dotenv').config();
+require("dotenv").config();
 
 Vue.use(InfiniteLoading);
 Vue.use(Vuelidate);
-Vue.use(moment);
 Vue.use(VueToast);
+Vue.use(swalPlugin);
 
 Vue.config.productionTip = false;
 
