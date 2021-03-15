@@ -3114,14 +3114,15 @@ eslint-loader@^2.2.1:
     object-assign "^4.0.1"
     object-hash "^1.1.4"
     rimraf "^2.6.1"
-
 eslint-plugin-vue@^7.7.0:
   version "7.7.0"
   resolved "https://registry.yarnpkg.com/eslint-plugin-vue/-/eslint-plugin-vue-7.7.0.tgz#a90df4595e670821bf243bd2750ededdb74948b8"
+
   dependencies:
     eslint-utils "^2.1.0"
     natural-compare "^1.4.0"
     semver "^7.3.2"
+
     vue-eslint-parser "^7.6.0"
 
 eslint-scope@^4.0.3:
@@ -5910,14 +5911,6 @@ postcss@^6.0.9:
     source-map "^0.6.1"
     supports-color "^5.4.0"
 
-postcss@^7, postcss@^7.0.0, postcss@^7.0.1, postcss@^7.0.14, postcss@^7.0.18, postcss@^7.0.27, postcss@^7.0.32, postcss@^7.0.35, postcss@^7.0.5, postcss@^7.0.6:
-  version "7.0.35"
-  resolved "https://registry.npmjs.org/postcss/-/postcss-7.0.35.tgz"
-  dependencies:
-    chalk "^2.4.2"
-    source-map "^0.6.1"
-    supports-color "^6.1.0"
-
 postcss@^8.2.1:
   version "8.2.8"
   resolved "https://registry.npmjs.org/postcss/-/postcss-8.2.8.tgz"
@@ -7050,10 +7043,6 @@ svgo@^1.0.0:
 sweetalert2@^10.15.5:
   version "10.15.5"
   resolved "https://registry.npmjs.org/sweetalert2/-/sweetalert2-10.15.5.tgz"
-
-swiper@^6.4.15:
-  version "6.4.15"
-  resolved "https://registry.npmjs.org/swiper/-/swiper-6.4.15.tgz"
   dependencies:
     dom7 "^3.0.0"
     ssr-window "^3.0.0"
@@ -7278,7 +7267,6 @@ uglify-js@3.4.x:
   dependencies:
     commander "~2.19.0"
     source-map "~0.6.1"
-
 uikit@^3.6.17:
   version "3.6.17"
   resolved "https://registry.npmjs.org/uikit/-/uikit-3.6.17.tgz"
@@ -7488,10 +7476,6 @@ vue-cli-plugin-pug@~2.0.0:
     pug "^3.0.0"
     pug-plain-loader "^1.0.0"
     raw-loader "^4.0.2"
-
-vue-eslint-parser@^7.6.0:
-  version "7.6.0"
-  resolved "https://registry.yarnpkg.com/vue-eslint-parser/-/vue-eslint-parser-7.6.0.tgz#01ea1a2932f581ff244336565d712801f8f72561"
   dependencies:
     debug "^4.1.1"
     eslint-scope "^5.0.0"
