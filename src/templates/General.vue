@@ -1,7 +1,7 @@
 <template lang="pug">
     div.main(id="app") 
         Header(class="")
-        Body.w-full.max-w-8xl(class="min-h-screen-good pb-14")
+        Body.w-full.max-w-8xl(class="min-h-screen-good")
         Footer  
 </template>
 
@@ -26,14 +26,3 @@ export default {
     created() {}
 };
 </script>
-
-<style lang="scss">
-.main {
-    min-height: 100vh;
-    height: 100%;
-    width: 100%;
-    background: url("../assets/images/Fondo.jpg") no-repeat fixed;
-    background-size: cover;
-    // opacity: 90%;
-}
-</style>

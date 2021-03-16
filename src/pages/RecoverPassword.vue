@@ -1,27 +1,27 @@
 <template lang="pug">
-	div
-		div(class="bg-white lg:w-4/12 md:6/12 w-10/12 m-auto md:my-40 my-5")
-			div(class="grid md:grid-cols-1 gap-2 mt-7")
-				h4(class="text-2xl text-gray-800 dark:text-white font-extrabold tracking-tight text-words") Asignar contraseña
-			form(@submit.prevent="generatePassword()" class="mt-9")
-				.my-5.text-sm( :class="{ 'form-group-error': $v.model.password.$error }")
-					input( type="password" autofocus class="rounded px-4 py-3 mt-3 focus:outline-none bg-gray-100 w-full" placeholder="Contraseña" v-model.trim="$v.model.password.$model")
-					div(v-if="$v.model.password.$dirty")
-						.error.text-error.text-xs.text-center(v-if="!$v.model.password.required") Se requiere una nueva contraseña
-				.my-5.text-sm( :class="{ 'form-group-error': $v.model.password_confirmation.$error }")
-					input(
-						type="password" 
-						class="rounded px-4 py-3 mt-3 focus:outline-none bg-gray-100 w-full" 
-						placeholder="Repetir contraseña" 
-						v-model.trim="$v.model.password_confirmation.$model"
-					)
-					div(v-if="$v.model.password_confirmation.$dirty")
-						.error.text-error.text-xs.text-center(v-if="!$v.model.password_confirmation.required") Contraseña necesaria
-						.error.text-error.text-xs.text-center.mt-3(v-if="!$v.model.password_confirmation.sameAsPassword") Las contraseñas deben ser identicas.
-				button( class="block text-center p-3 duration-300 rounded hover:bg-purple-500 w-full mt-10 bg-purple-600 text-white font-bold uppercase text-xs px-4 py-2 focus:outline-none") Enviar enlace
-				
-				.error.text-md.font-semibold.text-center.mt-3(:class="{'text-error': submitStatus == 'ERROR', 'text-success': submitStatus == 'SUCCESS'}")
-					h4(v-for="error in errors") {{error}}
+    div
+        div(class="bg-white lg:w-4/12 md:6/12 w-10/12 m-auto my-10 md:my-20 lg:my-40 px-5 py-2 px-4")
+            div(class="grid md:grid-cols-1 gap-2 mt-7")
+                h4(class="text-2xl text-gray-800 dark:text-white font-extrabold tracking-tight text-words") Asignar contraseña
+                form(@submit.prevent="generatePassword()" class="mt-9")
+                    .my-5.text-sm( :class="{ 'form-group-error': $v.model.password.$error }")
+                        input( type="password" autofocus class="rounded px-4 py-3 mt-3 focus:outline-none bg-gray-100 w-full" placeholder="Contraseña" v-model.trim="$v.model.password.$model")
+                        div(v-if="$v.model.password.$dirty")
+                            .error.text-error.text-xs.text-center(v-if="!$v.model.password.required") Se requiere una nueva contraseña
+                    .my-5.text-sm( :class="{ 'form-group-error': $v.model.password_confirmation.$error }")
+                        input(
+                            type="password" 
+                            class="rounded px-4 py-3 mt-3 focus:outline-none bg-gray-100 w-full" 
+                            placeholder="Repetir contraseña" 
+                            v-model.trim="$v.model.password_confirmation.$model"
+                        )
+                        div(v-if="$v.model.password_confirmation.$dirty")
+                            .error.text-error.text-xs.text-center(v-if="!$v.model.password_confirmation.required") Contraseña necesaria
+                            .error.text-error.text-xs.text-center.mt-3(v-if="!$v.model.password_confirmation.sameAsPassword") Las contraseñas deben ser identicas.
+                    button( class="block text-center p-3 duration-300 rounded hover:bg-purple-500 w-full mt-10 bg-purple-600 text-white font-bold uppercase text-xs px-4 py-2 focus:outline-none") Enviar enlace
+                    
+                    .error.text-md.font-semibold.text-center.mt-3(:class="{'text-error': submitStatus == 'ERROR', 'text-success': submitStatus == 'SUCCESS'}")
+                        h4(v-for="error in errors") {{error}}
 </template>
 <script>
 import { required, minLength, sameAs } from "vuelidate/lib/validators";
