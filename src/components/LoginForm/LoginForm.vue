@@ -88,6 +88,7 @@ export default {
                     type: "error"
                 });
             } else {
+                window.bus.$emit("loading", true);
                 try {
                     let response = await this.auth.login(this.model);
                     if (!response.error) {
@@ -104,8 +105,10 @@ export default {
                             type: "success"
                         });
                     }
+                    window.bus.$emit("loading", false);
                 } catch (error) {
                     this.showErrors(error);
+                    window.bus.$emit("loading", false);
                 }
             }
             this.sending = false;

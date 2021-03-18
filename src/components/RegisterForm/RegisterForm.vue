@@ -44,7 +44,7 @@
                 input.h-4.w-4.text-indigo-600.border-gray-300.rounded(id="term_conditions" v-model="model.term_conditions" type="checkbox" class="focus:ring-indigo-500")
                 label.ml-2.block.text-sm.text-gray-900() Terminos y condiciones
             .text-sm(class="mt-3 md:mt-0")
-                a.font-medium.text-gray-900(class="text-xs text-right text-blue-500 cursor-pointer" @click="terminosCondiciones()") Visualizar terminos
+                a.font-medium.text-gray-900(class="text-xs text-right text-blue-500 cursor-pointer" @click="termsConditions()") Visualizar terminos
         div(v-if="customErrors.term_conditions")
                 .error.text-error.text-xs.text-center
                     | {{ customErrors.term_conditions }}
@@ -109,7 +109,7 @@ export default {
     },
     created() {},
     methods: {
-        terminosCondiciones() {
+        termsConditions() {
             let routeData = this.$router.resolve({
                 path: "/terminos-condiciones"
             });
@@ -125,6 +125,7 @@ export default {
                     type: "error"
                 });
             } else {
+                window.bus.$emit("loading", true);
                 try {
                     let response = await this.auth.register(this.model);
                     if (!response.error) {
@@ -142,8 +143,10 @@ export default {
                         window.bus.$emit("login");
                         this.$router.push("/home");
                     }
+                    window.bus.$emit("loading", false);
                 } catch (error) {
                     this.showErrors(error);
+                    window.bus.$emit("loading", false);
                 }
             }
             this.sending = false;

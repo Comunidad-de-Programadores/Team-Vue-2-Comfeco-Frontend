@@ -53,6 +53,7 @@ export default {
                 });
             } else {
                 try {
+                    window.bus.$emit("loading", true);
                     let response = await this.auth.recoverPassword(this.model);
                     if (!response.error) {
                         this.model = {
@@ -67,8 +68,10 @@ export default {
                             duration: 5000
                         });
                     }
+                    window.bus.$emit("loading", false);
                 } catch (error) {
                     this.showErrors(error);
+                    window.bus.$emit("loading", false);
                 }
             }
         }

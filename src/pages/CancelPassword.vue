@@ -25,6 +25,7 @@ export default {
     methods: {
         async cancelRecoverPassword() {
             try {
+                window.bus.$emit("loading", true);
                 let response = await this.auth.cancelRecoverPassword({
                     email: this.$route.params.email
                 });
@@ -41,8 +42,10 @@ export default {
                         duration: 5000
                     });
                 }
+                window.bus.$emit("loading", false);
                 this.$router.push("/login");
             } catch (error) {
+                window.bus.$emit("loading", false);
                 this.$router.push("/login");
             }
         }
