@@ -271,7 +271,6 @@ export default {
     methods: {
         triggerFileAvatar() {
             document.getElementById("fileAvatar").click();
-            console.log(document.getElementById("fileAvatar"));
         },
         async handleImage(e) {
             const selectImage = e.target.files[0];
@@ -302,10 +301,7 @@ export default {
                     this.modelDataToSend.birthday != "" &&
                     this.modelDataToSend.birthday != null
                 ) {
-                    this.modelDataToSend.birthday = dateFormat(
-                        this.modelDataToSend.birthday,
-                        "DD/MM/YYYY"
-                    );
+                    this.modelDataToSend.birthday = dateFormat(new Date(this.modelDataToSend.birthday), 'dd/MM/yyyy')
                 }
                 try {
                     window.bus.$emit("loading", true);
