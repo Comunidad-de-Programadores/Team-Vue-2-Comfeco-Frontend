@@ -1,6 +1,6 @@
 import Login from "@/pages/Login.vue";
 import Register from "@/pages/Register.vue";
-import RememberPassword from "@/pages/RememberPassword.vue";
+import GeneratePassword from "@/pages/GeneratePassword.vue";
 import Home from "@/pages/Home";
 import RecoverPassword from "@/pages/RecoverPassword.vue";
 import CancelPassword from "@/pages/CancelPassword.vue";
@@ -29,12 +29,12 @@ const routes = [
     },
     {
         path: "/recover-password",
-        component: RememberPassword,
+        component: RecoverPassword,
         meta: { layout: "SimpleTemplate" }
     },
     {
         path: "/recuperarClave/:email",
-        component: RecoverPassword,
+        component: GeneratePassword,
         meta: { layout: "SimpleTemplate" }
     },
     {
@@ -50,7 +50,11 @@ const routes = [
     { path: "/home", component: Home, meta: { requiresAuth: true } },
     { path: "/talleres", component: Workshops, meta: { requiresAuth: true } },
     { path: "/perfil", component: MyProfile, meta: { requiresAuth: true } },
-    { path: "/badges-admin", component: BadgesPage, meta: { requiresAuth: true } }
+    {
+        path: "/badges-admin",
+        component: BadgesPage,
+        meta: { requiresAuth: true }
+    }
 ];
 
 const router = new VueRouter({

@@ -1,8 +1,5 @@
 <template lang="pug">
-    form(
-        @submit.prevent="login()"
-        class="mt-9"
-    )
+    form(@submit.prevent="login()"  class="mt-2")
         div.my-5.text-sm( :class="{ 'form-group-error': $v.model.email.$error }")
             input( 
                 type="text" 
