@@ -3,15 +3,16 @@
     .swiper-wrapper
       template(v-for='item in mentors')
         .swiper-slide(:key='item.id')
-          article.overflow-hidden.rounded-lg.shadow-lg.my-10.max-h-48
-            a(href='#')
-              img.block.h-100.w-full(alt='Placeholder' :src='`${item.image_url}`')
-            header.flex.flex-col.items-center.justify-center.leading-tight.px-2.-mt-5.bg-white(class='md:p-4')
-              a.flex.flex-di.items-center.no-underline.text-black(class='hover:underline' href='#')
-                img.inline-block.h-6.w-6.rounded-full.ring-2.ring-comfeco(alt='Placeholder' :src='`${item.master_on_image}`')
-              a.flex.flex-di.items-center.no-underline.text-black(class='hover:underline' href='#')
-                p.ml-2.text-sm
-                  | {{item.name}}
+            article.overflow-hidden.rounded-lg.shadow-lg.my-10.max-h-48
+                a(href='#')
+                    img.block.h-100.w-full(class="lg:mentor-picture" alt='Placeholder' :src='`${item.image_url}`')
+                div.relative(class="lg:-mt-8")
+                    header.flex.flex-col.items-center.justify-center.leading-tight.px-2.-mt-5.bg-gray-300(class="md:p-4 lg:h-full h-8")
+                        a.flex.flex-di.items-center.no-underline.text-black.-mt-8(class='hover:underline' href='#')
+                            img.inline-block.h-6.w-6.rounded-full.ring-2.ring-comfeco( alt='Placeholder' :src='`${item.master_on_image}`')
+                        a.flex.flex-di.items-center.no-underline.text-black(class='hover:underline' href='#')
+                        p.ml-2.text-sm
+                        | {{item.name}}
     // Add Pagination
     .swiper-pagination
 </template>
