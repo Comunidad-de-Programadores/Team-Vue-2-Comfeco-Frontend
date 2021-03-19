@@ -31,7 +31,7 @@ export default {
 
 <style lang="scss">
 .hasNoBadge {
-    -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+    -webkit-filter: grayscale(100%);
     filter: grayscale(100%);
 }
 </style>

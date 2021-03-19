@@ -17,7 +17,7 @@
                         span.mr-1.p-1.px-2.font-bold {{group.members_count}} miembros
                     .desc.p-4.text-gray-800
                         a.title.font-bold.block.cursor-pointer(class='hover:underline') {{group.name}}
-                        span.description.text-sm.block.py-2.border-gray-400.mb-2.max-h-10.overflow-hidden {{group.description}}
+                        span.description.text-sm.block.py-2.border-gray-400.mb-2 {{group.description}}
                         template(v-if="!currentGroup")
                             button.text-gray-700.font-semibold.py-2.px-4.w-full(@click='handleClickJoin(group)' :class="(group && currentGroup && currentGroup.id === group.id) ? 'bg-red-300' : 'bg-gray-300'")
                                 i.text-lg.fas.fa-sign-in-alt.w-8
@@ -32,14 +32,14 @@
 </template>
 
 <script>
-import Vue from 'vue'
+import Vue from "vue";
 import manageStorage from "../../services/manageStorage";
-import teamService from "../../services/teamService"
-import VueConfetti from 'vue-confetti'
+import teamService from "../../services/teamService";
+import VueConfetti from "vue-confetti";
 
-Vue.use(VueConfetti)
+Vue.use(VueConfetti);
 export default {
-    name: 'ListGroups',
+    name: "ListGroups",
     props: {
         groups: {
             required: true,
@@ -48,45 +48,40 @@ export default {
         currentGroup: {
             required: false,
             type: Object,
-            default : () => {}
+            default: () => {}
         }
     },
     data() {
         return {
             user: {},
-            teamService: new teamService(),
-        
-        }
+            teamService: new teamService()
+        };
     },
     methods: {
-         leaveTeam(currentGroup) {
-            this.$emit('leaveTeam', currentGroup)
+        leaveTeam(currentGroup) {
+            this.$emit("leaveTeam", currentGroup);
         },
-        async handleClickJoin(group)
-        {
+        async handleClickJoin(group) {
             const loader = this.$loading.show();
-            if (this.currentGroup && 
-            (group.id === this.currentGroup.id)
-            ) {
-                console.log(group)
+            if (this.currentGroup && group.id === this.currentGroup.id) {
                 return false;
             }
             if (this.currentGroup) {
-                console.log(group)
+                loader.hide();
                 return false;
             }
-            const userInformation = await this.teamService.joinTeam(group)
-        
-            this.$emit('setTeam' , userInformation.team)
-             this.$confetti.start();
-             setTimeout(() => {
+            const userInformation = await this.teamService.joinTeam(group);
+
+            this.$emit("setTeam", userInformation.team);
+            this.$confetti.start();
+            setTimeout(() => {
                 loader.hide();
-                this.$confetti.stop(); 
-             }, 1000)
-        },
+                this.$confetti.stop();
+            }, 1000);
+        }
     },
     mounted() {
-        this.user = manageStorage.getObject("user")
+        this.user = manageStorage.getObject("user");
     }
-}
+};
 </script>

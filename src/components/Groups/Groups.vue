@@ -14,14 +14,14 @@
                     :groups="filteredGroups  ? filteredGroups : groups" :currentGroup="currentGroup" 
                     @setTeam="handleSetCurrentGroup" 
                     @leaveTeam="handleLeaveTeam"
-                    )
+                )
 </template>
 
 <script>
-import teamService from '../../services/teamService'
-import technologyService from '../../services/technologyService'
-import CurrentGroup from './CurrentGroup'
-import ListGroups from './ListGroups'
+import teamService from "../../services/teamService";
+import technologyService from "../../services/technologyService";
+import CurrentGroup from "./CurrentGroup";
+import ListGroups from "./ListGroups";
 export default {
     name: "Groups",
     components: {
@@ -43,9 +43,9 @@ export default {
     methods: {
         clearFilters: function() {
             this.loader = this.$loading.show();
-            this.filteredGroups = undefined
-            this.searchInput = ''
-            this.technology = ''
+            this.filteredGroups = undefined;
+            this.searchInput = "";
+            this.technology = "";
             return this.loader.hide();
         },
         handleLeaveTeam: async function() {
@@ -53,7 +53,7 @@ export default {
             await this.teamService.leave();
             this.currentGroup = undefined;
             await this.getTeams();
-             this.loader.hide();
+            this.loader.hide();
         },
         handleSetCurrentGroup: async function(team) {
             await this.getTeams();
@@ -67,44 +67,43 @@ export default {
             const data = await this.teamService.getCurrent();
             this.currentGroup = data.team;
         },
-         getTechnologies: async function() {
+        getTechnologies: async function() {
             const data = await this.technologyService.get();
             this.technologies = data.technologies;
         },
         handleSearchGroup(value) {
-            let text = value.target.value
+            let text = value.target.value;
             this.loader = this.$loading.show();
-            let filteredGroups = [...this.groups]
+            let filteredGroups = [...this.groups];
             filteredGroups = filteredGroups.filter(group => {
-                const groupName = group.name.toLowerCase()
-                const groupDescription = group.description.toLowerCase()
-                const filterText = text.toLowerCase()
+                const groupName = group.name.toLowerCase();
+                const groupDescription = group.description.toLowerCase();
+                const filterText = text.toLowerCase();
                 if (
                     groupName.includes(filterText) ||
                     groupDescription.includes(filterText)
                 )
-                    return group
-            })
+                    return group;
+            });
             this.loader.hide();
-            return this.filteredGroups = filteredGroups;
+            return (this.filteredGroups = filteredGroups);
         },
         async handleChangeTechnology(value) {
             this.loader = this.$loading.show();
-            let id = value.target.value
-            let filteredGroups = [...this.groups]
+            let id = value.target.value;
+            let filteredGroups = [...this.groups];
             if (!id) {
                 this.loader.hide();
-                return this.filteredGroups = undefined
+                return (this.filteredGroups = undefined);
             }
             filteredGroups = await filteredGroups.filter(group => {
                 if (group.technology_id === parseInt(id)) {
-                    return group
+                    return group;
                 }
-                 
-            })
+            });
             this.loader.hide();
-            return this.filteredGroups = filteredGroups;
-        },
+            return (this.filteredGroups = filteredGroups);
+        }
     },
     data() {
         return {
@@ -113,12 +112,12 @@ export default {
             groups: [],
             currentGroup: {},
             filteredGroups: undefined,
-            technology: '',
+            technology: "",
             technologies: [],
-            loader : {},
-            searchInput: ''
-        }
-    },
+            loader: {},
+            searchInput: ""
+        };
+    }
 };
 </script>
 
