@@ -1,5 +1,5 @@
 <template lang="pug">
-    .flex.flex-col.w-full.shadow.rounded.rounded-t-lg.h-100
+    .flex.flex-col.w-full.shadow.rounded.rounded-t-lg.h-100.rounded-lg
         template(v-for='event in events')
             Event  
 </template>

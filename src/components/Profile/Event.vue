@@ -1,8 +1,8 @@
 <template lang="pug">
 .flex.flex-col.w-full.shadow.rounded-full
   .w-full.h-full.bg-top.bg-cover.rounded-t.mt-5
-    img(src="@/assets/images/vue.png", alt="alt")
-  .flex.flex-col.w-full(class='md:flex-row')
+    img(src="@/assets/images/vue.png", alt="alt" class="object-fit")
+  .flex.flex-col.w-full(class='md:flex-row rounded-full')
     .flex.flex-row.justify-around.p-4.font-bold.leading-none.text-gray-800.uppercase.bg-gray-400(class='md:flex-col md:items-center md:justify-center md:w-1/4')
       div(class='md:text-3xl') FEB
       div(class='md:text-6xl') 13

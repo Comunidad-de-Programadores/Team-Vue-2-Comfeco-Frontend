@@ -5,7 +5,7 @@
         div(class="w-full lg:col-span-2")
             CardBadges
             ActivityLog
-        div(class="col-span-1 lg:block",style=" height: 400px;text-align: left;overflow: hidden;overflow-y: scroll;")
+        div(class="",style=" height: 400px;text-align: left;overflow: hidden;overflow-y: scroll;")
             SideEvents    
 </template>
 <script>

@@ -1,8 +1,8 @@
 <template lang="pug">
-    div.main(id="app") 
+    div.main(id="app")
         CleanHeader(class="")
         Body.max-w-8xl(class="min-h-screen-good")
-        Footer  
+        Footer
 </template>
 
 <script>
