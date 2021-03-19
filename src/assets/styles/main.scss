@@ -1,6 +1,7 @@
 .dropdown:hover .dropdown-menu {
     display: block;
 }
+
 .width-10-screen {
     width: 10vw;
 }
@@ -38,9 +39,14 @@
     background-size: cover;
     padding-bottom: 0;
     @media #{$md} {
-        padding-bottom: 76px;
+        // padding-bottom: 76px;
     }
     .min-h-screen-good {
         min-height: 385px;
     }
+}
+
+.lg\:mentor-picture {
+    width: 360px;
+    height: 192px;
 }

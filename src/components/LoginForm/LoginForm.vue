@@ -1,8 +1,5 @@
 <template lang="pug">
-    form(
-        @submit.prevent="login()"
-        class="mt-9"
-    )
+    form(@submit.prevent="login()"  class="mt-2")
         div.my-5.text-sm( :class="{ 'form-group-error': $v.model.email.$error }")
             input( 
                 type="text" 
@@ -91,6 +88,7 @@ export default {
                     type: "error"
                 });
             } else {
+                window.bus.$emit("loading", true);
                 try {
                     let response = await this.auth.login(this.model);
                     if (!response.error) {
@@ -107,8 +105,10 @@ export default {
                             type: "success"
                         });
                     }
+                    window.bus.$emit("loading", false);
                 } catch (error) {
                     this.showErrors(error);
+                    window.bus.$emit("loading", false);
                 }
             }
             this.sending = false;

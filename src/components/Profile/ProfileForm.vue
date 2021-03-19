@@ -1,22 +1,22 @@
 <template lang="pug">
     div
-        div(class="flex mx-auto xl:max-w-screen-xl px-4")
+        div(class="flex mx-auto xl:max-w-screen-xl px-4 mb-4")
             a( @click="closeEditProfile()" class="w-1/6 m-auto cursor-pointer lg:text-left text-center", ref="bellContainer")
-                i( class="text-lg fas fa-chevron-left" )  
+                i( class="text-lg fas fa-chevron-left text-white" )  
             div(class="w-5/6 text-center lg:mr-40 mr-20")
-                p(class="text-base lg:text-3xl m-5 font-bold") Editar Perfil
+                p(class="text-base lg:text-3xl m-5 font-bold text-white") Editar Perfil
         form(@submit.prevent="updateProfile()" class="lg:p-20x pb-20")
-            div(class="flex mx-auto xl:max-w-screen-xl px-4")
-                div(class="w-full box px-4")        
-                    img(v-if="model.avatar" :src="model.avatar" alt="avatar" class="w-40 h-40 object-cover rounded-full m-auto" )
-                    template(v-else)
-                        div(class="flex justify-center")
-                            <svg class="m-auto animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                            </svg>
-                    .w-full.px-4.text-center
-                        input( @change="handleImage" type="file" accept="image/*" )
+            input( @change="handleImage" type="file" accept="image/*" id="fileAvatar" class="hidden" )
+            .relative.w-20.h-20.mx-auto.mb-4(v-if="model.avatar")
+                img.rounded-full.border.border-gray-100.shadow-sm.w-full.h-full.object-cover.object-center(:src='model.avatar' alt='User avatar')
+                .absolute.top-0.right-0.h-8.w-8.my-1.border-4.border-white.rounded-full.bg-green-400.z-2.cursor-pointer.flex.justify-center.items-center
+                    i( class="fas fa-user-edit text-white text-sm" @click.prevent="triggerFileAvatar()" )  
+            template(v-else)
+                div(class="flex justify-center")
+                    <svg class="m-auto animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
             div(class="lg:flex mx-auto xl:max-w-screen-xl px-4")
                 div(class="lg:w-1/2 m-4")
                     input( 
@@ -269,6 +269,9 @@ export default {
             : "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=731&amp;q=80";
     },
     methods: {
+        triggerFileAvatar() {
+            document.getElementById("fileAvatar").click();
+        },
         async handleImage(e) {
             const selectImage = e.target.files[0];
             this.createBase64Image(selectImage);
@@ -298,12 +301,10 @@ export default {
                     this.modelDataToSend.birthday != "" &&
                     this.modelDataToSend.birthday != null
                 ) {
-                    this.modelDataToSend.birthday = dateFormat(
-                        this.modelDataToSend.birthday,
-                        "DD/MM/YYYY"
-                    );
+                    this.modelDataToSend.birthday = dateFormat(new Date(this.modelDataToSend.birthday), 'dd/MM/yyyy')
                 }
                 try {
+                    window.bus.$emit("loading", true);
                     let response = await this.profileService.updateUser(
                         this.modelDataToSend
                     );
@@ -314,8 +315,10 @@ export default {
                             type: "success"
                         });
                     }
+                    window.bus.$emit("loading", false);
                 } catch (error) {
                     this.showErrors(error);
+                    window.bus.$emit("loading", false);
                 }
             }
             this.sending = false;

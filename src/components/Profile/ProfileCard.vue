@@ -3,7 +3,7 @@
 		.rounded.rounded-t-lg.overflow-hidden.shadow.my-3.bg-white
 			img.w-full(src='https://i.imgur.com/dYcYQ7E.png')
 			.flex.justify-center.-mt-8
-				img.rounded-full.border-solid.border-white.border-2.-mt-3(:src='user.image')
+				img.rounded-full.h-32.w-32.flex.items-center.justify-center.mx-auto.border-solid.border-white.border-2.-mt-3(:src="user.avatar")
 			.text-center.px-3.pb-6.pt-2
 				p.mt-2.font-sans.font-light.text-grey-dark Hello, {{user.name}}
 			.flex.justify-center.pb-3.text-grey-dark
@@ -15,21 +15,21 @@
 <script>
 import manageStorage from "../../services/manageStorage";
 export default {
-    name: 'ProfileCard',
+    name: "ProfileCard",
     data() {
         return {
             user: {}
-        }
+        };
     },
     methods: {
-		goToEditProfile: () => {
+        goToEditProfile: () => {
             window.bus.$emit("profileTab", false);
         }
     },
     mounted() {
-        this.user = manageStorage.getObject("user")
+        this.user = manageStorage.getObject("user");
     }
-}
+};
 </script>
 
 <style></style>

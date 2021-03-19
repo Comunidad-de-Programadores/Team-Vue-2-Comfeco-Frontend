@@ -1,17 +1,17 @@
 <template lang="pug">
     div
         div(class=" ")
-            nav(class="flex lg:flex-row flex-col justify-center py-2 px-10 lg:bg-gray-200")
-                button(v-for="(tab, $index) in tabs" :key="$index" @click="changeTab(tab, tab.title)" :class="{'border-morado-500 text-morado-500' : tab.active}" class="flex rounded text-gray-600 hover:text-morado-500 py-4 px-6 block focus:outline-none border-2 font-medium ")
+            nav(class="flex lg:flex-row flex-col justify-center p-10 lg:bg-gray-200")
+                button(v-for="(tab, $index) in tabs" :key="$index" @click="changeTab(tab, tab.title)" :class="{'border-morado-500 text-morado-500' : tab.active}" class="flex rounded text-gray-600 hover:text-morado-500 py-4 px-6 block focus:outline-none border-2 font-medium my-2 lg:my-0")
                     .mr-4
-                        i(class="text-lg far fa-bell" )                        
+                        i(class="text-lg far fa-bell text-white lg:text-gray-600" :class="{'border-morado-500 text-morado-500' : tab.active}")
                     .w-auto
-                        p {{ tab.title }}                
+                        p(class="text-white lg:text-gray-600" :class="{'border-morado-500 text-morado-500' : tab.active}") {{ tab.title }}
         div(v-if="tabDefault")
             ProfileForm(:tabProfile.sync="tabDefault")
         div(v-for="(tab, $index) in tabs" )
-            Profile(v-if="tab.active && tab.title == 'Mi perfil'" :tabProfile.sync="tab.active") 
-            Badges(v-if="tab.active && tab.title == 'Insignias'" :tabInsignias.sync="tab.active") 
+            Profile(v-if="tab.active && tab.title == 'Mi perfil'" :tabProfile.sync="tab.active")
+            Badges(v-if="tab.active && tab.title == 'Insignias'" :tabInsignias.sync="tab.active")
             Events(v-if="tab.active && tab.title == 'Eventos'")
             Groups(v-if="tab.active && tab.title == 'Grupos'")
 </template>
