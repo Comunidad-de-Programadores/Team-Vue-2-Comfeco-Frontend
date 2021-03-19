@@ -6,7 +6,9 @@ export default ({ requiresAuth = false, isGeneralApi = false } = {}) => {
     const headers = {};
     const oauthkey = process.env.VUE_APP_OAUTH_KEY;
     options.baseURL = process.env.VUE_APP_ROOT_API;
-    const client_id = process.env.VUE_API_CLIENT_ID ? process.env.VUE_API_CLIENT_ID : 3;
+    const client_id = process.env.VUE_APP_API_CLIENT_ID
+        ? process.env.VUE_APP_API_CLIENT_ID
+        : 1;
     function checkOAuthToken() {
         return new Promise(resolve => {
             let oauthObject = manageStorage.getObject("oauth");

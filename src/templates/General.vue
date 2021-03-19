@@ -1,5 +1,5 @@
 <template lang="pug">
-    div.main(id="app") 
+    div.main(id="app")
         Header(class="")
         Body.w-full.general-body-container
         Footer
