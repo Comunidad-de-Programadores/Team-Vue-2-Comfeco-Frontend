@@ -15,7 +15,7 @@ import ProfileCard from "@/components/Profile/ProfileCard";
 import SideEvents from "@/components/Profile/SideEvents";
 import ActivityLog from "@/components/Profile/ActivityLog";
 export default {
-    name: "MyProfile",
+    name: "ProfileTab",
     components: {
         Counter,
         ProfileCard,

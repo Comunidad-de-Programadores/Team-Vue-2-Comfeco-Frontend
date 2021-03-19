@@ -14,6 +14,19 @@ export default class comfecoEventsService {
             return Promise.reject(error);
         }
     };
+    getByUser = async () => {
+        const url = `v1/users/comfecoEvents`;
+        try {
+            const { data } = await axiosService({
+                requiresAuth: true,
+                isGeneralApi: false
+            }).get(url);
+
+            return data;
+        } catch (error) {
+            return Promise.reject(error);
+        }
+    };
     assign = async id => {
         const url = `v1/comfecoEvents/${id}/assign`;
         try {

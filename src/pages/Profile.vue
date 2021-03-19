@@ -1,31 +1,80 @@
 <template lang="pug">
-    div(class="grid lg:grid-cols-4 lg:gap-4 grid-cols-1 gap-10 px-4 py-5 shadow")
-        div(class="col-span-1 lg:block bg-white-100")
-            ProfileCard
-        div(class="w-full lg:col-span-2")
-            CardBadges
-            ActivityLog
-        div(class="col-span-1 lg:block",style=" height: 400px;text-align: left;overflow: hidden;overflow-y: scroll;")
-            SideEvents    
+    div
+        div(class=" ")
+            nav(class="flex lg:flex-row flex-col justify-center p-10 lg:bg-gray-200")
+                button(v-for="(tab, $index) in tabs" :key="$index" @click="changeTab(tab, tab.title)" :class="{'border-morado-500 text-morado-500' : tab.active}" class="flex rounded text-gray-600 hover:text-morado-500 py-4 px-6 block focus:outline-none border-2 font-medium my-2 lg:my-0")
+                    .mr-4
+                        i(class="text-lg far fa-bell text-white lg:text-gray-600" :class="{'border-morado-500 text-morado-500' : tab.active}")                        
+                    .w-auto
+                        p(class="text-white lg:text-gray-600" :class="{'border-morado-500 text-morado-500' : tab.active}") {{ tab.title }}                
+        div(v-if="tabDefault")
+            ProfileForm(:tabProfile.sync="tabDefault")
+        div(v-for="(tab, $index) in tabs" )
+            ProfileTab(v-if="tab.active && tab.title == 'Mi perfil'" :tabProfile.sync="tab.active")
+            Badges(v-if="tab.active && tab.title == 'Insignias'" :tabInsignias.sync="tab.active") 
+            Events(v-if="tab.active && tab.title == 'Eventos'")
+            Groups(v-if="tab.active && tab.title == 'Grupos'")
 </template>
 <script>
-import CardBadges from "@/components/Profile/CardBadges";
-import Counter from "@/components/Counter/Counter";
-import ProfileCard from "@/components/Profile/ProfileCard";
-import SideEvents from "@/components/Profile/SideEvents";
-import ActivityLog from "@/components/Profile/ActivityLog";
+import ProfileForm from "@/components/Profile/ProfileForm";
+import ProfileTab from "@/components/Profile/ProfileTab";
+import Badges from "@/components/Profile/Badge";
+import Events from "@/components/Events/Events";
+import Groups from "@/components/Groups/Groups";
+
 export default {
-    name: "Home",
+    name: "ProfilePage",
     components: {
-        Counter,
-        ProfileCard,
-        CardBadges,
-        SideEvents,
-        ActivityLog
+        ProfileForm,
+        ProfileTab,
+        Badges,
+        Events,
+        Groups
     },
     data() {
-        return {};
+        return {
+            tabs: [
+                {
+                    active: false,
+                    title: "Mi perfil"
+                },
+                {
+                    active: false,
+                    title: "Insignias"
+                },
+                {
+                    active: false,
+                    title: "Grupos"
+                },
+                {
+                    active: false,
+                    title: "Eventos"
+                }
+            ]
+        };
+    },
+    created() {
+        window.bus.$on(
+            "profileTab",
+            value =>
+                (this.tabs.find(tab => tab.title == "Mi perfil").active = value)
+        );
+        this.tabs[0].active = true;
+    },
+    computed: {
+        tabDefault() {
+            return this.tabs.every(tab => !tab.active);
+        }
+    },
+    methods: {
+        changeTab(tab, title) {
+            tab.active = true;
+            this.tabs.forEach(
+                element =>
+                    (element.active = element.title != title ? false : true)
+            );
+        }
     }
 };
 </script>
-<style lang="scss" scoped></style>
+<style lang="scss" src="@/assets/styles/profile.scss"></style>

@@ -6,7 +6,7 @@ import RecoverPassword from "@/pages/RecoverPassword.vue";
 import CancelPassword from "@/pages/CancelPassword.vue";
 import TerminosCondiciones from "@/pages/TerminosCondiciones.vue";
 import Workshops from "@/pages/Workshops.vue";
-import MyProfile from "@/pages/MyProfile.vue";
+import Profile from "@/pages/Profile.vue";
 import BadgesPage from "@/pages/BadgesPage.vue";
 
 import manageStorage from "./services/manageStorage";
@@ -49,7 +49,7 @@ const routes = [
     },
     { path: "/home", component: Home, meta: { requiresAuth: true } },
     { path: "/talleres", component: Workshops, meta: { requiresAuth: true } },
-    { path: "/perfil", component: MyProfile, meta: { requiresAuth: true } },
+    { path: "/perfil", component: Profile, meta: { requiresAuth: true } },
     {
         path: "/badges-admin",
         component: BadgesPage,
