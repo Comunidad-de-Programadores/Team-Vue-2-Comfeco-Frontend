@@ -1,5 +1,5 @@
 <template lang="pug">
-.swiper-container.manual-swiper
+.swiper-container.manual-swiper.mb-6
   .swiper-wrapper
     template(v-for='item in sponsors')
       .swiper-slide(:key='item.id')
@@ -12,12 +12,12 @@
 </template>
 
 <script>
-import Swiper, { Navigation }  from 'swiper'
+import Swiper, { Navigation } from "swiper";
 Swiper.use([Navigation]);
-import commonSwiperConfig from "@/utils/CommonSwiperConfig"
-import sponsorService from '../../services/sponsorService'
+import commonSwiperConfig from "@/utils/CommonSwiperConfig";
+import sponsorService from "../../services/sponsorService";
 
-import "swiper/swiper-bundle.css"
+import "swiper/swiper-bundle.css";
 export default {
     name: "ManualSlider",
     props: {
@@ -31,7 +31,7 @@ export default {
         this.getSponsors();
     },
     methods: {
-          getSponsors: async function() {
+        getSponsors: async function() {
             const data = await this.sponsorService.get();
             this.sponsors = data.records;
         }
@@ -40,47 +40,32 @@ export default {
         return {
             sponsorService: new sponsorService(),
             sponsors: [],
-            items: [
-                '',
-                '',
-                '',
-                '',
-                '',
-                '',
-                '',
-                '',
-                '',
-                '',
-                '',
-                '',
-                '',
-                '',
-            ],
-        }
+            items: ["", "", "", "", "", "", "", "", "", "", "", "", "", ""]
+        };
     },
     updated() {
-        new Swiper('.manual-swiper', {
+        new Swiper(".manual-swiper", {
             ...commonSwiperConfig,
             navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev"
             },
             breakpoints: {
                 110: {
                     slidesPerView: 1,
-                    slidesPerGroup: 1,
+                    slidesPerGroup: 1
                 },
                 480: {
                     slidesPerView: 4,
-                    slidesPerGroup: 4,
+                    slidesPerGroup: 4
                 },
                 720: {
                     slidesPerView: 6,
-                    slidesPerGroup: 6,
+                    slidesPerGroup: 6
                 },
-                 1020: {
+                1020: {
                     slidesPerView: 8,
-                    slidesPerGroup: 8,
+                    slidesPerGroup: 8
                 }
             }
         });
