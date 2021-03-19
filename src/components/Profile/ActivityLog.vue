@@ -1,9 +1,11 @@
 <template lang="pug">
 .mx-auto.my-6.border-t.border-b.border-r.rounded.bg-white
-	.p-4.border-l-4.border-teal.rounded
-		.m-2.p-2(v-for="(activity,index) in activities" :key="index")
-			span.mr-2.pr-2.text-grey-darker.border-r-2.border-grey-darker {{ activity.activity }}
-			span.text-grey-darker {{ activity.created }}
+    .p-4.border-l-4.border-teal.rounded
+        .m-2.p-2(v-if="activities.length == 0")
+            span.mr-2.pr-2.text-grey-darker.border-r-2.border-grey-darker Aún no presenta ninguna actividad
+        .m-2.p-2(v-for="(activity,index) in activities" :key="index")
+            span.mr-2.pr-2.text-grey-darker.border-r-2.border-grey-darker {{ activity.activity }}
+            span.text-grey-darker {{ activity.created }}
 </template>
 
 <script>

@@ -35,20 +35,21 @@
                         class="rounded py-3 px-3 mt-3 focus:outline-none bg-gray-100 w-full " 
                         placeholder="Correo electrónico" 
                         v-model.trim="$v.model.email.$model"
+                        disabled
                     )
                     div(v-if="customErrors.email")
                         .error.text-error.text-xs.text-center(v-html="customErrors.email")
             div(class="lg:flex mx-auto xl:max-w-screen-xl px-4")
                 div(class="lg:w-full m-4")
                     select(class="rounded py-3 px-3 mt-3 focus:outline-none bg-gray-100 w-full" v-model.trim="$v.model.area_id.$model" )
-                        option(hidden selected value="0") Selecciona una opción
+                        option(hidden selected value="undefined") Selecciona un área de conocimiento
                         option(v-for="area in arr_areas", :value="area.id") {{ area.name }}
                     div(v-if="customErrors.area_id")
                         .error.text-error.text-xs.text-center(v-html="customErrors.area_id")
             div(class="lg:flex mx-auto xl:max-w-screen-xl px-4")
                 div(class="lg:w-1/3 p-4")
                     select(class="rounded py-3 px-3 mt-3 focus:outline-none bg-gray-100 w-full" v-model.trim="$v.model.genre.$model" )
-                        option(hidden selected value="0") Selecciona una opción
+                        option(hidden selected value="null") Selecciona tu género
                         option( value="M" ) Hombre
                         option( value="F" ) Mujer
                     div(v-if="customErrors.genre")
@@ -66,7 +67,7 @@
                         .error.text-error.text-xs.text-center(v-html="customErrors.birthday")
                 div(class="lg:w-1/3 p-4")
                     select(class="rounded py-3 px-3 mt-3 focus:outline-none bg-gray-100 w-full" v-model.trim="$v.model.country_id.$model" )
-                        option(hidden selected value="0") Selecciona una opción
+                        option(hidden selected value="undefined") Selecciona un país
                         option(v-for="pais in arr_countries", :value="pais.id") {{ pais.name }}
                     div(v-if="customErrors.country_id")
                         .error.text-error.text-xs.text-center(v-html="customErrors.country_id")
@@ -76,7 +77,7 @@
                         type="password" 
                         autofocus 
                         class="rounded py-3 px-3 mt-3 focus:outline-none bg-gray-100 w-full " 
-                        placeholder="Contrasena" 
+                        placeholder="Contraseña" 
                         v-model.trim="$v.model.password.$model"
                     )
                     div(v-if="customErrors.password")
@@ -86,7 +87,7 @@
                         type="password" 
                         autofocus 
                         class="rounded py-3 px-3 mt-3 focus:outline-none bg-gray-100 w-full " 
-                        placeholder="Repetir contrasena" 
+                        placeholder="Repetir contraseña" 
                         v-model.trim="$v.model.password_confirmation.$model"
                     )
                     div(v-if="customErrors.password_confirmation")
@@ -139,7 +140,6 @@
                             type="text" 
                             autofocus 
                             class="rounded py-3 px-3 mt-3 focus:outline-none bg-gray-100 w-full " 
-                            placeholder="Correo electrónico" 
                             v-model.trim="$v.model.twitter_url.$model"
                         )
                         div(v-if="customErrors.twitter_url")
