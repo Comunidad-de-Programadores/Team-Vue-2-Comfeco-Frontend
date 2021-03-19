@@ -35,7 +35,6 @@
                         class="rounded py-3 px-3 mt-3 focus:outline-none bg-gray-100 w-full " 
                         placeholder="Correo electrónico" 
                         v-model.trim="$v.model.email.$model"
-                        disabled
                     )
                     div(v-if="customErrors.email")
                         .error.text-error.text-xs.text-center(v-html="customErrors.email")
@@ -192,7 +191,7 @@ export default {
                 required
             },
             password: {
-                required
+                // required
             },
             password_confirmation: {
                 // required,
@@ -289,38 +288,41 @@ export default {
         async updateProfile() {
             this.sending = true;
             this.modelDataToSend = { ...this.model };
-            this.$v.$touch();
-            if (this.$v.$invalid) {
-                this.submitStatus = "ERROR";
-                this.$toast.open({
-                    message: "Hubo un error",
-                    type: "error"
-                });
-            } else {
-                if (
-                    this.modelDataToSend.birthday != "" &&
-                    this.modelDataToSend.birthday != null
-                ) {
-                    this.modelDataToSend.birthday = dateFormat(new Date(this.modelDataToSend.birthday), 'dd/MM/yyyy')
-                }
-                try {
-                    window.bus.$emit("loading", true);
-                    let response = await this.profileService.updateUser(
-                        this.modelDataToSend
-                    );
-
-                    if (!response.error) {
-                        this.$toast.open({
-                            message: "Tus datos se han actualizado",
-                            type: "success"
-                        });
-                    }
-                    window.bus.$emit("loading", false);
-                } catch (error) {
-                    this.showErrors(error);
-                    window.bus.$emit("loading", false);
-                }
+            // this.$v.$touch();
+            // if (this.$v.$invalid) {
+            // this.submitStatus = "ERROR";
+            // this.$toast.open({
+            //     message: "Hubo un error",
+            //     type: "error"
+            // });
+            // } else {
+            if (
+                this.modelDataToSend.birthday != "" &&
+                this.modelDataToSend.birthday != null
+            ) {
+                this.modelDataToSend.birthday = dateFormat(
+                    new Date(this.modelDataToSend.birthday),
+                    "dd/MM/yyyy"
+                );
             }
+            try {
+                window.bus.$emit("loading", true);
+                let response = await this.profileService.updateUser(
+                    this.modelDataToSend
+                );
+
+                if (!response.error) {
+                    this.$toast.open({
+                        message: "Tus datos se han actualizado",
+                        type: "success"
+                    });
+                }
+                window.bus.$emit("loading", false);
+            } catch (error) {
+                this.showErrors(error);
+                window.bus.$emit("loading", false);
+            }
+            // }
             this.sending = false;
         },
         closeEditProfile() {

@@ -1,5 +1,7 @@
 <template lang="pug">
     .flex.flex-col.w-full.shadow.rounded.rounded-t-lg.h-100.rounded-lg
+        div(v-if="events.length == 0")
+            h3.text-2xl.text-white Aún no hay eventos disponibles
         template(v-for='event in events')
             Event(:event="event") 
 </template>
@@ -11,7 +13,8 @@ export default {
     data() {
         return {
             comfecoEventsService: new comfecoEventsService(),
-            events: []
+            events: [],
+            sending: false
         };
     },
     components: {
@@ -29,6 +32,8 @@ export default {
             this.events = data.records;
         },
         assign: async function(eventId) {
+            if (this.sending) return;
+            this.sending = true;
             try {
                 const data = await this.comfecoEventsService.assign(eventId);
 
@@ -37,14 +42,19 @@ export default {
                     type: data.error ? "error" : "success"
                 });
                 this.getComfecoEventsList();
+                window.bus.$emit("refreshActivityList");
+                this.sending = false;
             } catch (error) {
                 this.$toast.open({
                     message: error.response.data.message,
                     type: "error"
                 });
+                this.sending = false;
             }
         },
         unassign: async function(eventId) {
+            if (this.sending) return;
+            this.sending = true;
             try {
                 const data = await this.comfecoEventsService.unassign(eventId);
 
@@ -53,11 +63,14 @@ export default {
                     type: data.error ? "error" : "success"
                 });
                 this.getComfecoEventsList();
+                window.bus.$emit("refreshActivityList");
+                this.sending = false;
             } catch (error) {
                 this.$toast.open({
                     message: error.response.data.message,
                     type: "error"
                 });
+                this.sending = false;
             }
         }
     }
