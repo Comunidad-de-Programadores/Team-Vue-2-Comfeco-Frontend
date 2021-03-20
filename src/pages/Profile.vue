@@ -1,19 +1,19 @@
 <template lang="pug">
-    div(class="flex md:flex-row flex-col justify-around")
+    div(class="flex md:flex-row flex-col")
         nav(class="shadow border-lg  bg-gray-100 px-2")
           button(v-for="(tab, $index) in tabs" :key="$index" @click="changeTab(tab, tab.title)"
             :class="{'is-active' : tab.active}" class="flex w-full rounded text-gray-600 hover:text-morado-500 py-4 px-6 block focus:outline-none border-2 font-medium my-2")
             .mr-4
-              i(class="text-lg far fa-bell text-gray-600" :class="{'border-morado-500 text-morado-500' : tab.active}")
+                i(:class="[ tab.icon,  tab.active ? 'border-morado-500 text-morado-500' : '' ]")
             .w-auto
-              p(class="text-gray-600" :class="{'border-morado-500 text-morado-500' : tab.active}") {{ tab.title }}
+                p(class="text-gray-600" :class="{'border-morado-500 text-morado-500' : tab.active}") {{ tab.title }}
         div(v-if="tabDefault")
-            ProfileForm(:tabProfile.sync="tabDefault")
-        div(v-for="(tab, $index) in tabs" class="mt-5 sm:mt")
-            ProfileTab(v-if="tab.active && tab.title == 'Mi perfil'" :tabProfile.sync="tab.active")
-            Badges(v-if="tab.active && tab.title == 'Insignias'" :tabInsignias.sync="tab.active")
-            Events(v-if="tab.active && tab.title == 'Eventos'")
-            Groups(v-if="tab.active && tab.title == 'Grupos'")
+            ProfileForm(:tabProfile.sync="tabDefault" class="ml-0 md:ml-2")
+        div.tabs-content(v-for="(tab, $index) in tabs" )
+            ProfileTab(v-if="tab.active && tab.title == 'Mi perfil'" :tabProfile.sync="tab.active" class="ml-0 md:ml-2 mt-5 sm:mt md:p-1")
+            Badges(v-if="tab.active && tab.title == 'Insignias'" :tabInsignias.sync="tab.active" class="ml-0 md:ml-2 mt-5 sm:mt md:p-1")
+            Events(v-if="tab.active && tab.title == 'Eventos'" class="ml-0 md:ml-2 mt-5 sm:mt md:p-1")
+            Groups(v-if="tab.active && tab.title == 'Grupos'" class="ml-0 md:ml-2 mt-5 sm:mt md:p-1")
 </template>
 <script>
 import ProfileForm from "@/components/Profile/ProfileForm";
@@ -36,19 +36,23 @@ export default {
             tabs: [
                 {
                     active: false,
-                    title: "Mi perfil"
+                    title: "Mi perfil",
+                    icon: "far fa-id-card"
                 },
                 {
                     active: false,
-                    title: "Insignias"
+                    title: "Insignias",
+                    icon: "fas fa-certificate"
                 },
                 {
                     active: false,
-                    title: "Grupos"
+                    title: "Grupos",
+                    icon: "fas fa-users"
                 },
                 {
                     active: false,
-                    title: "Eventos"
+                    title: "Eventos",
+                    icon: "fas fa-calendar-alt"
                 }
             ]
         };

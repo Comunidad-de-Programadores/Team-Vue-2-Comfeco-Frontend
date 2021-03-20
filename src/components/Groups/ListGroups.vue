@@ -3,10 +3,10 @@
         div(v-if="groups.length === 0" class="w-full px-2 grid grid-cols-1")   
             .w-full.m-2.bg-blue-600.flex.justify-center
                 p.font-sans.text-white.error-text No encontramos coincidencias
-        div(v-if="groups.length > 0" class="holder w-full px-2 grid sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4")   
+        div(v-if="groups.length > 0" class="holder w-full px-2 grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4")   
             template(v-for="group in groups")
                 .each.m-2.shadow-lg.border-gray-800.bg-gray-100.relative
-                    img.w-full.h-32(
+                    img.w-full.h-32.object-cover.object-center(
                         width="70"
                         height="50"
                         :src='group.image ? group.image : "https://i.ytimg.com/vi/qew27BNl7io/maxresdefault.jpg"' 
