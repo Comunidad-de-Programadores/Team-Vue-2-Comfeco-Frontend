@@ -1,5 +1,5 @@
 <template lang="pug">
-    div.events-container(class="px-6 xl:px-0")
+    div.events-container(class="")
         div.container.mx-auto
             div.header-title.mt-10.mb-8
                 h3.text-white.text-center.text-3xl.uppercase Eventos activos

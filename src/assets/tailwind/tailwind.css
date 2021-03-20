@@ -3,7 +3,13 @@
 @tailwind utilities;
 
 .is-active{
-    color: rgba(139, 92, 246, var(--tw-bg-opacity));
+    text-transform: uppercase;
+    background: linear-gradient(to right, #ffb70b, #743ad5, #5e33ae);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    border-bottom: 2px solid;
+    border-image-slice: 1;
+    border-image-source: linear-gradient(to right, #ffb70b, #743ad5, #743ad5);
 }
 
 .exact-active{

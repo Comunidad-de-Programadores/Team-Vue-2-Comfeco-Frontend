@@ -2,7 +2,7 @@
     div.main(id="app")
         CleanHeader(class="")
         Body.max-w-8xl(class="min-h-screen-good")
-        Footer
+        Footer(:isFixed="true")
         Loading
 </template>
 

@@ -1,14 +1,15 @@
 <template lang="pug">
-.swiper-container.manual-swiper.mb-6
-  .swiper-wrapper
-    template(v-for='item in sponsors')
-      .swiper-slide(:key='item.id')
-        .flex.justify-center.items-center.overflow-hidden
-          a(href='#')
-            img.block-inline.object-cover.w-full.h-100.rounded-full(:src='`${item.image_url}`' :alt='`${item.name}`')
-  // Add Arrows
-  .swiper-button-next
-  .swiper-button-prev
+.container
+  .swiper-container.manual-swiper.mb-6
+    .swiper-wrapper
+      template(v-for='item in sponsors')
+        .swiper-slide(:key='item.id')
+          .flex.justify-center.items-center.overflow-hidden
+            a(href='#')
+              img.block-inline.object-cover.w-full.h-100.rounded-full(:src='`${item.image_url}`' :alt='`${item.name}`')
+    // Add Arrows
+    .swiper-button-next
+    .swiper-button-prev
 </template>
 
 <script>
@@ -52,8 +53,8 @@ export default {
             },
             breakpoints: {
                 110: {
-                    slidesPerView: 1,
-                    slidesPerGroup: 1
+                    slidesPerView: 4,
+                    slidesPerGroup: 4
                 },
                 480: {
                     slidesPerView: 4,

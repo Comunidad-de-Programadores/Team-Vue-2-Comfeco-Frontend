@@ -1,20 +1,19 @@
 <template lang="pug">
-    div
-        div(class="flex flex-wrap pt-2 justify-around mb-20")
-            CurrentGroup(:currentGroup="currentGroup" @leaveTeam="handleLeaveTeam")
-            div(class="rounded shadow-lg sm:w-3/3 md:w-2/3")
-                .col-12.align-middle.justify-content-center.flex.mx-5.mt-5
-                    select.col-4.py-3.px-2(type='button' data-toggle='collapse' data-target='#filters' v-model="technology" @change="handleChangeTechnology")
-                        option(value="") Filtrar por tecnología
-                        option(v-for="technology in technologies" :value="technology.id") {{technology.name}}
-                    input#search-filter.w-full.py-3.px-2(type='text' placeholder='Buscar' @keyup="handleSearchGroup" v-model="searchInput")
-                    button.bg-gray-300.py-3.px-2(:disabled="!technology && !searchInput" @click="clearFilters")
-                        i.text-lg.fas.fa-trash 
-                ListGroups(
-                    :groups="filteredGroups  ? filteredGroups : groups" :currentGroup="currentGroup" 
-                    @setTeam="handleSetCurrentGroup" 
-                    @leaveTeam="handleLeaveTeam"
-                )
+  div(class="flex flex-wrap pt-2 justify-around mb-20 w-full min-w-full")
+    CurrentGroup(:currentGroup="currentGroup" @leaveTeam="handleLeaveTeam")
+    div(class="rounded shadow-lg sm:w-3/3 md:w-2/3")
+      .col-12.align-middle.justify-content-center.flex.mx-5.mt-5
+        select.col-4.py-3.px-2(type='button' data-toggle='collapse' data-target='#filters' v-model="technology" @change="handleChangeTechnology")
+          option(value="") Filtrar por tecnología
+          option(v-for="technology in technologies" :value="technology.id") {{technology.name}}
+        input#search-filter.w-full.py-3.px-2(type='text' placeholder='Buscar' @keyup="handleSearchGroup" v-model="searchInput")
+        button.bg-gray-300.py-3.px-2(:disabled="!technology && !searchInput" @click="clearFilters")
+          i.text-lg.fas.fa-trash
+      ListGroups(
+        :groups="filteredGroups  ? filteredGroups : groups" :currentGroup="currentGroup"
+        @setTeam="handleSetCurrentGroup"
+        @leaveTeam="handleLeaveTeam"
+      )
 </template>
 
 <script>

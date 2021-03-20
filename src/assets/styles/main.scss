@@ -38,9 +38,7 @@
     background: url("../images/Fondo.jpg") no-repeat fixed;
     background-size: cover;
     padding-bottom: 0;
-    @media #{$sm} {
-        padding-bottom: 76px;
-    }
+
     .min-h-screen-good {
         min-height: 385px;
     }

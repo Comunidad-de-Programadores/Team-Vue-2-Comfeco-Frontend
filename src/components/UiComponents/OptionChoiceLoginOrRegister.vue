@@ -10,4 +10,10 @@ export default {
     name: "OptionChoiceLoginOrRegister"
 };
 </script>
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.is-active {
+  border-bottom: 5px solid;
+  border-image-slice: 1;
+  border-image-source: linear-gradient(to right, #ffb70b, #743ad5, #743ad5);
+}
+</style>

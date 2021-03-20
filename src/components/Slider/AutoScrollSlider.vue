@@ -59,7 +59,8 @@ export default {
             },
             autoplay: {
                 delay: 30000
-            }
+            },
+
         });
     }
 };

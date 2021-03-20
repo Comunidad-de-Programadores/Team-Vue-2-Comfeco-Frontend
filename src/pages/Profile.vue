@@ -1,17 +1,17 @@
 <template lang="pug">
-    div
-        div(class=" ")
-            nav(class="flex lg:flex-row flex-col justify-center p-10 lg:bg-gray-200")
-                button(v-for="(tab, $index) in tabs" :key="$index" @click="changeTab(tab, tab.title)" :class="{'border-morado-500 text-morado-500' : tab.active}" class="flex rounded text-gray-600 hover:text-morado-500 py-4 px-6 block focus:outline-none border-2 font-medium my-2 lg:my-0")
-                    .mr-4
-                        i(class="text-lg far fa-bell text-white lg:text-gray-600" :class="{'border-morado-500 text-morado-500' : tab.active}")                        
-                    .w-auto
-                        p(class="text-white lg:text-gray-600" :class="{'border-morado-500 text-morado-500' : tab.active}") {{ tab.title }}                
+    div(class="flex md:flex-row flex-col justify-around")
+        nav(class="shadow border-lg  bg-gray-100 px-2")
+          button(v-for="(tab, $index) in tabs" :key="$index" @click="changeTab(tab, tab.title)"
+            :class="{'is-active' : tab.active}" class="flex w-full rounded text-gray-600 hover:text-morado-500 py-4 px-6 block focus:outline-none border-2 font-medium my-2")
+            .mr-4
+              i(class="text-lg far fa-bell text-gray-600" :class="{'border-morado-500 text-morado-500' : tab.active}")
+            .w-auto
+              p(class="text-gray-600" :class="{'border-morado-500 text-morado-500' : tab.active}") {{ tab.title }}
         div(v-if="tabDefault")
             ProfileForm(:tabProfile.sync="tabDefault")
-        div(v-for="(tab, $index) in tabs" )
+        div(v-for="(tab, $index) in tabs" class="mt-5 sm:mt")
             ProfileTab(v-if="tab.active && tab.title == 'Mi perfil'" :tabProfile.sync="tab.active")
-            Badges(v-if="tab.active && tab.title == 'Insignias'" :tabInsignias.sync="tab.active") 
+            Badges(v-if="tab.active && tab.title == 'Insignias'" :tabInsignias.sync="tab.active")
             Events(v-if="tab.active && tab.title == 'Eventos'")
             Groups(v-if="tab.active && tab.title == 'Grupos'")
 </template>

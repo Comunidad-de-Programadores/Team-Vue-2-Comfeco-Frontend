@@ -2,15 +2,16 @@
     div
         div(class="flex mx-auto xl:max-w-screen-xl px-4 mb-4")
             a( @click="closeEditProfile()" class="w-1/6 m-auto cursor-pointer lg:text-left text-center", ref="bellContainer")
-                i( class="text-lg fas fa-chevron-left text-white" )  
+                i( class="text-lg fas fa-chevron-left text-white" )
+                span.text-white.underline &nbsp;Volver
             div(class="w-5/6 text-center lg:mr-40 mr-20")
                 p(class="text-base lg:text-3xl m-5 font-bold text-white") Editar Perfil
-        form(@submit.prevent="updateProfile()" class="lg:p-20x pb-20")
+        form(@submit.prevent="updateProfile()" class="lg:p-10x pb-20")
             input( @change="handleImage" type="file" accept="image/*" id="fileAvatar" class="hidden" )
             .relative.w-20.h-20.mx-auto.mb-4(v-if="model.avatar")
                 img.rounded-full.border.border-gray-100.shadow-sm.w-full.h-full.object-cover.object-center(:src='model.avatar' alt='User avatar')
                 .absolute.top-0.right-0.h-8.w-8.my-1.border-4.border-white.rounded-full.bg-green-400.z-2.cursor-pointer.flex.justify-center.items-center
-                    i( class="fas fa-user-edit text-white text-sm" @click.prevent="triggerFileAvatar()" )  
+                    i( class="fas fa-user-edit text-white text-sm" @click.prevent="triggerFileAvatar()" )
             template(v-else)
                 div(class="flex justify-center")
                     <svg class="m-auto animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -19,21 +20,21 @@
                     </svg>
             div(class="lg:flex mx-auto xl:max-w-screen-xl px-4")
                 div(class="lg:w-1/2 m-4")
-                    input( 
-                        type="text" 
-                        autofocus 
-                        class="rounded py-3 px-3 mt-3 focus:outline-none bg-gray-100 w-full " 
-                        placeholder="Nick de usuario" 
+                    input(
+                        type="text"
+                        autofocus
+                        class="rounded py-3 px-3 mt-3 focus:outline-none bg-gray-100 w-full "
+                        placeholder="Nick de usuario"
                         v-model.trim="$v.model.nickname.$model"
                     )
                     div(v-if="customErrors.nickname")
                         .error.text-error.text-xs.text-center(v-html="customErrors.nickname")
                 div(class="lg:w-1/2 m-4")
-                    input( 
-                        type="email" 
-                        autofocus 
-                        class="rounded py-3 px-3 mt-3 focus:outline-none bg-gray-100 w-full " 
-                        placeholder="Correo electrónico" 
+                    input(
+                        type="email"
+                        autofocus
+                        class="rounded py-3 px-3 mt-3 focus:outline-none bg-gray-100 w-full "
+                        placeholder="Correo electrónico"
                         v-model.trim="$v.model.email.$model"
                         disabled
                     )
@@ -55,10 +56,10 @@
                     div(v-if="customErrors.genre")
                         .error.text-error.text-xs.text-center(v-html="customErrors.genre")
                 div(class="lg:w-1/3 p-4")
-                    input( 
-                        type="date" 
-                        autofocus 
-                        class="rounded py-3 px-3 mt-3 focus:outline-none bg-gray-100 w-full " 
+                    input(
+                        type="date"
+                        autofocus
+                        class="rounded py-3 px-3 mt-3 focus:outline-none bg-gray-100 w-full "
                         placeholder="Fecha de nacimiento"
                         v-model.trim="$v.model.birthday.$model"
                         pattern="[0-9]{4}/[0-9]{2}/[0-9]{2}"
@@ -73,34 +74,34 @@
                         .error.text-error.text-xs.text-center(v-html="customErrors.country_id")
             div(class="lg:flex mx-auto xl:max-w-screen-xl px-4")
                 div(class="lg:w-1/2 m-4")
-                    input( 
-                        type="password" 
-                        autofocus 
-                        class="rounded py-3 px-3 mt-3 focus:outline-none bg-gray-100 w-full " 
-                        placeholder="Contraseña" 
+                    input(
+                        type="password"
+                        autofocus
+                        class="rounded py-3 px-3 mt-3 focus:outline-none bg-gray-100 w-full "
+                        placeholder="Contraseña"
                         v-model.trim="$v.model.password.$model"
                     )
                     div(v-if="customErrors.password")
                         .error.text-error.text-xs.text-center(v-html="customErrors.password")
                 div(class="lg:w-1/2 m-4")
-                    input( 
-                        type="password" 
-                        autofocus 
-                        class="rounded py-3 px-3 mt-3 focus:outline-none bg-gray-100 w-full " 
-                        placeholder="Repetir contraseña" 
+                    input(
+                        type="password"
+                        autofocus
+                        class="rounded py-3 px-3 mt-3 focus:outline-none bg-gray-100 w-full "
+                        placeholder="Repetir contraseña"
                         v-model.trim="$v.model.password_confirmation.$model"
                     )
                     div(v-if="customErrors.password_confirmation")
                         .error.text-error.text-xs.text-center(v-html="customErrors.password_confirmation")
-            
+
             div(class="lg:flex mx-auto xl:max-w-screen-xl px-4")
                 div(class="lg:w-1/2 w-full flex p-4")
                     div(class="w-1/3 text-left m-auto")
                         p.text-white facebook.com/
                     div(class="w-2/3 m-auto")
-                        input( 
-                            type="text" 
-                            autofocus 
+                        input(
+                            type="text"
+                            autofocus
                             class="rounded py-3 px-3 mt-3 focus:outline-none bg-gray-100 w-full "
                             v-model.trim="$v.model.facebook_url.$model"
                         )
@@ -110,9 +111,9 @@
                     div(class="w-1/3 text-left m-auto")
                         p.text-white github.com/
                     div(class="w-2/3 m-auto")
-                        input( 
-                            type="text" 
-                            autofocus 
+                        input(
+                            type="text"
+                            autofocus
                             class="rounded py-3 px-3 mt-3 focus:outline-none bg-gray-100 w-full "
                             v-model.trim="$v.model.github_url.$model"
                         )
@@ -124,10 +125,10 @@
                     div(class="w-1/3 text-left m-auto")
                         p.text-white linkedin.com/in/
                     div(class="w-2/3 m-auto")
-                        input( 
-                            type="text" 
-                            autofocus 
-                            class="rounded py-3 px-3 mt-3 focus:outline-none bg-gray-100 w-full " 
+                        input(
+                            type="text"
+                            autofocus
+                            class="rounded py-3 px-3 mt-3 focus:outline-none bg-gray-100 w-full "
                             v-model.trim="$v.model.linkedin_url.$model"
                         )
                         div(v-if="customErrors.linkedin_url")
@@ -136,29 +137,29 @@
                     div(class="w-1/3 text-left m-auto")
                         p.text-white twitter.com/
                     div(class="w-2/3 m-auto")
-                        input( 
-                            type="text" 
-                            autofocus 
-                            class="rounded py-3 px-3 mt-3 focus:outline-none bg-gray-100 w-full " 
+                        input(
+                            type="text"
+                            autofocus
+                            class="rounded py-3 px-3 mt-3 focus:outline-none bg-gray-100 w-full "
                             v-model.trim="$v.model.twitter_url.$model"
                         )
                         div(v-if="customErrors.twitter_url")
                             .error.text-error.text-xs.text-center(v-html="customErrors.twitter_url")
             div(class="lg:flex mx-auto xl:max-w-screen-xl px-4")
                 div(class="lg:w-full m-4")
-                    textarea( 
-                        type="text" 
-                        autofocus 
-                        class="rounded py-3 px-3 mt-3 focus:outline-none bg-gray-100 w-full " 
-                        placeholder="Biografia" 
+                    textarea(
+                        type="text"
+                        autofocus
+                        class="rounded py-3 px-3 mt-3 focus:outline-none bg-gray-100 w-full "
+                        placeholder="Biografia"
                         v-model.trim="$v.model.biography.$model"
                     )
                     div(v-if="customErrors.biography")
                         .error.text-error.text-xs.text-center(v-html="customErrors.biography")
 
-            div(class="lg:flex flex-row-reverse px-4")        
-                div(class="lg:w-1/2 m-4 ")   
-                    button( class=" w-full block text-center py-3 px-3 mt-3 duration-300 rounded hover:bg-purple-500 bg-purple-600 text-white font-bold uppercase text-xs lg:m-4 focus:outline-none" :disabled="sending") Guardar cambios                        
+            div(class="lg:flex flex-row-reverse px-4")
+                div(class="lg:w-1/2 m-4 ")
+                    button( class=" w-full block text-center py-3 px-3 mt-3 duration-300 rounded hover:bg-purple-500 bg-purple-600 text-white font-bold uppercase text-xs lg:m-4 focus:outline-none" :disabled="sending") Guardar cambios
 </template>
 <script>
 import profileService from "../../services/profileService.js";
