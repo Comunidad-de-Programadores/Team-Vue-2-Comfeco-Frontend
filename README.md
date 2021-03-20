@@ -22,3 +22,11 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+Links server 
+
+https://comfeco.tk
+
+Back api
+
+https://comfeco.tk/backend/
