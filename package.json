@@ -19,7 +19,7 @@
     "core-js": "^3.6.5",
     "date-fns": "^2.19.0",
     "dotenv": "^8.2.0",
-    "hellojs": "^1.18.8",
+    "hellojs": "^1.19.3",
     "postcss": "^8.2.8",
     "sweetalert2": "^10.15.6",
     "swiper": "^6.5.0",
