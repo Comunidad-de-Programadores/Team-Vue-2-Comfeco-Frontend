@@ -16,7 +16,7 @@
     "@tailwindcss/postcss7-compat": "^2.1.2",
     "autoprefixer": "^9.8.6",
     "axios": "^0.21.1",
-    "core-js": "^3.6.5",
+    "core-js": "^3.12.1",
     "date-fns": "^2.19.0",
     "dotenv": "^8.2.0",
     "hellojs": "^1.19.3",
