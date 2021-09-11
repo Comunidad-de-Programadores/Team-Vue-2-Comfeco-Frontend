@@ -19,7 +19,7 @@
     "core-js": "^3.12.1",
     "date-fns": "^2.21.3",
     "dotenv": "^10.0.0",
-    "hellojs": "^1.19.3",
+    "hellojs": "^1.19.4",
     "postcss": "^8.3.0",
     "sweetalert2": "^11.0.7",
     "swiper": "^6.6.2",
@@ -31,7 +31,7 @@
     "vue-loading-overlay": "^3.4.2",
     "vue-router": "^3.5.1",
     "vue-slick-carousel": "^1.0.6",
-    "vue-toast-notification": "^0.6.1",
+    "vue-toast-notification": "^0.6.2",
     "vuelidate": "^0.7.6"
   },
   "devDependencies": {
@@ -42,7 +42,7 @@
     "eslint": "^7.27.0",
     "eslint-plugin-vue": "^7.9.0",
     "sass": "^1.34.0",
-    "sass-loader": "^11.1.1",
+    "sass-loader": "^12.1.0",
     "vue-cli-plugin-pug": "~2.0.0",
     "vue-confetti": "^2.2.1",
     "vue-template-compiler": "^2.6.11"
