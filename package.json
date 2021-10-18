@@ -12,7 +12,7 @@
     "@capacitor/android": "3.0.0",
     "@capacitor/cli": "^3.2.2",
     "@capacitor/core": "^3.0.0",
-    "@fortawesome/fontawesome-free": "5.15.3",
+    "@fortawesome/fontawesome-free": "5.15.4",
     "@tailwindcss/postcss7-compat": "^2.2.14",
     "autoprefixer": "^10.3.4",
     "axios": "^0.21.1",
@@ -20,7 +20,7 @@
     "date-fns": "^2.23.0",
     "dotenv": "^10.0.0",
     "hellojs": "^1.19.4",
-    "postcss": "^8.3.0",
+    "postcss": "^8.3.9",
     "sweetalert2": "^11.1.5",
     "swiper": "^7.0.5",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.0.3",
@@ -35,7 +35,7 @@
     "vuelidate": "^0.7.6"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "~4.5.13",
+    "@vue/cli-plugin-babel": "~4.5.14",
     "@vue/cli-plugin-eslint": "~4.5.13",
     "@vue/cli-service": "~4.5.13",
     "babel-eslint": "^10.1.0",
