@@ -29,7 +29,7 @@
     "vue-avatar-cropper": "^5.0.1",
     "vue-infinite-loading": "^2.4.5",
     "vue-loading-overlay": "^3.4.2",
-    "vue-router": "^3.5.1",
+    "vue-router": "^3.5.2",
     "vue-slick-carousel": "^1.0.6",
     "vue-toast-notification": "^0.6.2",
     "vuelidate": "^0.7.6"
