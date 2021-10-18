@@ -44,7 +44,7 @@
     "sass": "^1.39.2",
     "sass-loader": "^12.1.0",
     "vue-cli-plugin-pug": "~2.0.0",
-    "vue-confetti": "^2.2.1",
+    "vue-confetti": "^2.2.2",
     "vue-template-compiler": "^2.6.14"
   },
   "eslintConfig": {
