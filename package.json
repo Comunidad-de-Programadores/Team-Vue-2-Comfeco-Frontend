@@ -20,7 +20,7 @@
     "date-fns": "^2.23.0",
     "dotenv": "^10.0.0",
     "hellojs": "^1.19.4",
-    "postcss": "^8.3.9",
+    "postcss": "^8.4.5",
     "sweetalert2": "^11.1.5",
     "swiper": "^7.0.9",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.0.3",
