@@ -9,7 +9,7 @@
     "android": "npm run build && npx cap sync android && npx cap open android"
   },
   "dependencies": {
-    "@capacitor/android": "3.2.5",
+    "@capacitor/android": "3.4.0",
     "@capacitor/cli": "^3.2.5",
     "@capacitor/core": "^3.0.0",
     "@fortawesome/fontawesome-free": "5.15.4",
@@ -36,7 +36,7 @@
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.14",
-    "@vue/cli-plugin-eslint": "~4.5.13",
+    "@vue/cli-plugin-eslint": "~4.5.15",
     "@vue/cli-service": "~4.5.14",
     "babel-eslint": "^10.1.0",
     "eslint": "^8.0.1",
