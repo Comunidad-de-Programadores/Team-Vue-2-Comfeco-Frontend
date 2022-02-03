@@ -18,7 +18,7 @@
     "axios": "^0.25.0",
     "core-js": "^3.21.0",
     "date-fns": "^2.28.0",
-    "dotenv": "^15.0.0",
+    "dotenv": "^16.0.0",
     "hellojs": "^1.19.5",
     "postcss": "^8.4.6",
     "sweetalert2": "^11.3.10",
