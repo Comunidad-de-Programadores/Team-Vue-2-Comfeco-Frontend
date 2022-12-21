@@ -21,7 +21,7 @@
     "dotenv": "^15.0.0",
     "hellojs": "^1.19.5",
     "postcss": "^8.4.6",
-    "sweetalert2": "^11.3.10",
+    "sweetalert2": "^11.6.16",
     "swiper": "^8.0.1",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.0.3",
     "uikit": "^3.10.1",
